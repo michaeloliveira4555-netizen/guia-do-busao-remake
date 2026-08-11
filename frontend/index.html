@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Guia do Busão - encontre rotas, horários e conexões de ônibus."
+    >
+
+    <title>Guia do Busão | Encontre sua rota</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+        <div class="container header-content">
+
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🚌</div>
+
+                <div class="logo-text">
+                    <strong>Guia do <span>Busão</span></strong>
+                    <small>Conexões inteligentes</small>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Início</a>
+                <a href="pesquisa.html" class="nav-link">Pesquisar</a>
+                <a href="#" class="nav-link">Horários</a>
+                <a href="#" class="nav-link">Linhas</a>
+            </nav>
+
+            <button class="menu-button" id="menuButton" aria-label="Abrir menu">
+                ☰
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-background"></div>
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <span class="hero-badge">
+                        🚌 Transporte inteligente
+                    </span>
+
+                    <h1>
+                        Encontre a melhor rota
+                        <span>para sua viagem</span>
+                    </h1>
+
+                    <p>
+                        Pesquise ônibus por cidade, bairro, endereço,
+                        terminal ou ponto e encontre os melhores horários
+                        para chegar ao seu destino.
+                    </p>
+
+                </div>
+
+
+                <!-- ================= SEARCH CARD ================= -->
+
+                <div class="search-card">
+
+                    <div class="search-card-header">
+
+                        <div>
+                            <span class="search-label">Planeje sua viagem</span>
+
+                            <h2>
+                                Para onde você quer ir?
+                            </h2>
+                        </div>
+
+                        <div class="search-icon">
+                            🔎
+                        </div>
+
+                    </div>
+
+
+                    <form id="routeForm">
+
+                        <!-- ORIGEM -->
+
+                        <div class="field-group">
+
+                            <label for="origin">
+                                Origem
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">📍</span>
+
+                                <input
+                                    type="text"
+                                    id="origin"
+                                    name="origin"
+                                    placeholder="Cidade, bairro ou endereço"
+                                    autocomplete="off"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="location-button"
+                                    id="locationButton"
+                                    title="Usar minha localização"
+                                >
+                                    ◎
+                                </button>
+
+                            </div>
+
+                            <div
+                                class="suggestions"
+                                id="originSuggestions"
+                            ></div>
+
+                        </div>
+
+
+                        <!-- INVERTER -->
+
+                        <button
+                            type="button"
+                            class="swap-button"
+                            id="swapButton"
+                            title="Inverter origem e destino"
+                        >
+                            ↕
+                        </button>
+
+
+                        <!-- DESTINO -->
+
+                        <div class="field-group">
+
+                            <label for="destination">
+                                Destino
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">📍</span>
+
+                                <input
+                                    type="text"
+                                    id="destination"
+                                    name="destination"
+                                    placeholder="Cidade, bairro ou endereço"
+                                    autocomplete="off"
+                                    required
+                                >
+
+                            </div>
+
+                            <div
+                                class="suggestions"
+                                id="destinationSuggestions"
+                            ></div>
+
+                        </div>
+
+
+                        <!-- DATA E HORÁRIO -->
+
+                        <div class="fields-row">
+
+                            <div class="field-group">
+
+                                <label for="travelDate">
+                                    Data
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">📅</span>
+
+                                    <input
+                                        type="date"
+                                        id="travelDate"
+                                        name="travelDate"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="field-group">
+
+                                <label for="travelTime">
+                                    Horário
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">🕐</span>
+
+                                    <input
+                                        type="time"
+                                        id="travelTime"
+                                        name="travelTime"
+                                        value="08:00"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- OPÇÕES -->
+
+                        <div class="search-options">
+
+                            <label class="checkbox-label">
+
+                                <input
+                                    type="checkbox"
+                                    id="directRoute"
+                                >
+
+                                <span class="checkbox-custom"></span>
+
+                                Apenas rotas diretas
+
+                            </label>
+
+                            <button
+                                type="button"
+                                class="advanced-button"
+                                id="advancedButton"
+                            >
+                                Mais opções ⚙
+                            </button>
+
+                        </div>
+
+
+                        <!-- BUSCAR -->
+
+                        <button
+                            type="submit"
+                            class="search-button"
+                        >
+
+                            <span>🔎</span>
+
+                            Buscar rotas
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <section class="quick-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span>ACESSO RÁPIDO</span>
+
+                    <h2>
+                        O que você precisa?
+                    </h2>
+
+                </div>
+
+
+                <div class="quick-grid">
+
+                    <a href="pesquisa.html" class="quick-card">
+
+                        <div class="quick-icon">
+                            🔎
+                        </div>
+
+                        <div>
+                            <h3>Pesquisar rota</h3>
+
+                            <p>
+                                Encontre o melhor caminho
+                            </p>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                    </a>
+
+
+                    <a href="#" class="quick-card">
+
+                        <div class="quick-icon">
+                            🕐
+                        </div>
+
+                        <div>
+                            <h3>Consultar horários</h3>
+
+                            <p>
+                                Veja horários das linhas
+                            </p>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                    </a>
+
+
+                    <a href="#" class="quick-card">
+
+                        <div class="quick-icon">
+                            🚏
+                        </div>
+
+                        <div>
+                            <h3>Pontos próximos</h3>
+
+                            <p>
+                                Encontre pontos de ônibus
+                            </p>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                    </a>
+
+
+                    <a href="#" class="quick-card">
+
+                        <div class="quick-icon">
+                            🗺️
+                        </div>
+
+                        <div>
+                            <h3>Explorar mapa</h3>
+
+                            <p>
+                                Veja linhas e pontos no mapa
+                            </p>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+
+        <section class="features-section">
+
+            <div class="container">
+
+                <div class="section-heading center">
+
+                    <span>GUIA DO BUSÃO</span>
+
+                    <h2>
+                        Mais do que encontrar um ônibus
+                    </h2>
+
+                    <p>
+                        Informações para você planejar sua viagem
+                        com mais facilidade.
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            📍
+                        </div>
+
+                        <h3>
+                            Pesquise por localização
+                        </h3>
+
+                        <p>
+                            Encontre rotas usando cidade, bairro,
+                            endereço, terminal ou ponto de ônibus.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            📅
+                        </div>
+
+                        <h3>
+                            Datas inteligentes
+                        </h3>
+
+                        <p>
+                            Se não houver ônibus na data escolhida,
+                            encontre automaticamente os próximos dias
+                            disponíveis.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            🔄
+                        </div>
+
+                        <h3>
+                            Conexões inteligentes
+                        </h3>
+
+                        <p>
+                            Compare diferentes combinações de linhas
+                            para encontrar uma rota melhor.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+
+                    <div class="logo-icon">🚌</div>
+
+                    <div class="logo-text">
+
+                        <strong>
+                            Guia do <span>Busão</span>
+                        </strong>
+
+                        <small>
+                            Conexões inteligentes
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <p>
+                    Encontre caminhos melhores para chegar
+                    ao seu destino.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Guia do Busão</h4>
+
+                    <a href="#">Sobre</a>
+                    <a href="#">Contato</a>
+                    <a href="#">Termos de uso</a>
+                </div>
+
+
+                <div>
+                    <h4>Transporte</h4>
+
+                    <a href="#">Linhas</a>
+                    <a href="#">Horários</a>
+                    <a href="#">Pontos</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Guia do Busão. Projeto acadêmico.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- MENU MOBILE -->
+
+    <div class="mobile-menu" id="mobileMenu">
+
+        <button
+            class="mobile-close"
+            id="mobileClose"
+            aria-label="Fechar menu"
+        >
+            ×
+        </button>
+
+        <a href="index.html">Início</a>
+        <a href="pesquisa.html">Pesquisar</a>
+        <a href="#">Horários</a>
+        <a href="#">Linhas</a>
+
+    </div>
+
+
+    <script src="../js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+    .nav {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+}
+
+
+/* ================= CELULAR ================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: min(100% - 28px, var(--container));
+    }
+
+    .header {
+        height: 70px;
+    }
+
+    .logo-icon {
+        width: 39px;
+        height: 39px;
+
+        font-size: 21px;
+    }
+
+    .logo-text strong {
+        font-size: 17px;
+    }
+
+    .logo-text small {
+        font-size: 9px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        padding: 50px 0 60px;
+    }
+
+    .hero-text {
+        margin-bottom: 30px;
+    }
+
+    .hero-text h1 {
+        font-size: 38px;
+
+        letter-spacing: -1.8px;
+    }
+
+    .hero-text p {
+        font-size: 14px;
+    }
+
+
+    /* SEARCH */
+
+    .search-card {
+        padding: 20px 16px;
+
+        border-radius: 19px;
+    }
+
+    .search-card-header h2 {
+        font-size: 20px;
+    }
+
+    .fields-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .input-wrapper input {
+        height: 54px;
+    }
+
+    .swap-button {
+        margin-top: -2px;
+        margin-bottom: 5px;
+    }
+
+    .search-options {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+
+    /* QUICK */
+
+    .quick-section {
+        padding: 60px 0;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-card {
+        min-height: 100px;
+    }
+
+
+    /* FEATURES */
+
+    .features-section {
+        padding: 65px 0;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+    .feature-card {
+        padding: 25px 20px;
+    }
+
+
+    /* FOOTER */
+
+    .footer-content {
+        padding: 40px 0;
+    }
+
+    .footer-links {
+        gap: 50px;
+    }
+
+    .footer-bottom p {
+        text-align: center;
+    }
+
+}
