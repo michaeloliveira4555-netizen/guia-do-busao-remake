@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Entre na sua conta do Guia do Busão."
+    >
+
+    <title>Entrar - Guia do Busão</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #ffffff;
+
+            color: #222;
+        }
+
+
+        .login-page {
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                42% 58%;
+        }
+
+
+        /* =====================================================
+           LADO ESQUERDO
+           ===================================================== */
+
+        .login-left {
+            min-height: 100vh;
+
+            padding: 45px 60px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-start;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1257e8,
+                    #1451d8
+                );
+
+            color: white;
+        }
+
+
+        .logo {
+            width: 390px;
+
+            max-width: 100%;
+
+            height: auto;
+
+            object-fit: contain;
+
+            margin-bottom: 5px;
+        }
+
+
+        .slogan {
+            margin-top: -5px;
+
+            margin-left: 30px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            letter-spacing: 0.4px;
+        }
+
+
+        .left-content {
+            margin-top: 65px;
+
+            margin-left: 35px;
+        }
+
+
+        .left-content h2 {
+            max-width: 430px;
+
+            font-size: 34px;
+
+            line-height: 1.2;
+
+            margin-bottom: 25px;
+        }
+
+
+        .left-content h2 span {
+            color: #d9ef27;
+        }
+
+
+        .left-content p {
+            max-width: 480px;
+
+            font-size: 18px;
+
+            line-height: 1.5;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.9
+                );
+        }
+
+
+        .bus-area {
+            margin-top: auto;
+
+            min-height: 280px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: center;
+        }
+
+
+        .bus-area img {
+            width: 560px;
+
+            max-width: 100%;
+
+            object-fit: contain;
+        }
+
+
+        /* =====================================================
+           LADO DIREITO
+           ===================================================== */
+
+        .login-right {
+            min-height: 100vh;
+
+            padding: 40px 55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #ffffff;
+        }
+
+
+        .login-card {
+            width: 100%;
+
+            max-width: 700px;
+
+            padding: 25px 10px;
+        }
+
+
+        /* =====================================================
+           TÍTULO
+           ===================================================== */
+
+        .login-title {
+            text-align: center;
+
+            margin-bottom: 38px;
+        }
+
+
+        .login-title h1 {
+            font-size: 38px;
+
+            color: #111;
+
+            margin-bottom: 8px;
+        }
+
+
+        .login-title p {
+            color: #777;
+
+            font-size: 19px;
+        }
+
+
+        /* =====================================================
+           FORMULÁRIO
+           ===================================================== */
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #333;
+
+            font-size: 17px;
+
+            font-weight: 600;
+        }
+
+
+        .input-container {
+            position: relative;
+
+            width: 100%;
+        }
+
+
+        .input-icon {
+            position: absolute;
+
+            left: 20px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 23px;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+
+        .input-container input {
+            width: 100%;
+
+            height: 58px;
+
+            padding:
+                0 55px;
+
+            border:
+                1px solid #dedede;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #333;
+
+            font-size: 17px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .input-container input::placeholder {
+            color: #aaa;
+        }
+
+
+        .input-container input:focus {
+            border-color: #2948ed;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    41,
+                    72,
+                    237,
+                    0.10
+                );
+        }
+
+
+        .password-toggle {
+            position: absolute;
+
+            right: 17px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 38px;
+
+            height: 38px;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 22px;
+
+            color: #555;
+        }
+
+
+        .password-toggle:hover {
+            color: #2445e8;
+        }
+
+
+        /* =====================================================
+           OPÇÕES
+           ===================================================== */
+
+        .login-options {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 5px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #666;
+
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+
+        .remember input {
+            width: 16px;
+
+            height: 16px;
+
+            accent-color: #2948ed;
+
+            cursor: pointer;
+        }
+
+
+        .forgot-password {
+            color: #3025ed;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           BOTÃO ENTRAR
+           ===================================================== */
+
+        .login-button {
+            width: 100%;
+
+            height: 58px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3025ed,
+                    #3e24e9
+                );
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                opacity 0.2s;
+        }
+
+
+        .login-button:hover {
+            opacity: 0.92;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .login-button:disabled {
+            opacity: 0.6;
+
+            cursor: wait;
+
+            transform: none;
+        }
+
+
+        /* =====================================================
+           MENSAGEM
+           ===================================================== */
+
+        .form-message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        .form-message.erro {
+            display: block;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border:
+                1px solid #fecaca;
+        }
+
+
+        .form-message.sucesso {
+            display: block;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            border:
+                1px solid #bbf7d0;
+        }
+
+
+        /* =====================================================
+           DIVISOR
+           ===================================================== */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin:
+                25px 0 18px;
+
+            color: #777;
+        }
+
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #ddd;
+        }
+
+
+        .divider span {
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           GOOGLE
+           ===================================================== */
+
+        .google-button {
+            width: 100%;
+
+            height: 54px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #333;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s;
+        }
+
+
+        .google-button:hover {
+            background: #f7f7f7;
+        }
+
+
+        /* =====================================================
+           CADASTRO
+           ===================================================== */
+
+        .register-link {
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 15px;
+        }
+
+
+        .register-link a {
+            color: #3927e8;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+           ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .login-page {
+                grid-template-columns: 1fr;
+            }
+
+
+            .login-left {
+                min-height: auto;
+
+                padding:
+                    35px 30px;
+
+                align-items: center;
+
+                text-align: center;
+            }
+
+
+            .logo {
+                width: 330px;
+            }
+
+
+            .slogan {
+                margin-left: 0;
+            }
+
+
+            .left-content {
+                margin:
+                    30px 0 0;
+            }
+
+
+            .left-content h2 {
+                font-size: 28px;
+            }
+
+
+            .left-content p {
+                font-size: 16px;
+            }
+
+
+            .bus-area {
+                min-height: auto;
+
+                margin-top: 30px;
+            }
+
+
+            .bus-area img {
+                width: 430px;
+            }
+
+
+            .login-right {
+                min-height: auto;
+
+                padding:
+                    40px 25px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .login-left {
+                padding:
+                    25px 20px;
+            }
+
+
+            .logo {
+                width: 280px;
+            }
+
+
+            .left-content h2 {
+                font-size: 25px;
+            }
+
+
+            .left-content p {
+                font-size: 15px;
+            }
+
+
+            .bus-area img {
+                width: 330px;
+            }
+
+
+            .login-right {
+                padding:
+                    25px 18px;
+            }
+
+
+            .login-title h1 {
+                font-size: 30px;
+            }
+
+
+            .login-title p {
+                font-size: 16px;
+            }
+
+
+            .input-container input {
+                height: 54px;
+
+                font-size: 16px;
+            }
+
+
+            .login-options {
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="login-page">
+
+
+        <!-- =================================================
+             LADO ESQUERDO
+             ================================================= -->
+
+        <section class="login-left">
+
+
+            <img
+                src="../assets/images/logo.png"
+                alt="Guia do Busão"
+                class="logo"
+            >
+
+
+            <p class="slogan">
+                – SUA VIAGEM COMEÇA AQUI! –
+            </p>
+
+
+            <div class="left-content">
+
+                <h2>
+
+                    Conexões
+                    <span>Inteligentes</span>
+                    por todo o Brasil
+
+                </h2>
+
+
+                <p>
+
+                    Entre na sua conta e tenha acesso
+                    a rotas, favoritos, histórico
+                    de viagens e muito mais!
+
+                </p>
+
+            </div>
+
+
+            <div class="bus-area">
+
+                <img
+                    src="../assets/images/logo.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             LADO DIREITO
+             ================================================= -->
+
+        <section class="login-right">
+
+            <div class="login-card">
+
+
+                <!-- TÍTULO -->
+
+                <div class="login-title">
+
+                    <h1>
+                        Entrar
+                    </h1>
+
+                    <p>
+                        Acesse sua conta para continuar
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FORMULÁRIO
+                     ================================================= -->
+
+                <form
+                    id="loginForm"
+                    novalidate
+                >
+
+
+                    <!-- E-MAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+
+                        <div class="input-container">
+
+                            <span
+                                class="input-icon"
+                                aria-hidden="true"
+                            >
+                                ✉
+                            </span>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Digite seu e-mail"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SENHA -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Senha
+                        </label>
+
+
+                        <div class="input-container">
+
+                            <span
+                                class="input-icon"
+                                aria-hidden="true"
+                            >
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Digite sua senha"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="password-toggle"
+                                aria-label="Mostrar senha"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- OPÇÕES -->
+
+                    <div class="login-options">
+
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                                name="remember"
+                            >
+
+                            <span>
+                                Lembrar de mim
+                            </span>
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            id="forgotPassword"
+                            class="forgot-password"
+                        >
+                            Esqueci minha senha
+                        </a>
+
+
+                    </div>
+
+
+
+                    <!-- MENSAGEM -->
+
+                    <div
+                        id="loginMessage"
+                        class="form-message"
+                        role="alert"
+                        aria-live="polite"
+                    ></div>
+
+
+
+                    <!-- BOTÃO -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button"
+                    >
+                        Entrar
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- GOOGLE -->
+
+                <div class="divider">
+
+                    <span>
+                        ou
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="googleButton"
+                    class="google-button"
+                >
+                    Continuar com Google
+                </button>
+
+
+
+                <!-- CADASTRO -->
+
+                <div class="register-link">
+
+                    Ainda não tem uma conta?
+
+                    <a href="cadastro.html">
+                        Criar conta
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =================================================
+         JAVASCRIPT
+         ================================================= -->
+
+    <script src="./js/login.js"></script>
+
+</body>
+
+</html>

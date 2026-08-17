@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Mapa da viagem - Guia do Busão"
+    >
+
+    <title>Mapa da rota - Guia do Busão</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="index.html" class="logo-link">
+
+                <img
+                    src="../assets/logos/logo.png"
+                    alt="Guia do Busão"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a href="index.html" class="nav-link">
+                    <span>⌂</span>
+                    Início
+                </a>
+
+                <a href="rotas-salvas.html" class="nav-link">
+                    <span>⌖</span>
+                    Rotas Salvas
+                </a>
+
+                <a href="favoritos.html" class="nav-link">
+                    <span>☆</span>
+                    Favoritos
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <button
+                    type="button"
+                    class="theme-button"
+                    id="themeButton"
+                    aria-label="Alterar tema"
+                >
+                    ☾
+                </button>
+
+                <a
+                    href="login.html"
+                    class="profile-button"
+                    aria-label="Minha conta"
+                >
+                    👤
+                </a>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CONTEÚDO ================= -->
+
+    <main class="map-page">
+
+        <div class="map-page-container">
+
+
+            <!-- VOLTAR -->
+
+            <a
+                href="rota.html"
+                class="back-button"
+            >
+                ← Voltar para detalhes
+            </a>
+
+
+            <!-- TÍTULO -->
+
+            <section class="map-header">
+
+                <span class="hero-tag">
+                    🗺️ Mapa da viagem
+                </span>
+
+                <h1>
+                    Veja seu trajeto
+                </h1>
+
+                <p id="mapRouteDescription">
+                    Porto Alegre → Florianópolis
+                </p>
+
+            </section>
+
+
+            <!-- ================= MAPA ================= -->
+
+            <section class="map-container">
+
+                <!--
+
+                    O mapa real será carregado posteriormente.
+
+                    Podemos utilizar uma API de mapas ou
+                    OpenStreetMap.
+
+                -->
+
+                <div
+                    id="map"
+                    class="map"
+                >
+
+                    <div class="map-placeholder">
+
+                        <div class="map-placeholder-icon">
+                            🗺️
+                        </div>
+
+                        <h2>
+                            Mapa da rota
+                        </h2>
+
+                        <p>
+                            O mapa será carregado aqui.
+                        </p>
+
+                    </div>
+
+
+                    <!-- MARCADOR DE ORIGEM -->
+
+                    <div
+                        class="map-marker origin-marker"
+                        id="originMarker"
+                    >
+                        📍
+                    </div>
+
+
+                    <!-- MARCADOR DE DESTINO -->
+
+                    <div
+                        class="map-marker destination-marker"
+                        id="destinationMarker"
+                    >
+                        📍
+                    </div>
+
+                </div>
+
+
+                <!-- CONTROLES -->
+
+                <div class="map-controls">
+
+                    <button
+                        type="button"
+                        id="zoomIn"
+                        aria-label="Aumentar zoom"
+                    >
+                        +
+                    </button>
+
+                    <button
+                        type="button"
+                        id="zoomOut"
+                        aria-label="Diminuir zoom"
+                    >
+                        −
+                    </button>
+
+                    <button
+                        type="button"
+                        id="centerMap"
+                        aria-label="Centralizar rota"
+                    >
+                        ◎
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RESUMO ================= -->
+
+            <section class="map-route-card">
+
+                <div class="map-route-point">
+
+                    <span class="map-route-icon origin">
+                        ●
+                    </span>
+
+                    <div>
+
+                        <small>
+                            ORIGEM
+                        </small>
+
+                        <strong id="mapOrigin">
+                            Porto Alegre - RS
+                        </strong>
+
+                        <span id="mapDeparture">
+                            Terminal Rodoviário
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="map-route-line">
+
+                    <span></span>
+
+                    <strong id="mapDuration">
+                        4h 30min
+                    </strong>
+
+                    <span></span>
+
+                </div>
+
+
+                <div class="map-route-point">
+
+                    <span class="map-route-icon destination">
+                        ●
+                    </span>
+
+                    <div>
+
+                        <small>
+                            DESTINO
+                        </small>
+
+                        <strong id="mapDestination">
+                            Florianópolis - SC
+                        </strong>
+
+                        <span id="mapArrival">
+                            Terminal Rodoviário
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PARADAS ================= -->
+
+            <section class="map-stops">
+
+                <div class="section-heading">
+
+                    <span class="hero-tag">
+                        🛑 Paradas
+                    </span>
+
+                    <h2>
+                        Pontos no trajeto
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="map-stops-list"
+                    id="mapStopsList"
+                >
+
+                    <div class="map-stop">
+
+                        <span class="map-stop-number">
+                            1
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Porto Alegre
+                            </strong>
+
+                            <small>
+                                Saída
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="map-stop">
+
+                        <span class="map-stop-number">
+                            2
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Osório
+                            </strong>
+
+                            <small>
+                                Parada
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="map-stop">
+
+                        <span class="map-stop-number">
+                            3
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Florianópolis
+                            </strong>
+
+                            <small>
+                                Chegada
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= AÇÕES ================= -->
+
+            <section class="map-actions">
+
+                <a
+                    href="rota.html"
+                    class="secondary-button"
+                >
+                    ← Detalhes da rota
+                </a>
+
+                <button
+                    type="button"
+                    class="search-button"
+                    id="saveMapRoute"
+                >
+                    ☆ Salvar rota
+                </button>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <p>
+                © 2026 Guia do Busão.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= MENU MOBILE ================= -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <button
+            type="button"
+            class="mobile-menu-close"
+            id="mobileMenuClose"
+        >
+            ×
+        </button>
+
+        <a href="index.html">
+            Início
+        </a>
+
+        <a href="rotas-salvas.html">
+            Rotas Salvas
+        </a>
+
+        <a href="favoritos.html">
+            Favoritos
+        </a>
+
+        <a href="login.html">
+            Minha conta
+        </a>
+
+    </div>
+
+</body>
+
+</html>

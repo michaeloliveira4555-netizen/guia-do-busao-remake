@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Crie sua conta no Guia do Busão."
+    >
+
+    <title>Criar conta - Guia do Busão</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #ffffff;
+
+            color: #222;
+        }
+
+
+        .cadastro-page {
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                42% 58%;
+        }
+
+
+        /* =================================================
+           LADO ESQUERDO
+           ================================================= */
+
+        .cadastro-left {
+            min-height: 100vh;
+
+            padding: 45px 60px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: flex-start;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1257e8,
+                    #1451d8
+                );
+
+            color: white;
+        }
+
+
+        .logo {
+            width: 390px;
+            max-width: 100%;
+            height: auto;
+
+            object-fit: contain;
+
+            margin-bottom: 5px;
+        }
+
+
+        .slogan {
+            margin-top: -5px;
+            margin-left: 30px;
+
+            font-size: 16px;
+            font-weight: 500;
+
+            letter-spacing: 0.4px;
+        }
+
+
+        .left-content {
+            margin-top: 65px;
+            margin-left: 35px;
+        }
+
+
+        .left-content h2 {
+            max-width: 430px;
+
+            font-size: 34px;
+            line-height: 1.2;
+
+            margin-bottom: 25px;
+        }
+
+
+        .left-content h2 span {
+            color: #d9ef27;
+        }
+
+
+        .left-content p {
+            max-width: 480px;
+
+            font-size: 18px;
+            line-height: 1.5;
+
+            color: rgba(
+                255,
+                255,
+                255,
+                0.9
+            );
+        }
+
+
+        .bus-image {
+            width: 560px;
+            max-width: 100%;
+
+            margin-top: auto;
+            margin-left: -25px;
+
+            object-fit: contain;
+        }
+
+
+        /* =================================================
+           LADO DIREITO
+           ================================================= */
+
+        .cadastro-right {
+            min-height: 100vh;
+
+            padding: 40px 55px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #ffffff;
+        }
+
+
+        .cadastro-card {
+            width: 100%;
+            max-width: 700px;
+
+            padding: 25px 10px;
+        }
+
+
+        .cadastro-title {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .cadastro-title h1 {
+            font-size: 38px;
+
+            color: #111;
+
+            margin-bottom: 8px;
+        }
+
+
+        .cadastro-title p {
+            color: #777;
+
+            font-size: 19px;
+        }
+
+
+        /* =================================================
+           FORMULÁRIO
+           ================================================= */
+
+        .cadastro-form {
+            width: 100%;
+        }
+
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #333;
+
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+
+        .input-container {
+            position: relative;
+
+            width: 100%;
+        }
+
+
+        .input-icon {
+            position: absolute;
+
+            left: 20px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 24px;
+
+            z-index: 2;
+
+            pointer-events: none;
+        }
+
+
+        .input-container input {
+            width: 100%;
+            height: 58px;
+
+            padding:
+                0 55px;
+
+            border:
+                1px solid #dedede;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #333;
+
+            font-size: 17px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .input-container input::placeholder {
+            color: #aaa;
+        }
+
+
+        .input-container input:focus {
+            border-color: #2948ed;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    41,
+                    72,
+                    237,
+                    0.10
+                );
+        }
+
+
+        .password-toggle {
+            position: absolute;
+
+            right: 17px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 38px;
+            height: 38px;
+
+            border: none;
+
+            background:
+                transparent;
+
+            cursor: pointer;
+
+            font-size: 22px;
+
+            color: #555;
+        }
+
+
+        .password-toggle:hover {
+            color: #2445e8;
+        }
+
+
+        /* =================================================
+           TERMOS
+           ================================================= */
+
+        .terms-container {
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+
+
+        .checkbox-label {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            color: #666;
+
+            font-size: 14px;
+
+            line-height: 1.4;
+
+            cursor: pointer;
+        }
+
+
+        .checkbox-label input {
+            width: 17px;
+            height: 17px;
+
+            margin-top: 2px;
+
+            flex-shrink: 0;
+
+            accent-color: #2948ed;
+
+            cursor: pointer;
+        }
+
+
+        .checkbox-label a {
+            color: #2948ed;
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =================================================
+           BOTÃO
+           ================================================= */
+
+        .register-button {
+            width: 100%;
+            height: 58px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3025ed,
+                    #3e24e9
+                );
+
+            color: white;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                opacity 0.2s;
+        }
+
+
+        .register-button:hover {
+            opacity: 0.92;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .register-button:disabled {
+            opacity: 0.6;
+
+            cursor: wait;
+
+            transform: none;
+        }
+
+
+        /* =================================================
+           MENSAGEM
+           ================================================= */
+
+        .form-message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        .form-message.erro {
+            display: block;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border:
+                1px solid #fecaca;
+        }
+
+
+        .form-message.sucesso {
+            display: block;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            border:
+                1px solid #bbf7d0;
+        }
+
+
+        /* =================================================
+           DIVISOR
+           ================================================= */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin:
+                25px 0 18px;
+
+            color: #777;
+        }
+
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #ddd;
+        }
+
+
+        .divider span {
+            font-size: 16px;
+        }
+
+
+        /* =================================================
+           GOOGLE
+           ================================================= */
+
+        .google-button {
+            width: 100%;
+            height: 54px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #333;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s;
+        }
+
+
+        .google-button:hover {
+            background: #f7f7f7;
+        }
+
+
+        /* =================================================
+           LOGIN
+           ================================================= */
+
+        .login-link {
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 15px;
+        }
+
+
+        .login-link a {
+            color: #3927e8;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =================================================
+           RESPONSIVO
+           ================================================= */
+
+        @media (max-width: 1000px) {
+
+            .cadastro-page {
+                grid-template-columns: 1fr;
+            }
+
+
+            .cadastro-left {
+                min-height: auto;
+
+                padding:
+                    35px 30px;
+
+                align-items: center;
+
+                text-align: center;
+            }
+
+
+            .logo {
+                width: 330px;
+            }
+
+
+            .slogan {
+                margin-left: 0;
+            }
+
+
+            .left-content {
+                margin:
+                    30px 0 0;
+            }
+
+
+            .left-content h2 {
+                font-size: 28px;
+            }
+
+
+            .left-content p {
+                font-size: 16px;
+            }
+
+
+            .bus-image {
+                width: 430px;
+
+                margin:
+                    25px auto 0;
+            }
+
+
+            .cadastro-right {
+                min-height: auto;
+
+                padding:
+                    40px 25px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .cadastro-left {
+                padding:
+                    25px 20px;
+            }
+
+
+            .logo {
+                width: 280px;
+            }
+
+
+            .left-content h2 {
+                font-size: 25px;
+            }
+
+
+            .left-content p {
+                font-size: 15px;
+            }
+
+
+            .bus-image {
+                width: 330px;
+            }
+
+
+            .cadastro-right {
+                padding:
+                    25px 18px;
+            }
+
+
+            .cadastro-title h1 {
+                font-size: 30px;
+            }
+
+
+            .cadastro-title p {
+                font-size: 16px;
+            }
+
+
+            .input-container input {
+                height: 54px;
+
+                font-size: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="cadastro-page">
+
+
+        <!-- =================================================
+             LADO ESQUERDO
+             ================================================= -->
+
+        <section class="cadastro-left">
+
+
+            <img
+                src="../assets/images/logo.png"
+                alt="Guia do Busão"
+                class="logo"
+            >
+
+
+            <p class="slogan">
+                – SUA VIAGEM COMEÇA AQUI! –
+            </p>
+
+
+            <div class="left-content">
+
+                <h2>
+                    Conexões
+                    <span>Inteligentes</span>
+                    por todo o Brasil
+                </h2>
+
+
+                <p>
+                    Crie sua conta e tenha acesso
+                    a rotas, favoritos, histórico
+                    de viagens e muito mais!
+                </p>
+
+            </div>
+
+
+            <img
+                src="../assets/images/logo.png"
+                alt=""
+                class="bus-image"
+                aria-hidden="true"
+            >
+
+        </section>
+
+
+
+        <!-- =================================================
+             LADO DIREITO
+             ================================================= -->
+
+        <section class="cadastro-right">
+
+            <div class="cadastro-card">
+
+
+                <div class="cadastro-title">
+
+                    <h1>
+                        Criar conta
+                    </h1>
+
+                    <p>
+                        Preencha os dados abaixo
+                        para começar
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FORMULÁRIO
+                     ================================================= -->
+
+                <form
+                    id="registerForm"
+                    class="cadastro-form"
+                    novalidate
+                >
+
+
+                    <!-- NOME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Nome completo
+                        </label>
+
+                        <div class="input-container">
+
+                            <span
+                                class="input-icon"
+                                aria-hidden="true"
+                            >
+                                ♙
+                            </span>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Digite seu nome completo"
+                                autocomplete="name"
+                                minlength="3"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- E-MAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <div class="input-container">
+
+                            <span
+                                class="input-icon"
+                                aria-hidden="true"
+                            >
+                                ✉
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Digite seu melhor e-mail"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TELEFONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Telefone
+                            <span
+                                style="
+                                    color:#999;
+                                    font-weight:400;
+                                "
+                            >
+                                (opcional)
+                            </span>
+                        </label>
+
+                        <div class="input-container">
+
+                            <span
+                                class="input-icon"
+                                aria-hidden="true"
+                            >
+                                ☎
+                            </span>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="(00) 00000-0000"
+                                autocomplete="tel"
+                                maxlength="15"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SENHA -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Senha
+                        </label>
+
+                        <div class="input-container">
+
+                            <span
+                                class="input-icon"
+                                aria-hidden="true"
+                            >
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Crie uma senha"
+                                autocomplete="new-password"
+                                minlength="6"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="togglePassword"
+                                aria-label="Mostrar senha"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONFIRMAR SENHA -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirmar senha
+                        </label>
+
+                        <div class="input-container">
+
+                            <span
+                                class="input-icon"
+                                aria-hidden="true"
+                            >
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Confirme sua senha"
+                                autocomplete="new-password"
+                                minlength="6"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="toggleConfirmPassword"
+                                aria-label="Mostrar confirmação da senha"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TERMOS -->
+
+                    <div class="terms-container">
+
+                        <label class="checkbox-label">
+
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                name="terms"
+                                required
+                            >
+
+                            <span>
+
+                                Li e aceito os
+
+                                <a href="#">
+                                    termos de uso
+                                </a>
+
+                                e a
+
+                                <a href="#">
+                                    política de privacidade
+                                </a>.
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- MENSAGEM -->
+
+                    <div
+                        id="registerMessage"
+                        class="form-message"
+                        role="alert"
+                        aria-live="polite"
+                    ></div>
+
+
+
+                    <!-- BOTÃO -->
+
+                    <button
+                        type="submit"
+                        class="register-button"
+                        id="registerButton"
+                    >
+                        Criar conta
+                    </button>
+
+                </form>
+
+
+
+                <!-- =================================================
+                     GOOGLE
+                     ================================================= -->
+
+                <div class="divider">
+                    <span>ou</span>
+                </div>
+
+
+                <button
+                    type="button"
+                    class="google-button"
+                    id="googleButton"
+                >
+                    Continuar com Google
+                </button>
+
+
+
+                <!-- =================================================
+                     LOGIN
+                     ================================================= -->
+
+                <div class="login-link">
+
+                    Já tem uma conta?
+
+                    <a href="login.html">
+                        Entrar
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================================
+         JAVASCRIPT
+         ================================================= -->
+
+    <script src="./js/cadastro.js"></script>
+
+</body>
+
+</html>

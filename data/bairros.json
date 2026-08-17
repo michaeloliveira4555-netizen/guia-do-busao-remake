@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nome": "Centro",
+    "cidadeId": 1
+  },
+  {
+    "id": 2,
+    "nome": "São Francisco",
+    "cidadeId": 1
+  },
+  {
+    "id": 3,
+    "nome": "Madre de Deus",
+    "cidadeId": 1
+  }
+]
