@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Detalhes da rota - Guia do Busão"
+    >
+
+    <title>Detalhes da rota - Guia do Busão</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo-link"
+            >
+
+                <img
+                    src="../assets/logos/logo.png"
+                    alt="Guia do Busão"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <!-- MENU -->
+
+            <nav class="nav">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    <span>⌂</span>
+                    Início
+                </a>
+
+                <a
+                    href="rotas-salvas.html"
+                    class="nav-link"
+                >
+                    <span>⌖</span>
+                    Rotas Salvas
+                </a>
+
+                <a
+                    href="favoritos.html"
+                    class="nav-link"
+                >
+                    <span>☆</span>
+                    Favoritos
+                </a>
+
+            </nav>
+
+
+            <!-- AÇÕES -->
+
+            <div class="header-actions">
+
+                <button
+                    type="button"
+                    class="theme-button"
+                    id="themeButton"
+                    aria-label="Alterar tema"
+                >
+                    ☾
+                </button>
+
+                <a
+                    href="login.html"
+                    class="profile-button"
+                    aria-label="Minha conta"
+                >
+                    👤
+                </a>
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <button
+                type="button"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CONTEÚDO ================= -->
+
+    <main class="route-page">
+
+        <div class="route-page-container">
+
+
+            <!-- ================= VOLTAR ================= -->
+
+            <a
+                href="resultado.html"
+                class="back-button"
+            >
+                ← Voltar para resultados
+            </a>
+
+
+            <!-- ================= TÍTULO ================= -->
+
+            <section class="route-header">
+
+                <span class="hero-tag">
+                    🚌 Detalhes da viagem
+                </span>
+
+                <h1>
+                    Sua rota
+                </h1>
+
+                <p>
+                    Confira todos os detalhes da viagem
+                    antes de seguir.
+                </p>
+
+            </section>
+
+
+            <!-- ================= RESUMO DA VIAGEM ================= -->
+
+            <section class="route-summary-card">
+
+
+                <!-- ORIGEM -->
+
+                <div class="route-point">
+
+                    <span class="route-point-marker origin">
+                        ●
+                    </span>
+
+                    <div>
+
+                        <small>
+                            SAÍDA
+                        </small>
+
+                        <strong id="routeOrigin">
+                            Porto Alegre - RS
+                        </strong>
+
+                        <span id="departureLocation">
+                            Terminal Rodoviário
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LINHA DA ROTA -->
+
+                <div class="route-line">
+
+                    <span></span>
+
+                    <small id="routeDuration">
+                        4h 30min
+                    </small>
+
+                    <span></span>
+
+                </div>
+
+
+                <!-- DESTINO -->
+
+                <div class="route-point">
+
+                    <span class="route-point-marker destination">
+                        ●
+                    </span>
+
+                    <div>
+
+                        <small>
+                            CHEGADA
+                        </small>
+
+                        <strong id="routeDestination">
+                            Florianópolis - SC
+                        </strong>
+
+                        <span id="arrivalLocation">
+                            Terminal Rodoviário
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= INFORMAÇÕES ================= -->
+
+            <section class="route-information">
+
+
+                <!-- HORÁRIOS -->
+
+                <div class="information-card">
+
+                    <div class="information-icon">
+                        🕐
+                    </div>
+
+                    <div>
+
+                        <small>
+                            Saída
+                        </small>
+
+                        <strong id="departureTime">
+                            08:30
+                        </strong>
+
+                    </div>
+
+                    <div class="information-divider"></div>
+
+                    <div>
+
+                        <small>
+                            Chegada
+                        </small>
+
+                        <strong id="arrivalTime">
+                            13:00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DURAÇÃO -->
+
+                <div class="information-card">
+
+                    <div class="information-icon">
+                        ⏱️
+                    </div>
+
+                    <div>
+
+                        <small>
+                            Duração total
+                        </small>
+
+                        <strong id="totalDuration">
+                            4h 30min
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREÇO -->
+
+                <div class="information-card">
+
+                    <div class="information-icon">
+                        💰
+                    </div>
+
+                    <div>
+
+                        <small>
+                            Valor da viagem
+                        </small>
+
+                        <strong id="routePrice">
+                            R$ 120,00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONEXÕES -->
+
+                <div class="information-card">
+
+                    <div class="information-icon">
+                        🔄
+                    </div>
+
+                    <div>
+
+                        <small>
+                            Conexões
+                        </small>
+
+                        <strong id="routeConnections">
+                            1 conexão
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= EMPRESA ================= -->
+
+            <section class="company-card">
+
+                <div class="company-logo-large">
+                    🚌
+                </div>
+
+                <div class="company-details">
+
+                    <small>
+                        EMPRESA
+                    </small>
+
+                    <h2 id="companyName">
+                        Empresa de ônibus
+                    </h2>
+
+                    <p id="busType">
+                        Ônibus convencional
+                    </p>
+
+                </div>
+
+
+                <div class="company-features">
+
+                    <span>
+                        ✓ Ar-condicionado
+                    </span>
+
+                    <span>
+                        ✓ Wi-Fi
+                    </span>
+
+                    <span>
+                        ✓ Banheiro
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TRECHOS ================= -->
+
+            <section class="route-steps">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="hero-tag">
+                            📍 Trajeto
+                        </span>
+
+                        <h2>
+                            Como será sua viagem
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TRECHO 1 -->
+
+                <article class="route-step">
+
+                    <div class="step-time">
+
+                        <strong>
+                            08:30
+                        </strong>
+
+                        <span>
+                            Saída
+                        </span>
+
+                    </div>
+
+
+                    <div class="step-line">
+
+                        <span class="step-dot"></span>
+
+                        <span class="vertical-line"></span>
+
+                        <span class="step-dot"></span>
+
+                    </div>
+
+
+                    <div class="step-content">
+
+                        <h3>
+                            Porto Alegre - RS
+                        </h3>
+
+                        <p>
+                            Terminal Rodoviário de Porto Alegre
+                        </p>
+
+                        <div class="step-company">
+
+                            🚌
+
+                            <span>
+                                Empresa de ônibus
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CONEXÃO -->
+
+                <article class="connection-step">
+
+                    <div class="connection-icon">
+                        🔄
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Conexão
+                        </strong>
+
+                        <p>
+                            Troca de ônibus
+                        </p>
+
+                        <span>
+                            30 minutos de espera
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TRECHO 2 -->
+
+                <article class="route-step">
+
+                    <div class="step-time">
+
+                        <strong>
+                            13:00
+                        </strong>
+
+                        <span>
+                            Chegada
+                        </span>
+
+                    </div>
+
+
+                    <div class="step-line">
+
+                        <span class="step-dot"></span>
+
+                    </div>
+
+
+                    <div class="step-content">
+
+                        <h3>
+                            Florianópolis - SC
+                        </h3>
+
+                        <p>
+                            Terminal Rodoviário de Florianópolis
+                        </p>
+
+                        <div class="step-company">
+
+                            🚌
+
+                            <span>
+                                Empresa de ônibus
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- ================= PARADAS ================= -->
+
+            <section class="stops-card">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="hero-tag">
+                            🛑 Paradas
+                        </span>
+
+                        <h2>
+                            Paradas durante o trajeto
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stops-list"
+                    id="stopsList"
+                >
+
+                    <div class="stop">
+
+                        <span class="stop-number">
+                            1
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Porto Alegre
+                            </strong>
+
+                            <small>
+                                Terminal Rodoviário
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stop">
+
+                        <span class="stop-number">
+                            2
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Osório
+                            </strong>
+
+                            <small>
+                                Parada rápida
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stop">
+
+                        <span class="stop-number">
+                            3
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Florianópolis
+                            </strong>
+
+                            <small>
+                                Terminal Rodoviário
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= AÇÕES ================= -->
+
+            <section class="route-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="saveRouteButton"
+                >
+                    ☆ Salvar rota
+                </button>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="favoriteRouteButton"
+                >
+                    ♡ Favoritar
+                </button>
+
+                <button
+                    type="button"
+                    class="search-button"
+                    id="continueRouteButton"
+                >
+                    🗺️ Ver mapa
+                </button>
+
+            </section>
+
+
+            <!-- ================= AVISO ================= -->
+
+            <section class="route-notice">
+
+                <span>
+                    🛡️
+                </span>
+
+                <div>
+
+                    <strong>
+                        Informações da viagem
+                    </strong>
+
+                    <p>
+                        Os horários, preços e disponibilidade
+                        podem sofrer alterações. Confirme as
+                        informações com a empresa antes da viagem.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <p>
+                © 2026 Guia do Busão.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= MENU MOBILE ================= -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <button
+            type="button"
+            class="mobile-menu-close"
+            id="mobileMenuClose"
+        >
+            ×
+        </button>
+
+        <a href="index.html">
+            Início
+        </a>
+
+        <a href="rotas-salvas.html">
+            Rotas Salvas
+        </a>
+
+        <a href="favoritos.html">
+            Favoritos
+        </a>
+
+        <a href="login.html">
+            Minha conta
+        </a>
+
+    </div>
+
+</body>
+
+</html>

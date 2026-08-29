@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nome": "Porto Alegre",
+    "estado": "RS"
+  },
+  {
+    "id": 2,
+    "nome": "Canoas",
+    "estado": "RS"
+  },
+  {
+    "id": 3,
+    "nome": "São Leopoldo",
+    "estado": "RS"
+  }
+]

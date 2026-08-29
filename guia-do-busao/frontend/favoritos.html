@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Rotas favoritas - Guia do Busão"
+    >
+
+    <title>Favoritos - Guia do Busão</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a
+                href="index.html"
+                class="logo-link"
+            >
+
+                <img
+                    src="../assets/logos/logo.png"
+                    alt="Guia do Busão"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    <span>⌂</span>
+                    Início
+                </a>
+
+                <a
+                    href="rotas-salvas.html"
+                    class="nav-link"
+                >
+                    <span>⌖</span>
+                    Rotas Salvas
+                </a>
+
+                <a
+                    href="favoritos.html"
+                    class="nav-link active"
+                >
+                    <span>☆</span>
+                    Favoritos
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <button
+                    type="button"
+                    class="theme-button"
+                    id="themeButton"
+                    aria-label="Alterar tema"
+                >
+                    ☾
+                </button>
+
+                <a
+                    href="perfil.html"
+                    class="profile-button"
+                    aria-label="Meu perfil"
+                >
+                    👤
+                </a>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CONTEÚDO ================= -->
+
+    <main class="favorites-page">
+
+        <div class="favorites-container">
+
+
+            <!-- ================= TÍTULO ================= -->
+
+            <section class="favorites-header">
+
+                <span class="hero-tag">
+                    ☆ Seus favoritos
+                </span>
+
+                <h1>
+                    Rotas favoritas
+                </h1>
+
+                <p>
+                    Acesse rapidamente as viagens que
+                    você mais utiliza.
+                </p>
+
+            </section>
+
+
+            <!-- ================= FILTROS / AÇÕES ================= -->
+
+            <section class="favorites-toolbar">
+
+                <div>
+
+                    <strong id="favoritesCount">
+                        2 rotas favoritas
+                    </strong>
+
+                    <span>
+                        salvas na sua conta
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="pesquisa.html"
+                    class="search-button"
+                >
+                    + Nova pesquisa
+                </a>
+
+            </section>
+
+
+            <!-- ================= LISTA ================= -->
+
+            <section
+                class="favorites-list"
+                id="favoritesList"
+            >
+
+
+                <!-- FAVORITO 1 -->
+
+                <article class="favorite-card">
+
+                    <div class="favorite-route">
+
+                        <div class="favorite-location">
+
+                            <span class="location-marker origin">
+                                ●
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    ORIGEM
+                                </small>
+
+                                <strong>
+                                    Porto Alegre - RS
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="favorite-arrow">
+                            →
+                        </div>
+
+
+                        <div class="favorite-location">
+
+                            <span class="location-marker destination">
+                                ●
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    DESTINO
+                                </small>
+
+                                <strong>
+                                    Florianópolis - SC
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="favorite-details">
+
+                        <span>
+                            🕐 A partir das 08:30
+                        </span>
+
+                        <span>
+                            ⏱️ 4h 30min
+                        </span>
+
+                        <span>
+                            💰 A partir de R$ 120,00
+                        </span>
+
+                    </div>
+
+
+                    <div class="favorite-actions">
+
+                        <a
+                            href="resultado.html"
+                            class="secondary-button"
+                        >
+                            Ver viagens
+                        </a>
+
+                        <button
+                            type="button"
+                            class="favorite-remove"
+                            data-route="porto-alegre-florianopolis"
+                            aria-label="Remover dos favoritos"
+                        >
+                            ♥
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FAVORITO 2 -->
+
+                <article class="favorite-card">
+
+                    <div class="favorite-route">
+
+                        <div class="favorite-location">
+
+                            <span class="location-marker origin">
+                                ●
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    ORIGEM
+                                </small>
+
+                                <strong>
+                                    Curitiba - PR
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="favorite-arrow">
+                            →
+                        </div>
+
+
+                        <div class="favorite-location">
+
+                            <span class="location-marker destination">
+                                ●
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    DESTINO
+                                </small>
+
+                                <strong>
+                                    Balneário Camboriú - SC
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="favorite-details">
+
+                        <span>
+                            🕐 A partir das 07:00
+                        </span>
+
+                        <span>
+                            ⏱️ 3h 20min
+                        </span>
+
+                        <span>
+                            💰 A partir de R$ 85,00
+                        </span>
+
+                    </div>
+
+
+                    <div class="favorite-actions">
+
+                        <a
+                            href="resultado.html"
+                            class="secondary-button"
+                        >
+                            Ver viagens
+                        </a>
+
+                        <button
+                            type="button"
+                            class="favorite-remove"
+                            data-route="curitiba-balneario"
+                            aria-label="Remover dos favoritos"
+                        >
+                            ♥
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- ================= SEM FAVORITOS ================= -->
+
+            <section
+                class="empty-state"
+                id="emptyFavorites"
+                hidden
+            >
+
+                <div class="empty-state-icon">
+                    ☆
+                </div>
+
+                <h2>
+                    Você ainda não possui favoritos
+                </h2>
+
+                <p>
+                    Quando encontrar uma rota que você
+                    usa bastante, favorite para encontrá-la
+                    rapidamente depois.
+                </p>
+
+                <a
+                    href="pesquisa.html"
+                    class="search-button"
+                >
+                    🔎 Encontrar uma rota
+                </a>
+
+            </section>
+
+
+            <!-- ================= DICA ================= -->
+
+            <section class="favorites-tip">
+
+                <span>
+                    💡
+                </span>
+
+                <div>
+
+                    <strong>
+                        Dica
+                    </strong>
+
+                    <p>
+                        Você pode favoritar uma rota
+                        diretamente na página de detalhes
+                        da viagem.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <p>
+                © 2026 Guia do Busão.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= MENU MOBILE ================= -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <button
+            type="button"
+            class="mobile-menu-close"
+            id="mobileMenuClose"
+        >
+            ×
+        </button>
+
+        <a href="index.html">
+            Início
+        </a>
+
+        <a href="rotas-salvas.html">
+            Rotas Salvas
+        </a>
+
+        <a href="favoritos.html">
+            Favoritos
+        </a>
+
+        <a href="perfil.html">
+            Minha conta
+        </a>
+
+    </div>
+
+</body>
+
+</html>

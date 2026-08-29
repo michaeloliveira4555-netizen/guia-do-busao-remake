@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "numero": "101",
+    "nome": "Centro - Madre de Deus",
+    "origem": {
+      "cidadeId": 1,
+      "bairroId": 1
+    },
+    "destino": {
+      "cidadeId": 1,
+      "bairroId": 3
+    },
+    "tempoEstimado": "1h 25min",
+    "horariosId": [1, 2]
+  },
+  {
+    "id": 2,
+    "numero": "202",
+    "nome": "São Francisco - Canoas",
+    "origem": {
+      "cidadeId": 1,
+      "bairroId": 2
+    },
+    "destino": {
+      "cidadeId": 2,
+      "bairroId": 1
+    },
+    "tempoEstimado": "45min",
+    "horariosId": []
+  }
+]

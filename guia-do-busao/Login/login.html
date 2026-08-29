@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Faça login no Guia do Busão e tenha acesso às suas rotas, favoritos e histórico de viagens.">
+      <title>Login | Guia do Busão</title>
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1457e8;
+            --primary-dark: #0d43c7;
+            --secondary: #3025ed;
+            --accent: #d9ef27;
+
+            --text: #222;
+            --text-light: #777;
+            --border: #dedede;
+
+            --white: #ffffff;
+            --error-bg: #fee2e2;
+            --error: #b91c1c;
+            --success-bg: #dcfce7;
+            --success: #15803d;
+
+            --radius: 10px;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--white);
+            color: var(--text);
+        }
+
+        /* Concluio  */
+
+        .login-page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 42% 58%;
+        }
+
+            /* Concluio  */
+
+        .login-left {
+         min-height: 100vh;
+         padding: 45px 60px;
+         display: flex;
+         flex-direction: column;
+         background:
+         linear-gradient(135deg, 
+         var(--primary),
+         var(--primary-dark)
+                );
+
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .brand {
+            width: 100%;
+        }
+
+        .logo {
+            width: 320px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .slogan {
+            margin-top: 5px;
+            margin-left: 30px;
+
+            font-size: 15px;
+            font-weight: 500;
+
+            letter-spacing: 0.5px;
+        }
+
+        .left-content {
+            margin-top: 80px;
+            margin-left: 35px;
+        }
+
+        .left-content h2 {
+            max-width: 480px;
+
+            font-size: 38px;
+            line-height: 1.2;
+
+            margin-bottom: 25px;
+        }
+
+        .left-content h2 span {
+            color: var(--accent);
+        }
+
+        .left-content p {
+            max-width: 500px;
+
+            font-size: 18px;
+            line-height: 1.6;
+
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .bus-image {
+            width: 480px;
+            max-width: 100%;
+
+            margin-top: auto;
+            margin-left: -15px;
+
+            object-fit: contain;
+        }
+
+        /* =====================================================
+           LADO DIREITO
+        ===================================================== */
+
+        .login-right {
+            min-height: 100vh;
+
+            padding: 40px 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #ffffff;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 560px;
+        }
+
+        /* =====================================================
+           TÍTULO
+        ===================================================== */
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .login-title h1 {
+            font-size: 38px;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        .login-title p {
+            color: var(--text-light);
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           FORMULÁRIO
+        ===================================================== */
+
+        .login-form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #333;
+
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .input-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 18px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 20px;
+
+            pointer-events: none;
+        }
+
+        .input-container input {
+            width: 100%;
+            height: 58px;
+
+            padding: 0 55px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: #ffffff;
+
+            color: #333;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .input-container input::placeholder {
+            color: #aaa;
+        }
+
+        .input-container input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(20, 87, 232, 0.10);
+        }
+
+        /* =====================================================
+           MOSTRAR SENHA
+        ===================================================== */
+
+        .password-toggle {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 20px;
+
+            color: #555;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        /* =====================================================
+           OPÇÕES
+        ===================================================== */
+
+        .login-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin: 5px 0 25px;
+
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #666;
+
+            cursor: pointer;
+        }
+
+        .remember input {
+            width: 16px;
+            height: 16px;
+
+            accent-color: var(--primary);
+
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: var(--secondary);
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           BOTÃO LOGIN
+        ===================================================== */
+
+        .login-button {
+            width: 100%;
+            height: 58px;
+
+            border: none;
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--secondary),
+                    #3e24e9
+                );
+
+            color: #ffffff;
+
+            font-size: 17px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                opacity 0.2s;
+        }
+
+        .login-button:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+
+        /* =====================================================
+           MENSAGEM
+        ===================================================== */
+
+        .form-message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+        .form-message.erro {
+            display: block;
+
+            background: var(--error-bg);
+            color: var(--error);
+
+            border: 1px solid #fecaca;
+        }
+
+        .form-message.sucesso {
+            display: block;
+
+            background: var(--success-bg);
+            color: var(--success);
+
+            border: 1px solid #bbf7d0;
+        }
+
+        /* =====================================================
+           DIVISOR
+        ===================================================== */
+
+        .divider {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            margin: 28px 0 20px;
+
+            color: #777;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #ddd;
+        }
+
+        .divider span {
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           GOOGLE
+        ===================================================== */
+
+        .google-button {
+            width: 100%;
+            height: 54px;
+
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #333;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: background 0.2s;
+        }
+
+        .google-button:hover {
+            background: #f7f7f7;
+        }
+
+        /* =====================================================
+           CADASTRO
+        ===================================================== */
+
+        .register-link {
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 15px;
+        }
+
+        .register-link a {
+            color: var(--secondary);
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           ACESSIBILIDADE
+        ===================================================== */
+
+        input:focus-visible,
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid rgba(20, 87, 232, 0.30);
+            outline-offset: 2px;
+        }
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .login-page {
+                grid-template-columns: 1fr;
+            }
+
+            .login-left {
+                min-height: auto;
+
+                padding: 35px 30px;
+
+                align-items: center;
+
+                text-align: center;
+            }
+
+            .logo {
+                width: 300px;
+            }
+
+            .slogan {
+                margin-left: 0;
+            }
+
+            .left-content {
+                margin: 45px 0 0;
+            }
+
+            .left-content h2 {
+                font-size: 30px;
+            }
+
+            .left-content p {
+                font-size: 16px;
+            }
+
+            .bus-image {
+                width: 400px;
+
+                margin: 35px auto 0;
+            }
+
+            .login-right {
+                min-height: auto;
+
+                padding: 45px 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .login-left {
+                padding: 30px 20px;
+            }
+
+            .logo {
+                width: 260px;
+            }
+
+            .left-content {
+                margin-top: 35px;
+            }
+
+            .left-content h2 {
+                font-size: 26px;
+            }
+
+            .left-content p {
+                font-size: 15px;
+            }
+
+            .bus-image {
+                width: 320px;
+            }
+
+            .login-right {
+                padding: 35px 20px;
+            }
+
+            .login-title h1 {
+                font-size: 30px;
+            }
+
+            .login-title p {
+                font-size: 15px;
+            }
+
+            .input-container input {
+                height: 54px;
+                font-size: 16px;
+            }
+
+            .login-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="login-page">
+
+    <!-- =====================================================
+         LADO ESQUERDO
+    ====================================================== -->
+
+    <section class="login-left">
+
+        <div class="brand">
+
+            <img
+                src="../assets/images/logo.png"
+                alt="Guia do Busão"
+                class="logo"
+            >
+
+            <p class="slogan">
+                – SUA VIAGEM COMEÇA AQUI! –
+            </p>
+
+        </div>
+
+        <div class="left-content">
+
+            <h2>
+                Conexões
+                <span>Inteligentes</span>
+                por todo o Brasil
+            </h2>
+
+            <p>
+                Acesse sua conta para consultar rotas,
+                salvar favoritos, acompanhar seu histórico
+                de viagens e muito mais.
+            </p>
+
+        </div>
+
+        <!--
+            Substitua pelo caminho real da imagem
+            do ônibus.
+        -->
+        <img
+            src="../assets/images/logo.png"
+            alt="Ilustração de ônibus"
+            class="bus-image"
+        >
+
+    </section>
+
+
+    <!-- =====================================================
+         LADO DIREITO
+    ====================================================== -->
+
+    <section class="login-right">
+
+        <div class="login-card">
+
+            <header class="login-title">
+
+                <h1>
+                    Entrar na sua conta
+                </h1>
+
+                <p>
+                    Informe seus dados para continuar.
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 FORMULÁRIO
+            ================================================== -->
+
+            <form
+                id="formLogin"
+                class="login-form"
+                novalidate
+            >
+
+                <!-- USUÁRIO -->
+
+                <div class="form-group">
+
+                    <label for="usuario">
+                        Usuário ou e-mail
+                    </label>
+
+                    <div class="input-container">
+
+                        <span
+                            class="input-icon"
+                            aria-hidden="true"
+                        >
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            id="usuario"
+                            name="usuario"
+                            placeholder="Digite seu usuário ou e-mail"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- SENHA -->
+
+                <div class="form-group">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <div class="input-container">
+
+                        <span
+                            class="input-icon"
+                            aria-hidden="true"
+                        >
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Digite sua senha"
+                            autocomplete="current-password"
+                            minlength="6"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Mostrar senha"
+                            aria-pressed="false"
+                        >
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPÇÕES -->
+
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                            name="remember"
+                        >
+
+                        <span>
+                            Lembrar de mim
+                        </span>
+
+                    </label>
+
+                    <a
+                        href="recuperar-senha.html"
+                        class="forgot-password"
+                    >
+                        Esqueci minha senha
+                    </a>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="btnLogin"
+                >
+                    ENTRAR
+                </button>
+
+
+                <!-- MENSAGEM -->
+
+                <div
+                    id="formMessage"
+                    class="form-message"
+                    role="alert"
+                    aria-live="polite"
+                ></div>
+
+            </form>
+
+
+            <!-- DIVISOR -->
+
+            <div class="divider">
+                <span>ou</span>
+            </div>
+
+
+            <!-- GOOGLE -->
+
+            <button
+                type="button"
+                class="google-button"
+                id="googleButton"
+            >
+                🌐 Continuar com Google
+            </button>
+
+
+            <!-- CADASTRO -->
+
+            <p class="register-link">
+
+                Ainda não possui uma conta?
+
+                <a href="cadastro.html">
+                    Criar conta
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    /* =========================================================
+       MOSTRAR / OCULTAR SENHA
+    ========================================================== */
+
+    const passwordInput =
+        document.getElementById("senha");
+
+    const passwordToggle =
+        document.getElementById("passwordToggle");
+
+
+    passwordToggle.addEventListener("click", () => {
+
+        const isPassword =
+            passwordInput.type === "password";
+
+        passwordInput.type =
+            isPassword ? "text" : "password";
+
+        passwordToggle.textContent =
+            isPassword ? "🙈" : "👁️";
+
+        passwordToggle.setAttribute(
+            "aria-label",
+            isPassword
+                ? "Ocultar senha"
+                : "Mostrar senha"
+        );
+
+        passwordToggle.setAttribute(
+            "aria-pressed",
+            isPassword.toString()
+        );
+
+    });
+
+
+    /* =========================================================
+       LOGIN
+    ========================================================== */
+
+    const formLogin =
+        document.getElementById("formLogin");
+
+    const btnLogin =
+        document.getElementById("btnLogin");
+
+    const formMessage =
+        document.getElementById("formMessage");
+
+
+    function mostrarMensagem(
+        mensagem,
+        tipo
+    ) {
+
+        formMessage.textContent = mensagem;
+
+        formMessage.className =
+            "form-message " + tipo;
+
+    }
+
+
+    formLogin.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+            const usuario =
+                document
+                    .getElementById("usuario")
+                    .value
+                    .trim();
+
+            const senha =
+                passwordInput.value;
+
+
+            /* VALIDAÇÃO */
+
+            if (!usuario) {
+
+                mostrarMensagem(
+                    "Informe seu usuário ou e-mail.",
+                    "erro"
+                );
+
+                return;
+            }
+
+
+            if (!senha) {
+
+                mostrarMensagem(
+                    "Informe sua senha.",
+                    "erro"
+                );
+
+                return;
+            }
+
+
+            if (senha.length < 6) {
+
+                mostrarMensagem(
+                    "A senha deve possuir pelo menos 6 caracteres.",
+                    "erro"
+                );
+
+                return;
+            }
+
+
+            /* ESTADO DE CARREGAMENTO */
+
+            btnLogin.disabled = true;
+
+            btnLogin.textContent =
+                "ENTRANDO...";
+
+
+            try {
+
+                /*
+                 * IMPORTANTE:
+                 *
+                 * Aqui deverá ser feita a chamada
+                 * para sua API/backend.
+                 *
+                 * Exemplo futuro:
+                 *
+                 * const response = await fetch(
+                 *     "/api/auth/login",
+                 *     {
+                 *         method: "POST",
+                 *         headers: {
+                 *             "Content-Type":
+                 *                 "application/json"
+                 *         },
+                 *         body: JSON.stringify({
+                 *             usuario,
+                 *             senha
+                 *         })
+                 *     }
+                 * );
+                 */
+
+                await new Promise(
+                    resolve =>
+                        setTimeout(resolve, 1000)
+                );
+
+
+                mostrarMensagem(
+                    "Dados validados. Conecte este formulário à sua API de autenticação.",
+                    "sucesso"
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                mostrarMensagem(
+                    "Não foi possível realizar o login. Tente novamente.",
+                    "erro"
+                );
+
+            } finally {
+
+                btnLogin.disabled = false;
+
+                btnLogin.textContent =
+                    "ENTRAR";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       GOOGLE
+    ========================================================== */
+
+    const googleButton =
+        document.getElementById("googleButton");
+
+
+    googleButton.addEventListener(
+        "click",
+        () => {
+
+            mostrarMensagem(
+                "A autenticação com Google ainda precisa ser configurada no backend.",
+                "erro"
+            );
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
+```

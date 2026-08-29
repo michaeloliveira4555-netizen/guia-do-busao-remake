@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Horários de ônibus - Guia do Busão"
+    >
+
+    <title>Horários - Guia do Busão</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a
+                href="index.html"
+                class="logo-link"
+            >
+
+                <img
+                    src="../assets/logos/logo.png"
+                    alt="Guia do Busão"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    <span>⌂</span>
+                    Início
+                </a>
+
+                <a
+                    href="rotas-salvas.html"
+                    class="nav-link"
+                >
+                    <span>⌖</span>
+                    Rotas Salvas
+                </a>
+
+                <a
+                    href="favoritos.html"
+                    class="nav-link"
+                >
+                    <span>☆</span>
+                    Favoritos
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <button
+                    type="button"
+                    class="theme-button"
+                    id="themeButton"
+                    aria-label="Alterar tema"
+                >
+                    ☾
+                </button>
+
+                <a
+                    href="perfil.html"
+                    class="profile-button"
+                    aria-label="Meu perfil"
+                >
+                    👤
+                </a>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CONTEÚDO ================= -->
+
+    <main class="schedule-page">
+
+        <div class="schedule-container">
+
+
+            <!-- ================= CABEÇALHO ================= -->
+
+            <section class="schedule-header">
+
+                <a
+                    href="resultado.html"
+                    class="back-button"
+                >
+                    ← Voltar para resultados
+                </a>
+
+
+                <span class="hero-tag">
+                    🕐 Horários
+                </span>
+
+                <h1>
+                    Horários de ônibus
+                </h1>
+
+                <p>
+                    Consulte os horários disponíveis
+                    para sua viagem.
+                </p>
+
+            </section>
+
+
+            <!-- ================= ROTA ================= -->
+
+            <section class="schedule-route-card">
+
+                <div class="schedule-location">
+
+                    <small>
+                        ORIGEM
+                    </small>
+
+                    <strong id="scheduleOrigin">
+                        Porto Alegre - RS
+                    </strong>
+
+                </div>
+
+
+                <span class="schedule-arrow">
+                    →
+                </span>
+
+
+                <div class="schedule-location">
+
+                    <small>
+                        DESTINO
+                    </small>
+
+                    <strong id="scheduleDestination">
+                        Florianópolis - SC
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= DATA PESQUISADA ================= -->
+
+            <section class="searched-date">
+
+                <div class="searched-date-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <small>
+                        DATA PESQUISADA
+                    </small>
+
+                    <strong id="searchedDate">
+                        15/08/2026
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SEM HORÁRIOS ================= -->
+
+            <section class="no-schedule-card">
+
+                <div class="no-schedule-icon">
+                    🚌
+                </div>
+
+                <h2>
+                    Não encontramos viagens para esse dia
+                </h2>
+
+                <p>
+                    Não há horários disponíveis para
+                    a data selecionada.
+                </p>
+
+                <p class="no-schedule-help">
+                    Mas encontramos viagens em outras datas.
+                    Confira abaixo:
+                </p>
+
+            </section>
+
+
+            <!-- ================= OUTRAS DATAS ================= -->
+
+            <section class="available-dates">
+
+                <div class="section-heading">
+
+                    <span class="hero-tag">
+                        📅 Próximas opções
+                    </span>
+
+                    <h2>
+                        Dias com horários disponíveis
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="dates-list"
+                    id="availableDates"
+                >
+
+
+                    <!-- DATA 1 -->
+
+                    <button
+                        type="button"
+                        class="date-card"
+                        data-date="16/08/2026"
+                    >
+
+                        <span>
+                            DOM
+                        </span>
+
+                        <strong>
+                            16
+                        </strong>
+
+                        <small>
+                            AGO
+                        </small>
+
+                    </button>
+
+
+                    <!-- DATA 2 -->
+
+                    <button
+                        type="button"
+                        class="date-card active"
+                        data-date="17/08/2026"
+                    >
+
+                        <span>
+                            SEG
+                        </span>
+
+                        <strong>
+                            17
+                        </strong>
+
+                        <small>
+                            AGO
+                        </small>
+
+                    </button>
+
+
+                    <!-- DATA 3 -->
+
+                    <button
+                        type="button"
+                        class="date-card"
+                        data-date="18/08/2026"
+                    >
+
+                        <span>
+                            TER
+                        </span>
+
+                        <strong>
+                            18
+                        </strong>
+
+                        <small>
+                            AGO
+                        </small>
+
+                    </button>
+
+
+                    <!-- DATA 4 -->
+
+                    <button
+                        type="button"
+                        class="date-card"
+                        data-date="19/08/2026"
+                    >
+
+                        <span>
+                            QUA
+                        </span>
+
+                        <strong>
+                            19
+                        </strong>
+
+                        <small>
+                            AGO
+                        </small>
+
+                    </button>
+
+
+                    <!-- DATA 5 -->
+
+                    <button
+                        type="button"
+                        class="date-card"
+                        data-date="20/08/2026"
+                    >
+
+                        <span>
+                            QUI
+                        </span>
+
+                        <strong>
+                            20
+                        </strong>
+
+                        <small>
+                            AGO
+                        </small>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= HORÁRIOS ================= -->
+
+            <section class="available-schedules">
+
+                <div class="section-heading">
+
+                    <span class="hero-tag">
+                        🚌 Viagens disponíveis
+                    </span>
+
+                    <h2>
+                        Horários para
+                        <span id="selectedDate">
+                            17/08/2026
+                        </span>
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="schedule-list"
+                    id="scheduleList"
+                >
+
+
+                    <!-- HORÁRIO 1 -->
+
+                    <article class="schedule-card">
+
+                        <div class="schedule-time">
+
+                            <strong>
+                                06:30
+                            </strong>
+
+                            <small>
+                                Saída
+                            </small>
+
+                        </div>
+
+
+                        <div class="schedule-duration">
+
+                            <span>
+                                4h 30min
+                            </span>
+
+                            <div class="schedule-line">
+                                ─────────
+                            </div>
+
+                            <span>
+                                Direto
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-arrival">
+
+                            <strong>
+                                11:00
+                            </strong>
+
+                            <small>
+                                Chegada
+                            </small>
+
+                        </div>
+
+
+                        <div class="schedule-company">
+
+                            <strong>
+                                Empresa de ônibus
+                            </strong>
+
+                            <span>
+                                Ônibus convencional
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-price">
+
+                            <small>
+                                A partir de
+                            </small>
+
+                            <strong>
+                                R$ 120,00
+                            </strong>
+
+                        </div>
+
+
+                        <a
+                            href="rota.html"
+                            class="search-button"
+                        >
+                            Ver viagem
+                        </a>
+
+                    </article>
+
+
+                    <!-- HORÁRIO 2 -->
+
+                    <article class="schedule-card">
+
+                        <div class="schedule-time">
+
+                            <strong>
+                                09:45
+                            </strong>
+
+                            <small>
+                                Saída
+                            </small>
+
+                        </div>
+
+
+                        <div class="schedule-duration">
+
+                            <span>
+                                4h 45min
+                            </span>
+
+                            <div class="schedule-line">
+                                ─────────
+                            </div>
+
+                            <span>
+                                Direto
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-arrival">
+
+                            <strong>
+                                14:30
+                            </strong>
+
+                            <small>
+                                Chegada
+                            </small>
+
+                        </div>
+
+
+                        <div class="schedule-company">
+
+                            <strong>
+                                Empresa de ônibus
+                            </strong>
+
+                            <span>
+                                Semi-leito
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-price">
+
+                            <small>
+                                A partir de
+                            </small>
+
+                            <strong>
+                                R$ 145,00
+                            </strong>
+
+                        </div>
+
+
+                        <a
+                            href="rota.html"
+                            class="search-button"
+                        >
+                            Ver viagem
+                        </a>
+
+                    </article>
+
+
+                    <!-- HORÁRIO 3 -->
+
+                    <article class="schedule-card">
+
+                        <div class="schedule-time">
+
+                            <strong>
+                                14:20
+                            </strong>
+
+                            <small>
+                                Saída
+                            </small>
+
+                        </div>
+
+
+                        <div class="schedule-duration">
+
+                            <span>
+                                5h 10min
+                            </span>
+
+                            <div class="schedule-line">
+                                ─────────
+                            </div>
+
+                            <span>
+                                1 conexão
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-arrival">
+
+                            <strong>
+                                19:30
+                            </strong>
+
+                            <small>
+                                Chegada
+                            </small>
+
+                        </div>
+
+
+                        <div class="schedule-company">
+
+                            <strong>
+                                Empresa de ônibus
+                            </strong>
+
+                            <span>
+                                Convencional
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-price">
+
+                            <small>
+                                A partir de
+                            </small>
+
+                            <strong>
+                                R$ 110,00
+                            </strong>
+
+                        </div>
+
+
+                        <a
+                            href="rota.html"
+                            class="search-button"
+                        >
+                            Ver viagem
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= OUTRA PESQUISA ================= -->
+
+            <section class="schedule-actions">
+
+                <a
+                    href="pesquisa.html"
+                    class="secondary-button"
+                >
+                    🔎 Fazer nova pesquisa
+                </a>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <p>
+                © 2026 Guia do Busão.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= MENU MOBILE ================= -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <button
+            type="button"
+            class="mobile-menu-close"
+            id="mobileMenuClose"
+        >
+            ×
+        </button>
+
+        <a href="index.html">
+            Início
+        </a>
+
+        <a href="rotas-salvas.html">
+            Rotas Salvas
+        </a>
+
+        <a href="favoritos.html">
+            Favoritos
+        </a>
+
+        <a href="perfil.html">
+            Minha conta
+        </a>
+
+    </div>
+
+</body>
+
+</html>
