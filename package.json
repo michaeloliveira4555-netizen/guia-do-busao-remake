@@ -1,16 +1,14 @@
 {
   "name": "guia-do-busao",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Guia do Busão",
+  "main": "backend/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1"
+    "cors": "^2.8.6",
+    "express": "^5.1.0"
   }
 }

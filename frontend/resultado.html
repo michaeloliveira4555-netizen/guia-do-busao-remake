@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Resultados de viagens - Guia do Busão"
+    >
+
+    <title>Resultados - Guia do Busão</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="index.html" class="logo-link">
+
+                <img
+                    src="../assets/logos/logo.png"
+                    alt="Guia do Busão"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    <span>⌂</span>
+                    Início
+                </a>
+
+                <a
+                    href="rotas-salvas.html"
+                    class="nav-link"
+                >
+                    <span>⌖</span>
+                    Rotas Salvas
+                </a>
+
+                <a
+                    href="favoritos.html"
+                    class="nav-link"
+                >
+                    <span>☆</span>
+                    Favoritos
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <button
+                    type="button"
+                    class="theme-button"
+                    id="themeButton"
+                    aria-label="Alterar tema"
+                >
+                    ☾
+                </button>
+
+                <a
+                    href="login.html"
+                    class="profile-button"
+                    aria-label="Minha conta"
+                >
+                    👤
+                </a>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CONTEÚDO ================= -->
+
+    <main class="results-page">
+
+        <div class="results-container">
+
+
+            <!-- ================= TÍTULO ================= -->
+
+            <section class="results-header">
+
+                <a
+                    href="pesquisa.html"
+                    class="back-button"
+                >
+                    ← Alterar pesquisa
+                </a>
+
+
+                <div class="results-title">
+
+                    <span class="hero-tag">
+                        🚌 Resultados da busca
+                    </span>
+
+                    <h1>
+                        Rotas encontradas
+                    </h1>
+
+                    <p id="searchSummary">
+                        Carregando sua pesquisa...
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RESUMO ================= -->
+
+            <section class="search-summary-card">
+
+                <div class="summary-location">
+
+                    <span>
+                        📍
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Origem
+                        </small>
+
+                        <strong id="resultOrigin">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-arrow">
+                    →
+                </div>
+
+
+                <div class="summary-location">
+
+                    <span>
+                        📍
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Destino
+                        </small>
+
+                        <strong id="resultDestination">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-date">
+
+                    <span>
+                        📅
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Data
+                        </small>
+
+                        <strong id="resultDate">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= FILTROS ================= -->
+
+            <section class="results-tools">
+
+                <div>
+
+                    <strong>
+                        Opções de viagem
+                    </strong>
+
+                    <span id="resultCount">
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="sort-container">
+
+                    <label for="sortResults">
+                        Ordenar:
+                    </label>
+
+                    <select id="sortResults">
+
+                        <option value="fastest">
+                            Mais rápido
+                        </option>
+
+                        <option value="cheapest">
+                            Mais barato
+                        </option>
+
+                        <option value="earliest">
+                            Mais cedo
+                        </option>
+
+                        <option value="connections">
+                            Menos conexões
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RESULTADOS ================= -->
+
+            <section
+                class="results-list"
+                id="resultsList"
+            >
+
+                <!--
+
+                    Os resultados reais serão
+                    inseridos pelo resultado.js.
+
+                -->
+
+
+                <!-- RESULTADO DE EXEMPLO -->
+
+                <article class="trip-card">
+
+                    <div class="trip-main">
+
+
+                        <!-- HORÁRIO -->
+
+                        <div class="trip-time">
+
+                            <strong>
+                                08:30
+                            </strong>
+
+                            <span>
+                                Porto Alegre
+                            </span>
+
+                        </div>
+
+
+                        <!-- DURAÇÃO -->
+
+                        <div class="trip-duration">
+
+                            <span>
+                                ─────────
+                            </span>
+
+                            <small>
+                                4h 30min
+                            </small>
+
+                            <span>
+                                ─────────
+                            </span>
+
+                        </div>
+
+
+                        <!-- CHEGADA -->
+
+                        <div class="trip-time">
+
+                            <strong>
+                                13:00
+                            </strong>
+
+                            <span>
+                                Florianópolis
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INFORMAÇÕES -->
+
+                    <div class="trip-info">
+
+                        <div class="company">
+
+                            <div class="company-logo">
+                                🚌
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Empresa de ônibus
+                                </strong>
+
+                                <span>
+                                    Convencional
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="trip-details">
+
+                            <span>
+                                1 conexão
+                            </span>
+
+                            <span>
+                                Wi-Fi
+                            </span>
+
+                            <span>
+                                Ar-condicionado
+                            </span>
+
+                        </div>
+
+
+                        <div class="trip-price">
+
+                            <small>
+                                a partir de
+                            </small>
+
+                            <strong>
+                                R$ 120,00
+                            </strong>
+
+                            <button
+                                type="button"
+                                class="trip-button"
+                            >
+                                Ver rota
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- ================= SEM RESULTADOS ================= -->
+
+            <section
+                class="no-results"
+                id="noResults"
+                hidden
+            >
+
+                <div class="no-results-icon">
+                    🚌
+                </div>
+
+                <h2>
+                    Não encontramos viagens para esse dia
+                </h2>
+
+                <p>
+                    Não encontramos uma viagem disponível
+                    para a data escolhida.
+                </p>
+
+                <p>
+                    Mas encontramos opções próximas:
+                </p>
+
+
+                <div
+                    class="alternative-dates"
+                    id="alternativeDates"
+                >
+
+                    <!--
+                        Datas disponíveis serão
+                        inseridas pelo JavaScript.
+                    -->
+
+                </div>
+
+
+                <a
+                    href="pesquisa.html"
+                    class="search-button alternative-button"
+                >
+                    🔎
+                    Procurar outra data
+                </a>
+
+            </section>
+
+
+            <!-- ================= LEGENDA ================= -->
+
+            <section class="results-info">
+
+                <div>
+
+                    <span>
+                        ⚡
+                    </span>
+
+                    <strong>
+                        Mais rápido
+                    </strong>
+
+                    <small>
+                        Menor duração
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        💰
+                    </span>
+
+                    <strong>
+                        Mais barato
+                    </strong>
+
+                    <small>
+                        Menor preço
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        🚌
+                    </span>
+
+                    <strong>
+                        Mais opções
+                    </strong>
+
+                    <small>
+                        Diferentes empresas
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        🛡️
+                    </span>
+
+                    <strong>
+                        Mais seguro
+                    </strong>
+
+                    <small>
+                        Empresas verificadas
+                    </small>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <p>
+                © 2026 Guia do Busão.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= MENU MOBILE ================= -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <button
+            type="button"
+            class="mobile-menu-close"
+            id="mobileMenuClose"
+        >
+            ×
+        </button>
+
+        <a href="index.html">
+            Início
+        </a>
+
+        <a href="rotas-salvas.html">
+            Rotas Salvas
+        </a>
+
+        <a href="favoritos.html">
+            Favoritos
+        </a>
+
+        <a href="login.html">
+            Minha conta
+        </a>
+
+    </div>
+
+ <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="../js/api.js"></script>
+    <script src="../js/resultado.js"></script>
+
+</body>
+
+</html>

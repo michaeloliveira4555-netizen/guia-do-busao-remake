@@ -1,0 +1,730 @@
+/* =========================================================
+   GUIA DO BUSÃO
+   PÁGINA DO MAPA
+   ========================================================= */
+
+.mapa-page {
+    min-height: 100vh;
+    background: var(--background);
+}
+
+.mapa-main {
+    width: min(100% - 40px, var(--container));
+    margin: 0 auto;
+    padding: 30px 0 60px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.mapa-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.mapa-header h1 {
+    font-size: 28px;
+}
+
+.mapa-header p {
+    margin-top: 4px;
+
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+.mapa-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.mapa-layout {
+    display: grid;
+
+    grid-template-columns: 300px 1fr;
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   PAINEL LATERAL
+   ========================================================= */
+
+.mapa-sidebar {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.mapa-route-card {
+    padding: 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.mapa-route-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.mapa-route-card-header h2 {
+    font-size: 15px;
+}
+
+.mapa-route-status {
+    padding: 5px 9px;
+
+    border-radius: 50px;
+
+    background: var(--secondary-light);
+    color: var(--secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   ORIGEM / DESTINO
+   ========================================================= */
+
+.mapa-location {
+    position: relative;
+
+    display: flex;
+
+    gap: 12px;
+
+    padding-bottom: 20px;
+}
+
+.mapa-location:last-child {
+    padding-bottom: 0;
+}
+
+.mapa-location-line {
+    position: absolute;
+
+    left: 7px;
+    top: 18px;
+    bottom: 0;
+
+    width: 2px;
+
+    background: var(--border);
+}
+
+.mapa-location:last-child .mapa-location-line {
+    display: none;
+}
+
+.mapa-location-dot {
+    position: relative;
+
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    margin-top: 2px;
+
+    z-index: 2;
+
+    border-radius: 50%;
+
+    background: var(--secondary);
+
+    border: 3px solid var(--secondary-light);
+}
+
+.mapa-location.destination .mapa-location-dot {
+    background: var(--danger);
+
+    border-color: #ffe5e7;
+}
+
+.mapa-location small {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+.mapa-location strong {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 14px;
+}
+
+.mapa-location span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-light);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES DA VIAGEM
+   ========================================================= */
+
+.mapa-trip-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--border);
+}
+
+.mapa-info-item {
+    padding: 10px;
+
+    border-radius: var(--radius-sm);
+
+    background: var(--surface-light);
+}
+
+.mapa-info-item small {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.mapa-info-item strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CONTROLES DO MAPA
+   ========================================================= */
+
+.mapa-controls {
+    padding: 15px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.mapa-controls h3 {
+    margin-bottom: 12px;
+
+    font-size: 12px;
+}
+
+.mapa-control-button {
+    width: 100%;
+
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 7px;
+
+    padding: 0 12px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-align: left;
+
+    transition: var(--transition);
+}
+
+.mapa-control-button:last-child {
+    margin-bottom: 0;
+}
+
+.mapa-control-button:hover {
+    border-color: var(--primary);
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   MAPA
+   ========================================================= */
+
+.mapa-container {
+    position: relative;
+
+    min-height: 600px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf3f7,
+            #dce9ee
+        );
+
+    box-shadow: var(--shadow);
+}
+
+
+/*
+   Fundo provisório.
+   Depois podemos substituir por mapa real
+   usando Leaflet/OpenStreetMap.
+*/
+
+.mapa-background {
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            35deg,
+            transparent 48%,
+            rgba(255,255,255,.8) 49%,
+            rgba(255,255,255,.8) 51%,
+            transparent 52%
+        ),
+        linear-gradient(
+            120deg,
+            transparent 48%,
+            rgba(255,255,255,.7) 49%,
+            rgba(255,255,255,.7) 51%,
+            transparent 52%
+        );
+
+    background-size:
+        130px 130px,
+        170px 170px;
+
+    opacity: .8;
+}
+
+
+/* =========================================================
+   ROTA
+   ========================================================= */
+
+.mapa-route-line {
+    position: absolute;
+
+    width: 62%;
+    height: 7px;
+
+    top: 48%;
+    left: 19%;
+
+    background: var(--primary);
+
+    border-radius: 50px;
+
+    transform: rotate(-14deg);
+
+    box-shadow:
+        0 0 0 5px rgba(23,105,170,.12);
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   MARCADORES
+   ========================================================= */
+
+.mapa-marker {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow: var(--shadow);
+
+    z-index: 5;
+
+    font-size: 20px;
+}
+
+.mapa-marker.origin {
+    top: 35%;
+    left: 15%;
+
+    color: var(--secondary);
+}
+
+.mapa-marker.destination {
+    right: 14%;
+    bottom: 36%;
+
+    color: var(--danger);
+}
+
+
+/* =========================================================
+   PARADAS NO MAPA
+   ========================================================= */
+
+.mapa-stop {
+    position: absolute;
+
+    width: 15px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 4px solid var(--primary);
+
+    z-index: 4;
+
+    box-shadow: 0 1px 5px rgba(0,0,0,.15);
+}
+
+.mapa-stop.one {
+    top: 43%;
+    left: 32%;
+}
+
+.mapa-stop.two {
+    top: 39%;
+    left: 48%;
+}
+
+.mapa-stop.three {
+    top: 35%;
+    left: 63%;
+}
+
+
+/* =========================================================
+   BALÃO DE INFORMAÇÃO
+   ========================================================= */
+
+.mapa-popup {
+    position: absolute;
+
+    min-width: 180px;
+
+    padding: 13px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow: var(--shadow-lg);
+
+    z-index: 10;
+}
+
+.mapa-popup.origin {
+    top: 25%;
+    left: 10%;
+}
+
+.mapa-popup.destination {
+    right: 8%;
+    bottom: 27%;
+}
+
+.mapa-popup strong {
+    display: block;
+
+    font-size: 12px;
+}
+
+.mapa-popup span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-light);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   LEGENDA
+   ========================================================= */
+
+.mapa-legend {
+    position: absolute;
+
+    left: 18px;
+    bottom: 18px;
+
+    padding: 13px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    background: rgba(255,255,255,.95);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-sm);
+
+    box-shadow: var(--shadow);
+
+    z-index: 10;
+}
+
+.mapa-legend-item {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 10px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+}
+
+.legend-dot.origin {
+    background: var(--secondary);
+}
+
+.legend-dot.destination {
+    background: var(--danger);
+}
+
+.legend-dot.stop {
+    background: var(--primary);
+}
+
+
+/* =========================================================
+   BOTÕES FLUTUANTES
+   ========================================================= */
+
+.mapa-floating-controls {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    z-index: 10;
+}
+
+.mapa-floating-button {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: rgba(255,255,255,.95);
+
+    color: var(--text);
+
+    box-shadow: var(--shadow-sm);
+
+    font-size: 15px;
+
+    transition: var(--transition);
+}
+
+.mapa-floating-button:hover {
+    background: var(--primary);
+
+    color: white;
+
+    border-color: var(--primary);
+}
+
+
+/* =========================================================
+   AVISO DO MAPA
+   ========================================================= */
+
+.mapa-notice {
+    margin-top: 15px;
+
+    padding: 13px 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    background: var(--primary-light);
+
+    border: 1px solid #cfe5f4;
+
+    border-radius: var(--radius-sm);
+}
+
+.mapa-notice p {
+    color: var(--text-light);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .mapa-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .mapa-sidebar {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mapa-container {
+        min-height: 550px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .mapa-main {
+        width: min(100% - 24px, var(--container));
+    }
+
+    .mapa-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .mapa-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .mapa-container {
+        min-height: 470px;
+    }
+
+    .mapa-popup {
+        display: none;
+    }
+
+    .mapa-marker {
+        width: 40px;
+        height: 40px;
+
+        font-size: 17px;
+    }
+
+    .mapa-route-line {
+        width: 65%;
+
+        left: 18%;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .mapa-container {
+        min-height: 400px;
+    }
+
+    .mapa-legend {
+        left: 10px;
+        bottom: 10px;
+    }
+
+    .mapa-floating-controls {
+        top: 10px;
+        right: 10px;
+    }
+
+}

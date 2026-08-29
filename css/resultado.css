@@ -1,0 +1,1165 @@
+/* =========================================================
+   GUIA DO BUSÃO
+   RESULTADO DA PESQUISA
+   ========================================================= */
+
+.resultado-page {
+    background: var(--background);
+}
+
+.resultado-main {
+    width: min(100% - 40px, var(--container));
+    margin: 0 auto;
+    padding: 40px 0 70px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.resultado-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.resultado-header h1 {
+    margin-top: 10px;
+
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.1;
+}
+
+.resultado-header p {
+    margin-top: 7px;
+
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+.resultado-date {
+    padding: 12px 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    flex-shrink: 0;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.resultado-date-icon {
+    font-size: 18px;
+}
+
+.resultado-date small {
+    display: block;
+
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.resultado-date strong {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESUMO DA PESQUISA
+   ========================================================= */
+
+.search-summary {
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.search-summary-location {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    flex: 1;
+}
+
+.search-summary-location > span {
+    font-size: 16px;
+}
+
+.search-summary-location.origin > span {
+    color: var(--secondary);
+}
+
+.search-summary-location.destination > span {
+    color: var(--danger);
+}
+
+.search-summary-location small {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.search-summary-location strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+.search-summary-arrow {
+    color: var(--text-muted);
+}
+
+.edit-search-button {
+    padding: 8px 13px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    background: var(--surface);
+
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    transition: var(--transition);
+}
+
+.edit-search-button:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+
+.resultado-content {
+    display: grid;
+
+    grid-template-columns: 220px 1fr;
+
+    gap: 25px;
+
+    align-items: start;
+}
+
+.resultado-filters {
+    position: sticky;
+    top: 100px;
+
+    padding: 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.filters-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.filters-header h2 {
+    font-size: 16px;
+}
+
+.clear-filters {
+    border: none;
+
+    background: transparent;
+
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.filter-group {
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.filter-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.filter-group h3 {
+    margin-bottom: 12px;
+
+    font-size: 12px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.filter-option:last-child {
+    margin-bottom: 0;
+}
+
+.filter-option input {
+    accent-color: var(--primary);
+}
+
+.filter-option span {
+    flex: 1;
+}
+
+.filter-option-count {
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESULTADOS
+   ========================================================= */
+
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+.results-header strong {
+    font-size: 14px;
+}
+
+.results-header span {
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+.sort-select {
+    height: 38px;
+
+    padding: 0 12px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   CARD DO ÔNIBUS
+   ========================================================= */
+
+.bus-results {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.bus-result-card {
+    padding: 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+
+    transition: var(--transition);
+}
+
+.bus-result-card:hover {
+    border-color: var(--primary);
+
+    box-shadow: var(--shadow);
+
+    transform: translateY(-2px);
+}
+
+.bus-result-main {
+    display: grid;
+
+    grid-template-columns:
+        95px
+        1fr
+        150px
+        120px
+        auto;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   HORÁRIO
+   ========================================================= */
+
+.bus-departure strong,
+.bus-arrival strong {
+    display: block;
+
+    font-size: 22px;
+}
+
+.bus-departure small,
+.bus-arrival small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+.bus-departure span,
+.bus-arrival span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-light);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DURAÇÃO
+   ========================================================= */
+
+.bus-duration {
+    text-align: center;
+}
+
+.bus-duration-line {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 6px;
+}
+
+.bus-duration-line::before,
+.bus-duration-line::after {
+    content: "";
+
+    height: 1px;
+
+    flex: 1;
+
+    background: var(--border);
+}
+
+.bus-duration-line span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+}
+
+.bus-duration small {
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   EMPRESA
+   ========================================================= */
+
+.bus-company-result {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.bus-company-result-logo {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+
+    font-size: 17px;
+}
+
+.bus-company-result-logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.bus-company-result strong {
+    display: block;
+
+    font-size: 12px;
+}
+
+.bus-company-result span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   PREÇO
+   ========================================================= */
+
+.bus-price {
+    text-align: right;
+}
+
+.bus-price small {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+.bus-price strong {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--primary);
+
+    font-size: 19px;
+}
+
+.bus-price span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   BOTÃO
+   ========================================================= */
+
+.bus-select-button {
+    min-width: 105px;
+    height: 42px;
+
+    padding: 0 15px;
+
+    border: none;
+
+    border-radius: var(--radius-sm);
+
+    background: var(--primary);
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    transition: var(--transition);
+}
+
+.bus-select-button:hover {
+    background: var(--primary-dark);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   INFORMAÇÕES EXTRAS
+   ========================================================= */
+
+.bus-result-extra {
+    margin-top: 17px;
+
+    padding-top: 14px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    border-top: 1px solid var(--border);
+}
+
+.bus-feature {
+    padding: 5px 8px;
+
+    border-radius: 50px;
+
+    background: var(--surface-light);
+
+    color: var(--text-light);
+
+    font-size: 9px;
+}
+
+.bus-feature.good {
+    background: var(--secondary-light);
+
+    color: var(--secondary);
+}
+
+.bus-feature.warning {
+    background: #fff8e8;
+
+    color: #9a6800;
+}
+
+.bus-availability {
+    margin-left: auto;
+
+    color: var(--success);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CONEXÃO
+   ========================================================= */
+
+.bus-connection-card {
+    padding: 18px;
+
+    background: var(--surface);
+
+    border: 1px solid #f2dfa8;
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.connection-header {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.connection-header-icon {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff3d1;
+
+    color: #9a6800;
+}
+
+.connection-header strong {
+    display: block;
+
+    font-size: 13px;
+}
+
+.connection-header span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+.connection-route {
+    display: grid;
+
+    grid-template-columns:
+        80px
+        1fr
+        80px
+        auto;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.connection-time strong {
+    display: block;
+
+    font-size: 17px;
+}
+
+.connection-time small {
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+.connection-company strong {
+    display: block;
+
+    font-size: 12px;
+}
+
+.connection-company span {
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+.connection-wait {
+    padding: 8px 10px;
+
+    border-radius: var(--radius-sm);
+
+    background: #fff8e8;
+
+    color: #8a5a00;
+
+    text-align: center;
+
+    font-size: 10px;
+}
+
+.connection-button {
+    height: 40px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--primary);
+
+    border-radius: var(--radius-sm);
+
+    background: white;
+
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.connection-button:hover {
+    background: var(--primary);
+
+    color: white;
+}
+
+
+/* =========================================================
+   NENHUM RESULTADO
+   ========================================================= */
+
+.no-results {
+    padding: 45px 25px;
+
+    text-align: center;
+
+    background: var(--surface);
+
+    border: 1px dashed var(--border);
+
+    border-radius: var(--radius);
+}
+
+.no-results-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+
+    font-size: 28px;
+}
+
+.no-results h2 {
+    margin-top: 15px;
+
+    font-size: 22px;
+}
+
+.no-results p {
+    max-width: 520px;
+
+    margin: 7px auto 0;
+
+    color: var(--text-light);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   OUTRAS DATAS
+   ========================================================= */
+
+.other-dates {
+    margin-top: 25px;
+
+    padding: 22px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+}
+
+.other-dates-header {
+    margin-bottom: 15px;
+}
+
+.other-dates-header h2 {
+    font-size: 17px;
+}
+
+.other-dates-header p {
+    margin-top: 3px;
+
+    color: var(--text-light);
+
+    font-size: 11px;
+}
+
+.available-dates {
+    display: flex;
+
+    gap: 10px;
+
+    overflow-x: auto;
+
+    padding-bottom: 5px;
+}
+
+.available-date {
+    min-width: 90px;
+
+    padding: 13px 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-sm);
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    transition: var(--transition);
+}
+
+.available-date:hover {
+    border-color: var(--primary);
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+}
+
+.available-date.active {
+    border-color: var(--primary);
+
+    background: var(--primary);
+
+    color: white;
+}
+
+.available-date small {
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.available-date strong {
+    margin: 3px 0;
+
+    font-size: 20px;
+}
+
+.available-date span {
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ALERTA DE DATA
+   ========================================================= */
+
+.date-alert {
+    margin-bottom: 20px;
+
+    padding: 16px 18px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    border-radius: var(--radius);
+
+    background: #fff8e8;
+
+    border: 1px solid #f2dfa8;
+}
+
+.date-alert-icon {
+    font-size: 21px;
+}
+
+.date-alert strong {
+    display: block;
+
+    color: #765000;
+
+    font-size: 13px;
+}
+
+.date-alert p {
+    margin-top: 3px;
+
+    color: #8a6b32;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.results-loading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 50px;
+
+    color: var(--text-light);
+}
+
+.loading-spinner {
+    width: 22px;
+    height: 22px;
+
+    border: 3px solid var(--border);
+
+    border-top-color: var(--primary);
+
+    border-radius: 50%;
+
+    animation: loading 0.8s linear infinite;
+}
+
+@keyframes loading {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .resultado-content {
+        grid-template-columns: 190px 1fr;
+    }
+
+    .bus-result-main {
+        grid-template-columns:
+            80px
+            1fr
+            110px
+            auto;
+
+        gap: 14px;
+    }
+
+    .bus-company-result {
+        grid-column: span 2;
+    }
+
+    .bus-price {
+        text-align: left;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .resultado-content {
+        grid-template-columns: 1fr;
+    }
+
+    .resultado-filters {
+        position: static;
+    }
+
+    .filter-group {
+        display: inline-block;
+
+        vertical-align: top;
+
+        width: 49%;
+
+        border-bottom: none;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .resultado-main {
+        width: min(100% - 24px, var(--container));
+
+        padding-top: 30px;
+    }
+
+    .resultado-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .resultado-date {
+        width: 100%;
+    }
+
+    .search-summary {
+        flex-wrap: wrap;
+
+        padding: 15px;
+    }
+
+    .search-summary-location {
+        min-width: calc(50% - 20px);
+    }
+
+    .search-summary-arrow {
+        display: none;
+    }
+
+    .edit-search-button {
+        width: 100%;
+    }
+
+    .bus-result-main {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+    .bus-departure,
+    .bus-arrival {
+        padding-bottom: 10px;
+    }
+
+    .bus-duration {
+        grid-column: span 2;
+
+        order: 3;
+    }
+
+    .bus-company-result {
+        grid-column: span 2;
+
+        order: 4;
+    }
+
+    .bus-price {
+        order: 5;
+    }
+
+    .bus-select-button {
+        order: 6;
+    }
+
+    .bus-result-extra {
+        align-items: flex-start;
+    }
+
+    .bus-availability {
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+    .connection-route {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+    .connection-wait {
+        grid-column: span 2;
+    }
+
+    .connection-button {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .resultado-header h1 {
+        font-size: 29px;
+    }
+
+    .search-summary-location strong {
+        font-size: 12px;
+    }
+
+    .resultado-filters {
+        padding: 16px;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .bus-result-card {
+        padding: 16px;
+    }
+
+    .bus-result-main {
+        gap: 12px;
+    }
+
+    .bus-departure strong,
+    .bus-arrival strong {
+        font-size: 20px;
+    }
+
+    .bus-price strong {
+        font-size: 17px;
+    }
+
+    .bus-select-button {
+        min-width: auto;
+
+        width: 100%;
+    }
+
+    .available-date {
+        min-width: 80px;
+    }
+
+}
