@@ -1,55 +1,25 @@
-const database = require("../database/database");
+// importa a conexão do banco de dados
+const db = require("../database/db");
 
-function listarCidades() {
-    return database.getCidades();
+// função async
+async function listarCidades() {
+    const resultado = await db.query('SELECT * FROM cidades ORDER BY nome ASC')
+    return resultado.rows;
 }
 
-function buscarCidadePorId(id) {
-    const cidades = database.getCidades();
+async function buscarCidadePorId(id) {
+    const query = 'SELECT * FROM cidades WHERE id = $1';
+    const valores = [id];
 
-    return cidades.find(
-        cidade => cidade.id === Number(id)
-    ) || null;
-}
+    const resultado = await db.query(query, valores);
 
-function listarBairros() {
-    return database.getBairros();
-}
-
-function buscarBairroPorId(id) {
-    const bairros = database.getBairros();
-
-    return bairros.find(
-        bairro => bairro.id === Number(id)
-    ) || null;
-}
-
-function buscarBairrosPorCidade(cidadeId) {
-    const bairros = database.getBairros();
-
-    return bairros.filter(
-        bairro => bairro.cidadeId === Number(cidadeId)
-    );
-}
-
-function listarLocalidades() {
-    const cidades = database.getCidades();
-    const bairros = database.getBairros();
-
-    return cidades.map(cidade => ({
-        ...cidade,
-
-        bairros: bairros.filter(
-            bairro => bairro.cidadeId === cidade.id
-        )
-    }));
+    if (resultado.rows.length === 0) {
+        return null
+    }
+    return resultado.rows[0];
 }
 
 module.exports = {
     listarCidades,
-    buscarCidadePorId,
-    listarBairros,
-    buscarBairroPorId,
-    buscarBairrosPorCidade,
-    listarLocalidades
+    buscarCidadePorId
 };

@@ -1,10 +1,13 @@
 // Arquivo: backend/database/db.js
-const { pool, Connection } = require('pg')
+const { Pool } = require('pg')
 require('dotenv').config()
 
 // O pool pega a URL que configuramos secretamente no .env 
-const pool = new pool({
-    ConnectionString: process.env.DATABASE_URL
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 })
 
 // Testando a conexão quando o servidor iniciar 
@@ -13,7 +16,7 @@ pool.on('connect', () => {
 })
 
 pool.on('error', (err) => {
-    console.log('Erro inesperado no banco de Dados'.err)
+    console.log('Erro inesperado no banco de Dados', err)
     process.exit(-1)
 })
 
