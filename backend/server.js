@@ -2,9 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./database/db")
 
-const rotasRoutes = require("./routes/rotasRoutes");
-const horariosRoutes = require("./routes/horariosRoutes");
-const usuariosRoutes = require("./routes/usuariosRoutes");
+// const rotasRoutes = require("./routes/rotasRoutes");
+// const horariosRoutes = require("./routes/horariosRoutes");
+// const usuariosRoutes = require("./routes/usuariosRoutes");
 
 const app = express();
 
@@ -23,9 +23,9 @@ app.get("/", (req, res) => {
 });
 
 // Rotas
-app.use("/api/rotas", rotasRoutes);
-app.use("/api/horarios", horariosRoutes);
-app.use("/api/usuarios", usuariosRoutes);
+// app.use("/api/rotas", rotasRoutes);
+// app.use("/api/horarios", horariosRoutes);
+// app.use("/api/usuarios", usuariosRoutes);
 
 // Rota inexistente
 app.use((req, res) => {
