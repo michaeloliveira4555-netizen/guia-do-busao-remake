@@ -1,0 +1,12 @@
+# Pastas do Node
+node_modules/
+npm-debug.log
+
+# Arquivos de Senha e Ambiente (Muito Importante!)
+.env
+.env.local
+
+# Lixo do Sistema Operacional
+.DS_Store
+Thumbs.db
+tarefas.md 
