@@ -3,18 +3,18 @@
 Bem-vindo ao repositório do **Guia do Busão**! Este é o projeto do curso Dev Full Stack. Nosso objetivo é criar uma aplicação web completa (Frontend + Backend + Banco de Dados) para ajudar usuários a encontrarem rotas, horários e conexões de ônibus.
 
 ---
-# Objetivo do Projeto
+## Objetivo do Projeto
 
 O objetivo do Guia do Busão é facilitar o acesso às informações do transporte público por meio de uma plataforma simples, acessível e organizada.
 
 A aplicação busca permitir que o usuário encontre informações como:
 
-* **🚌 Linhas de ônibus;
-* **📍 Rotas;
-* **🕐 Horários;
-* **🔄 Conexões;
-* **🔎 Busca de linhas;
-* **📱 Informações acessíveis por dispositivos móveis.
+*  **🚌 Linhas de ônibus;
+*  **📍 Rotas;
+*  **🕐 Horários;
+*  **🔄 Conexões;
+*  **🔎 Busca de linhas;
+*  **📱 Informações acessíveis por dispositivos móveis.
 ---
 
   
