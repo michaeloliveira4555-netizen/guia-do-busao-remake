@@ -9,12 +9,12 @@ O objetivo do Guia do Busão é facilitar o acesso às informações do transpor
 
 A aplicação busca permitir que o usuário encontre informações como:
 
-*  **🚌 Linhas de ônibus;
-*  **📍 Rotas;
-*  **🕐 Horários;
-*  **🔄 Conexões;
-*  **🔎 Busca de linhas;
-*  **📱 Informações acessíveis por dispositivos móveis.
+*   **🚌  Linhas de ônibus;**
+*   **📍 Rotas;**
+*   **🕐 Horários;**
+*   **🔄 Conexões;**
+*   **🔎 Busca de linhas;**
+*   **📱 Informações acessíveis por dispositivos móveis.**
 ---
 
   
