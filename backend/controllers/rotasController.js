@@ -1,8 +1,8 @@
 const rotaService = require("../services/rotaService");
 
-function listarRotas(req, res) {
+async function listarRotas(req, res) {
     try {
-        const rotas = rotaService.listarRotas();
+        const rotas = await rotaService.listarRotas();
 
         res.status(200).json(rotas);
     } catch (erro) {
@@ -14,7 +14,7 @@ function listarRotas(req, res) {
     }
 }
 
-function buscarRota(req, res) {
+async function buscarRota(req, res) {
     try {
         const id = Number(req.params.id);
 
@@ -24,7 +24,7 @@ function buscarRota(req, res) {
             });
         }
 
-        const rota = rotaService.buscarRotaPorId(id);
+        const rota = await rotaService.buscarRotaPorId(id);
 
         if (!rota) {
             return res.status(404).json({
@@ -42,7 +42,7 @@ function buscarRota(req, res) {
     }
 }
 
-function buscarRotasPorOrigemDestino(req, res) {
+async function buscarRotasPorOrigemDestino(req, res) {
     try {
         const { origem, destino } = req.query;
 
@@ -52,7 +52,7 @@ function buscarRotasPorOrigemDestino(req, res) {
             });
         }
 
-        const rotas = rotaService.buscarRotasPorOrigemDestino(
+        const rotas = await rotaService.buscarRotasPorOrigemDestino(
             Number(origem),
             Number(destino)
         );

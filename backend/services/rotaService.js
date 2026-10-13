@@ -1,78 +1,81 @@
-const database = require("../database/database");
+const database = require("../database/db");
 
-function listarRotas() {
-    const linhas = database.getLinhas();
+async function listarRotas() {
+    const resposta = await database.query(`
+    SELECT 
+        r.id, 
+        r.origem_id, 
+        c_origem.nome AS origem_nome, 
+        c_origem.uf AS origem_uf, 
+        r.destino_id, 
+        c_destino.nome AS destino_nome, 
+        c_destino.uf AS destino_uf 
+    FROM rotas r 
+    JOIN cidades c_origem ON r.origem_id = c_origem.id 
+    JOIN cidades c_destino ON r.destino_id = c_destino.id;
+`)
 
-    return linhas.map(linha => montarRota(linha));
+    return resposta.rows.map(r => ({
+        id: r.id,
+        origem: {
+            cidade: {
+                id: r.origem_id,
+                nome: r.origem_nome,
+                estado: r.origem_uf
+            }
+        },
+        destino: {
+            cidade: {
+                id: r.destino_id,
+                nome: r.destino_nome,
+                estado: r.destino_uf
+            }
+        }
+    }));
 }
 
-function buscarRotaPorId(id) {
-    const linhas = database.getLinhas();
-
-    const linha = linhas.find(
-        item => item.id === Number(id)
+async function buscarRotaPorId(id) {
+    const linhas = await database.query(`
+        SELECT
+            r.id,
+            c_origem.nome AS origem,
+            c_origem.uf AS uf_origem,
+            c_destino.nome AS destino,
+            c_destino.uf AS uf_destino
+        FROM rotas r
+        JOIN cidades c_origem ON r.origem_id = c_origem.id
+        JOIN cidades c_destino ON r.destino_id = c_destino.id
+        WHERE r.id = $1
+    `,
+        [id]
     );
+
+    const linha = linhas.rows[0]
 
     if (!linha) {
         return null;
     }
 
-    return montarRota(linha);
+    return linha;
 }
 
-function buscarRotasPorOrigemDestino(origemId, destinoId) {
-    const linhas = database.getLinhas();
-
-    const resultado = linhas.filter(linha => {
-        return (
-            linha.origem.bairroId === Number(origemId) &&
-            linha.destino.bairroId === Number(destinoId)
-        );
-    });
-
-    return resultado.map(linha => montarRota(linha));
-}
-
-function montarRota(linha) {
-    const cidades = database.getCidades();
-    const bairros = database.getBairros();
-    const horarios = database.getHorarios();
-
-    const cidadeOrigem = cidades.find(
-        cidade => cidade.id === linha.origem.cidadeId
+async function buscarRotasPorOrigemDestino(origemId, destinoId) {
+    const linhas = await database.query(`
+        SELECT
+            r.id,
+            c_origem.nome AS origem,
+            c_origem.uf AS uf_origem,
+            c_destino.nome AS destino,
+            c_destino.uf AS uf_destino
+        FROM rotas r
+        JOIN cidades c_origem ON r.origem_id = c_origem.id
+        JOIN cidades c_destino ON r.destino_id = c_destino.id
+        WHERE r.origem_id = $1 AND r.destino_id = $2;
+    `,
+        [origemId, destinoId]
     );
 
-    const bairroOrigem = bairros.find(
-        bairro => bairro.id === linha.origem.bairroId
-    );
-
-    const cidadeDestino = cidades.find(
-        cidade => cidade.id === linha.destino.cidadeId
-    );
-
-    const bairroDestino = bairros.find(
-        bairro => bairro.id === linha.destino.bairroId
-    );
-
-    const horariosDaLinha = horarios.filter(
-        horario => linha.horariosId.includes(horario.id)
-    );
-
-    return {
-        ...linha,
-
-        origem: {
-            cidade: cidadeOrigem || null,
-            bairro: bairroOrigem || null
-        },
-
-        destino: {
-            cidade: cidadeDestino || null,
-            bairro: bairroDestino || null
-        },
-
-        horarios: horariosDaLinha
-    };
+    return linhas.rows;
 }
 
 module.exports = {
