@@ -1,0 +1,240 @@
+Origem_Cidade;Origem_UF;Destino_Cidade;Destino_UF;Viacao;Hora_Partida;Hora_Chegada;Preco
+Curitiba;PR;Florianópolis;SC;Catarinense;06:00;11:29;84.99
+Curitiba;PR;Florianópolis;SC;Catarinense;10:15;16:00;84.99
+Florianópolis;SC;Curitiba;PR;Catarinense;06:05;11:45;104.99
+Florianópolis;SC;Curitiba;PR;Catarinense;06:05;11:45;189.99
+Florianópolis;SC;Curitiba;PR;Catarinense;07:30;12:00;179.99
+Curitiba;PR;Joinville;SC;Eucatur;04:05;06:35;57.20
+Curitiba;PR;Joinville;SC;Eucatur;04:05;06:35;136.22
+Curitiba;PR;Ponta Grossa;PR;Princesa dos Campos;06:20;08:25;65.67
+Curitiba;PR;Ponta Grossa;PR;Princesa dos Campos;07:40;09:50;62.36
+Curitiba;PR;Ponta Grossa;PR;Princesa dos Campos;09:00;11:20;65.21
+Curitiba;PR;Ponta Grossa;PR;Princesa dos Campos;10:00;12:30;63.00
+Curitiba;PR;Ponta Grossa;PR;Princesa dos Campos;12:00;14:20;63.38
+Ponta Grossa;PR;Curitiba;PR;Princesa dos Campos;09:15;11:35;65.17
+Ponta Grossa;PR;Curitiba;PR;Princesa dos Campos;10:00;12:00;65.23
+Ponta Grossa;PR;Curitiba;PR;Princesa dos Campos;07:30;10:00;65.27
+Ponta Grossa;PR;Curitiba;PR;Princesa dos Campos;08:45;11:05;64.94
+Curitiba;PR;Antonina;PR;Graciosa;07:20;09:10;48.74
+Curitiba;PR;Antonina;PR;Graciosa;10:20;12:10;48.74
+Curitiba;PR;Antonina;PR;Graciosa;13:30;15:20;48.74
+Curitiba;PR;Morretes;PR;Graciosa;10:20;11:40;41.55
+Curitiba;PR;Morretes;PR;Graciosa;13:30;14:50;41.55
+Curitiba;PR;Morretes;PR;Graciosa;17:40;19:00;41.55
+Curitiba;PR;Morretes;PR;Graciosa;20:00;21:20;41.55
+Antonina;PR;Curitiba;PR;Graciosa;07:30;09:10;34.73
+Curitiba;PR;Foz do Iguaçu;PR;Catarinense;08:00;19:15;304.16
+Curitiba;PR;Foz do Iguaçu;PR;Catarinense;10:00;21:30;304.16
+Curitiba;PR;Foz do Iguaçu;PR;Catarinense;12:15;23:35;304.16
+Foz do Iguaçu;PR;Curitiba;PR;Catarinense;07:00;18:25;302.75
+Foz do Iguaçu;PR;Curitiba;PR;Catarinense;09:15;21:00;403.84
+Foz do Iguaçu;PR;Curitiba;PR;Catarinense;12:00;23:35;302.75
+Porto Alegre;RS;Caxias do Sul;RS;Planalto;05:00;07:20;67.00
+Porto Alegre;RS;Caxias do Sul;RS;Planalto;12:15;14:45;67.15
+Florianópolis;SC;Porto Alegre;RS;Santo Anjo;06:30;12:30;143.12
+Maringá;PR;Curitiba;PR;Garcia;06:30;13:15;174.65
+Curitiba;PR;Londrina;PR;Garcia;14:30;20:55;223.79
+Curitiba;PR;Maringá;PR;Garcia;08:00;16:35;208.59
+Maringá;PR;Londrina;PR;Garcia;06:35;09:40;58.22
+Londrina;PR;Maringá;PR;Garcia;07:30;09:00;64.21
+Curitiba;PR;Cascavel;PR;Garcia;12:45;21:05;245.55
+Cascavel;PR;Curitiba;PR;Garcia;12:45;21:15;243.36
+Curitiba;PR;Maringá;PR;Garcia;13:00;20:20;207.53
+Maringá;PR;Curitiba;PR;Garcia;07:30;16:05;208.20
+Maringá;PR;Curitiba;PR;Garcia;14:00;21:20;207.14
+Maringá;PR;Curitiba;PR;Garcia;17:00;23:45;174.25
+Porto Alegre;RS;Torres;RS;Unesul;06:30;11:20;91.35
+Torres;RS;Porto Alegre;RS;Ouro e Prata;08:00;11:05;54.64
+Torres;RS;Porto Alegre;RS;Ouro e Prata;12:00;14:40;54.64
+Torres;RS;Porto Alegre;RS;Ouro e Prata;14:00;17:05;54.64
+Torres;RS;Porto Alegre;RS;Ouro e Prata;15:00;20:10;52.98
+Porto Alegre;RS;Ijuí;RS;Ouro e Prata;15:00;22:00;199.00
+Bagé;RS;Porto Alegre;RS;Ouro e Prata;08:00;14:00;193.55
+Bagé;RS;Santa Maria;RS;Ouro e Prata;11:45;16:25;136.00
+Porto Alegre;RS;Santa Rosa;RS;Ouro e Prata;12:00;20:30;254.30
+Porto Alegre;RS;Santa Rosa;RS;Ouro e Prata;07:00;15:40;431.90
+Florianópolis;SC;Chapecó;SC;Reunidas;12:45;03:15;261.54
+Florianópolis;SC;Chapecó;SC;Reunidas;18:00;07:00;261.54
+Chapecó;SC;Florianópolis;SC;Reunidas;07:30;22:10;274.52
+Chapecó;SC;Florianópolis;SC;Reunidas;19:15;07:35;274.52
+Florianópolis;SC;Lages;SC;Reunidas;07:15;11:35;117.54
+Lages;SC;Florianópolis;SC;Reunidas;02:15;05:45;113.75
+Concórdia;SC;Chapecó;SC;Reunidas;01:15;03:15;42.91
+Blumenau;SC;Florianópolis;SC;Catarinense;15:10;19:10;78.37
+Itapema;SC;Florianópolis;SC;Catarinense;13:55;15:00;36.67
+Porto Alegre;RS;Curitiba;PR;Catarinense;07:00;20:45;135.97
+Porto Alegre;RS;Curitiba;PR;Catarinense;08:30;21:45;189.98
+Porto Alegre;RS;Curitiba;PR;Catarinense;09:00;20:55;158.99
+Porto Alegre;RS;Curitiba;PR;Catarinense;21:15;09:15;316.99
+Porto Alegre;RS;Curitiba;PR;Expresso NS Penha;00:45;14:15;318.97
+Porto Alegre;RS;Curitiba;PR;Brasil Sul;08:30;21:45;216.09
+Porto Alegre;RS;Curitiba;PR;Brasil Sul;08:45;21:35;388.78
+Curitiba;PR;Porto Alegre;RS;Catarinense;02:00;16:30;194.99
+Curitiba;PR;Porto Alegre;RS;Catarinense;08:30;21:15;359.97
+Curitiba;PR;Porto Alegre;RS;Catarinense;09:00;22:20;204.42
+Joinville;SC;Porto Alegre;RS;Catarinense;10:45;21:15;136.24
+Curitiba;PR;Joinville;SC;Eucatur;06:40;09:05;29.00
+Curitiba;PR;Joinville;SC;Eucatur;07:05;09:35;45.00
+Curitiba;PR;Joinville;SC;Penha;12:00;14:00;50.00
+Curitiba;PR;Joinville;SC;Eucatur;19:10;21:30;58.00
+Curitiba;PR;Joinville;SC;Catarinense;21:45;00:05;71.00
+Jaraguá do Sul;SC;Curitiba;PR;Catarinense;08:20;12:20;74.99
+Blumenau;SC;Porto Alegre;RS;Nordeste Transportes;20:05;07:10;234.82
+Blumenau;SC;Porto Alegre;RS;Expresso NS Penha;21:00;07:05;206.99
+Blumenau;SC;Porto Alegre;RS;Expresso NS Penha;19:00;06:45;235.28
+Blumenau;SC;Porto Alegre;RS;Eucatur;10:20;19:35;97.99
+Blumenau;SC;Porto Alegre;RS;Eucatur;14:45;04:25;109.99
+Blumenau;SC;Porto Alegre;RS;Penha;19:30;05:35;135.37
+Blumenau;SC;Porto Alegre;RS;Penha;19:45;06:50;122.91
+Florianópolis;SC;Porto Alegre;RS;Santo Anjo;07:00;16:00;128.66
+Florianópolis;SC;Porto Alegre;RS;Santo Anjo;08:45;14:45;128.67
+Florianópolis;SC;Porto Alegre;RS;Santo Anjo;10:15;16:15;161.96
+Florianópolis;SC;Porto Alegre;RS;Brasil Sul;06:30;12:30;237.07
+Florianópolis;SC;Porto Alegre;RS;Santo Anjo;08:30;14:55;101.77
+Florianópolis;SC;Porto Alegre;RS;Santo Anjo;14:00;20:20;109.18
+Porto Alegre;RS;Florianópolis;SC;Santo Anjo;07:00;13:05;154.65
+Porto Alegre;RS;Florianópolis;SC;Santo Anjo;08:45;17:20;144.76
+Porto Alegre;RS;Florianópolis;SC;Santo Anjo;09:45;16:25;146.74
+Porto Alegre;RS;Florianópolis;SC;Santo Anjo;10:15;16:50;136.67
+Porto Alegre;RS;Florianópolis;SC;Santo Anjo;10:30;16:30;137.85
+Porto Alegre;RS;Florianópolis;SC;Santo Anjo;07:00;13:00;114.66
+Porto Alegre;RS;Florianópolis;SC;Brasil Sul;07:00;13:00;135.41
+Porto Alegre;RS;Chapecó;SC;Ouro e Prata;06:30;15:30;192.99
+Porto Alegre;RS;Chapecó;SC;Ouro e Prata;11:00;20:30;189.99
+Porto Alegre;RS;Chapecó;SC;Ouro e Prata;12:30;22:00;188.30
+Porto Alegre;RS;Chapecó;SC;Unesul;19:30;03:30;224.92
+Porto Alegre;RS;Chapecó;SC;Unesul;21:30;05:05;224.92
+Chapecó;SC;Porto Alegre;RS;Ouro e Prata;06:15;14:54;223.99
+Chapecó;SC;Porto Alegre;RS;Ouro e Prata;11:30;20:30;184.99
+Chapecó;SC;Porto Alegre;RS;Ouro e Prata;18:45;03:00;191.18
+Caxias do Sul;RS;Florianópolis;SC;Reunidas;12:30;20:50;159.96
+Caxias do Sul;RS;Florianópolis;SC;Penha;20:30;05:20;204.24
+Caxias do Sul;RS;Florianópolis;SC;Penha;20:30;05:20;105.27
+Caxias do Sul;RS;Florianópolis;SC;Reunidas;21:00;05:10;188.96
+Caxias do Sul;RS;Florianópolis;SC;União Santa Cruz;22:15;05:45;200.84
+Florianópolis;SC;Caxias do Sul;RS;Penha;22:10;07:00;285.97
+Florianópolis;SC;Caxias do Sul;RS;União Santa Cruz;22:30;05:00;175.29
+Florianópolis;SC;Caxias do Sul;RS;Reunidas;22:30;06:20;179.39
+Caxias do Sul;RS;Florianópolis;SC;Reunidas;15:30;23:50;182.00
+Caxias do Sul;RS;Florianópolis;SC;Expresso São Marcos;11:00;19:30;189.00
+Pelotas;RS;Porto Alegre;RS;Expresso Embaixador;05:00;08:15;131.35
+Pelotas;RS;Porto Alegre;RS;Expresso Embaixador;07:30;11:15;111.95
+Pelotas;RS;Porto Alegre;RS;Expresso Embaixador;16:00;19:15;131.35
+Porto Alegre;RS;Pelotas;RS;Expresso Embaixador;06:30;10:00;111.95
+Porto Alegre;RS;Pelotas;RS;Expresso Embaixador;10:00;13:15;131.35
+Curitiba;PR;Passo Fundo;RS;Ouro e Prata;01:45;12:15;251.73
+Curitiba;PR;Passo Fundo;RS;Ouro e Prata;19:00;04:30;251.73
+Curitiba;PR;Passo Fundo;RS;Planalto;19:00;05:20;224.00
+Curitiba;PR;Passo Fundo;RS;Ouro e Prata;02:00;12:00;234.49
+Passo Fundo;RS;Curitiba;PR;Ouro e Prata;13:30;23:55;234.49
+Passo Fundo;RS;Curitiba;PR;Ouro e Prata;22:00;07:45;234.49
+Passo Fundo;RS;Curitiba;PR;Planalto;07:30;20:30;268.42
+Cascavel;PR;Londrina;PR;Expresso Nordeste;07:40;16:45;182.31
+Cascavel;PR;Londrina;PR;Penha;10:45;20:15;170.83
+Cascavel;PR;Londrina;PR;Garcia;11:25;18:15;170.83
+Cascavel;PR;Londrina;PR;Expresso Nordeste;12:00;18:50;170.83
+Cascavel;PR;Londrina;PR;Penha;14:20;21:35;160.56
+Londrina;PR;Cascavel;PR;Expresso Nordeste;07:40;16:55;169.18
+Londrina;PR;Cascavel;PR;Expresso Nordeste;10:30;18:00;169.18
+Cascavel;PR;Florianópolis;SC;Unesul;20:20;14:45;427.10
+Cascavel;PR;Florianópolis;SC;Expresso Nordeste;21:05;10:50;396.33
+Cascavel;PR;Florianópolis;SC;Expresso Nordeste;21:20;10:40;560.28
+Santana do Livramento;RS;Porto Alegre;RS;Ouro e Prata;05:30;14:30;116.83
+Santana do Livramento;RS;Porto Alegre;RS;Ouro e Prata;12:30;21:00;233.65
+Santana do Livramento;RS;Porto Alegre;RS;Ouro e Prata;15:30;23:45;151.70
+Santana do Livramento;RS;Porto Alegre;RS;Ouro e Prata;21:30;06:15;233.65
+Santana do Livramento;RS;Porto Alegre;RS;Ouro e Prata;22:30;05:35;233.65
+Porto Alegre;RS;Santana do Livramento;RS;Ouro e Prata;06:45;16:00;199.00
+Porto Alegre;RS;Santana do Livramento;RS;Ouro e Prata;15:30;00:30;233.65
+Porto Alegre;RS;Santana do Livramento;RS;Ouro e Prata;16:30;01:30;257.02
+Porto Alegre;RS;Santana do Livramento;RS;Ouro e Prata;18:00;03:00;252.75
+Porto Alegre;RS;Santana do Livramento;RS;Ouro e Prata;23:00;06:40;252.80
+Rio Grande;RS;Porto Alegre;RS;Planalto;02:00;06:55;213.10
+Rio Grande;RS;Porto Alegre;RS;Planalto;07:00;11:30;212.15
+Rio Grande;RS;Porto Alegre;RS;Planalto;09:30;14:00;212.15
+Porto Alegre;RS;Rio Grande;RS;Planalto;08:00;12:30;212.10
+Porto Alegre;RS;Rio Grande;RS;Planalto;10:00;15:30;213.10
+Porto Alegre;RS;Rio Grande;RS;Planalto;13:45;18:15;212.10
+Porto Alegre;RS;Rio Grande;RS;Planalto;23:30;05:00;213.10
+Porto Alegre;RS;Rio Grande;RS;Planalto;16:00;21:10;163.45
+Porto Alegre;RS;Uruguaiana;RS;Planalto;21:00;07:30;388.00
+Porto Alegre;RS;Uruguaiana;RS;Planalto;15:00;01:00;318.95
+Porto Alegre;RS;Uruguaiana;RS;Planalto;07:00;19:00;346.70
+Porto Alegre;RS;Uruguaiana;RS;Planalto;16:00;04:00;346.70
+Uruguaiana;RS;Porto Alegre;RS;Planalto;00:30;11:40;221.56
+Uruguaiana;RS;Porto Alegre;RS;Planalto;04:00;14:00;208.31
+Uruguaiana;RS;Porto Alegre;RS;Planalto;13:30;00:40;287.52
+Uruguaiana;RS;Porto Alegre;RS;Planalto;11:00;21:30;326.15
+Curitiba;PR;Chapecó;SC;Ouro e Prata;12:30;21:30;266.26
+Curitiba;PR;Chapecó;SC;Ouro e Prata;20:30;05:40;257.98
+Curitiba;PR;Chapecó;SC;Ouro e Prata;03:00;13:15;232.89
+Curitiba;PR;Chapecó;SC;Expresso Penha;02:45;13:00;262.98
+Curitiba;PR;Chapecó;SC;Expresso Maringá;20:00;05:10;242.98
+Chapecó;SC;Curitiba;PR;Ouro e Prata;07:30;18:00;223.99
+Chapecó;SC;Curitiba;PR;Ouro e Prata;10:45;22:00;263.99
+Chapecó;SC;Curitiba;PR;Ouro e Prata;13:40;23:59;272.99
+Chapecó;SC;Curitiba;PR;Ouro e Prata;19:40;05:00;263.99
+Chapecó;SC;Curitiba;PR;Ouro e Prata;21:45;06:45;247.98
+Chapecó;SC;Curitiba;PR;Ouro e Prata;21:00;05:45;265.20
+Curitiba;PR;Balneário Camboriú;SC;Catarinense;17:05;21:00;79.99
+Curitiba;PR;Balneário Camboriú;SC;Catarinense;06:00;09:40;84.99
+Balneário Camboriú;SC;Curitiba;PR;Catarinense;10:00;14:20;89.99
+Balneário Camboriú;SC;Curitiba;PR;Catarinense;11:45;16:00;89.99
+Balneário Camboriú;SC;Curitiba;PR;Catarinense;14:45;19:00;84.99
+Balneário Camboriú;SC;Curitiba;PR;Catarinense;01:30;05:45;94.99
+Balneário Camboriú;SC;Curitiba;PR;Catarinense;01:35;04:59;129.99
+Balneário Camboriú;SC;Curitiba;PR;Nordeste Transportes;05:45;09:50;127.45
+Londrina;PR;Florianópolis;SC;Penha;20:45;09:00;283.26
+Londrina;PR;Florianópolis;SC;Brasil Sul;21:50;08:15;379.96
+Londrina;PR;Maringá;PR;Garcia;06:45;10:00;66.42
+Londrina;PR;Maringá;PR;Expresso Nordeste;07:40;10:40;56.99
+Maringá;PR;Londrina;PR;Garcia;08:00;09:30;56.01
+Maringá;PR;Londrina;PR;Garcia;11:10;14:15;57.47
+Criciúma;SC;Florianópolis;SC;Empresa União;07:45;10:50;82.49
+Criciúma;SC;Florianópolis;SC;Empresa União;11:15;14:30;82.49
+Criciúma;SC;Florianópolis;SC;Empresa União;12:45;15:50;82.49
+Criciúma;SC;Florianópolis;SC;Santo Anjo;08:30;11:35;124.29
+Criciúma;SC;Florianópolis;SC;Santo Anjo;12:10;16:00;94.83
+Criciúma;SC;Florianópolis;SC;Santo Anjo;14:00;17:05;124.29
+Criciúma;SC;Florianópolis;SC;Brasil Sul;18:50;22:40;80.79
+Porto Alegre;RS;Santa Cruz do Sul;RS;União Santa Cruz;09:00;11:45;83.90
+Porto Alegre;RS;Santa Cruz do Sul;RS;União Santa Cruz;19:30;22:10;83.90
+Lajeado;RS;Santa Cruz do Sul;RS;Planalto;09:20;10:35;24.48
+Lajeado;RS;Santa Cruz do Sul;RS;Planalto;14:35;15:50;28.43
+Lajeado;RS;Santa Cruz do Sul;RS;Planalto;17:20;18:35;24.48
+Santa Cruz do Sul;RS;Lajeado;RS;Planalto;06:00;07:15;23.33
+Santa Cruz do Sul;RS;Lajeado;RS;Planalto;08:45;10:00;27.32
+Santa Cruz do Sul;RS;Lajeado;RS;Planalto;13:00;14:15;23.33
+Santa Cruz do Sul;RS;Lajeado;RS;Expresso Azul;17:55;19:15;24.60
+Porto Alegre;RS;Bento Gonçalves;RS;Unesul;05:00;07:40;75.05
+Porto Alegre;RS;Bento Gonçalves;RS;Unesul;09:00;11:35;72.10
+Porto Alegre;RS;Bento Gonçalves;RS;Unesul;13:30;16:00;66.50
+Porto Alegre;RS;Bento Gonçalves;RS;Unesul;16:00;18:50;71.55
+Porto Alegre;RS;Bento Gonçalves;RS;Unesul;17:30;19:55;69.05
+Bento Gonçalves;RS;Porto Alegre;RS;Unesul;07:15;09:45;63.85
+Bento Gonçalves;RS;Porto Alegre;RS;Unesul;09:45;12:15;63.85
+Bento Gonçalves;RS;Porto Alegre;RS;Unesul;14:00;16:40;66.65
+Bento Gonçalves;RS;Porto Alegre;RS;Unesul;16:45;19:15;66.65
+Bento Gonçalves;RS;Porto Alegre;RS;Unesul;20:30;23:00;61.50
+Erechim;RS;Porto Alegre;RS;Unesul;05:30;12:00;263.50
+Erechim;RS;Porto Alegre;RS;Unesul;09:00;15:30;223.98
+Erechim;RS;Porto Alegre;RS;Unesul;11:30;22:00;217.31
+Erechim;RS;Porto Alegre;RS;Unesul;14:00;20:30;223.98
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;07:20;12:20;131.49
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;09:40;13:40;132.59
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;12:00;17:15;140.67
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;14:40;18:40;131.49
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;15:20;20:45;138.98
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;10:00;16:00;133.23
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;18:00;23:25;132.59
+Curitiba;PR;Guarapuava;PR;Princesa dos Campos;20:20;00:05;121.95
+Guarapuava;PR;Curitiba;PR;Princesa dos Campos;02:55;06:55;259.04
+Guarapuava;PR;Curitiba;PR;Princesa dos Campos;07:00;12:00;135.90
+Guarapuava;PR;Curitiba;PR;Princesa dos Campos;10:00;15:30;128.42
+Guarapuava;PR;Curitiba;PR;Princesa dos Campos;12:35;17:50;136.54
+Curitiba;PR;Toledo;PR;Princesa dos Campos;12:00;23:00;258.63
+Curitiba;PR;Toledo;PR;Princesa dos Campos;21:20;05:50;250.46
+Curitiba;PR;Toledo;PR;Princesa dos Campos;21:20;05:50;479.04
+Toledo;PR;Curitiba;PR;Princesa dos Campos;11:15;22:20;255.75
+Toledo;PR;Curitiba;PR;Princesa dos Campos;21:05;06:25;397.84
+Toledo;PR;Curitiba;PR;Princesa dos Campos;21:15;06:05;247.22

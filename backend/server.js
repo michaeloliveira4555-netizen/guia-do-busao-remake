@@ -1,25 +1,30 @@
-const express = require("express");
-const cors = require("cors");
+const express = require("express")
+const cors = require("cors")
+const path = require("path")
+const db = require("./database/db")
 
-const rotasRoutes = require("./routes/rotasRoutes");
-const horariosRoutes = require("./routes/horariosRoutes");
-const usuariosRoutes = require("./routes/usuariosRoutes");
+const rotasRoutes = require("./routes/rotasRoutes")
+const horariosRoutes = require("./routes/horariosRoutes")
+const usuariosRoutes = require("./routes/usuariosRoutes")
 
-const app = express();
+const app = express()
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000
 
 // Middlewares
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-// Página inicial da API
-app.get("/", (req, res) => {
+// Servir arquivos estáticos do Frontend (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, "../frontend")))
+
+// Rota de status da API
+app.get("/api", (req, res) => {
     res.status(200).json({
         mensagem: "API Guia do Busão funcionando!"
-    });
-});
+    })
+})
 
 // Rotas
 app.use("/api/rotas", rotasRoutes);

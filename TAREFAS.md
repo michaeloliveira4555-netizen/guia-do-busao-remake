@@ -1,37 +1,44 @@
 # 📋 Tarefas do Projeto: Guia do Busão
 
-Este documento organiza o que cada equipe precisa fazer para entregar a versão inicial (MVP) do nosso projeto. Cada item deve se tornar um cartão no nosso quadro Kanban (GitHub Projects).
+Este documento organiza o status do projeto e o que cada equipe precisa fazer para entregar a versão final (MVP). Os cartões no GitHub Projects devem refletir este arquivo.
 
 ---
 
-## 🎨 Equipe Frontend (Interface)
-**Objetivo:** Garantir que o site funcione bem no celular, tenha botões interativos e mostre os dados que virão do banco de dados de forma bonita.
+## 🗄️ Equipe Banco de Dados (Dados e Modelagem) — 100% CONCLUÍDO ✅
+**Status:** Todas as etapas foram finalizadas com dados reais na nuvem.
 
-- [ ] **Arrumar Links Quebrados (Urgente):** A pasta `css`, `js` e `assets` mudou de lugar. Abrir os arquivos HTML (`index.html`, `pesquisa.html`, etc.) e trocar todos os caminhos que começam com `../` para `./` (Exemplo: `./css/style.css`).
-- [ ] **Padronizar Estilos:** Revisar o `style.css` para garantir que as fontes, cores e botões sigam um único padrão.
-- [ ] **Criar a Tela Home (`index.html`):** Onde o usuário digita de onde ele quer sair e para onde quer ir.
-- [ ] **Criar Tela de Resultados (`pesquisa.html`):** Deve mostrar uma lista das opções de ônibus disponíveis após a busca.
-- [ ] **Criar Tela de Detalhes (`rota.html`):** Mostrar o itinerário completo e os horários de uma linha específica clicada.
-- [ ] **Preparar o JavaScript (`main.js`):** Criar funções usando `fetch` para se conectar com a API que a equipe Backend vai construir (Ex: `fetch('http://localhost:3000/api/linhas')`).
+- [x] **Escolher a Tecnologia:** PostgreSQL hospedado na nuvem (Aiven) com SSL ativo.
+- [x] **Modelar o Schema:** Tabelas criadas (`cidades`, `rotas`, `viacoes`, `horarios`, `usuarios`, `favoritos`).
+- [x] **Preencher Dados Reais:** Banco populado com 36 cidades, 71 rotas reais e 239 horários de ônibus.
+- [x] **Conexão com o Backend:** Arquivo `backend/database/db.js` configurado com pool de conexões e variáveis de ambiente no `.env`.
 
 ---
 
-## 💻 Equipe Backend (Servidor e API)
-**Objetivo:** Criar o "cérebro" do projeto. O servidor que vai receber as perguntas do Frontend, buscar a resposta no Banco de Dados e devolver para a tela.
+## 💻 Equipe Backend (Servidor e API) — 100% CONCLUÍDO ✅
+**Status:** Toda a camada de negócios, segurança e rotas está pronta e funcional.
 
-- [ ] **Configurar o Servidor Base:** Escrever o código inicial no `backend/server.js` usando Express para rodar o projeto na porta 3000. Testar com um simples "Hello World".
-- [ ] **Servir os Arquivos do Frontend:** Configurar o Express (`express.static`) para conseguir exibir os arquivos da pasta `frontend/` pelo navegador usando `localhost:3000`.
-- [ ] **Criar Rota (Endpoint) de Listagem:** Criar o código em `backend/routes/` para o endpoint `GET /api/linhas`. Ele deve devolver uma lista JSON com todos os ônibus.
-- [ ] **Criar Rota (Endpoint) de Busca:** Criar o endpoint `GET /api/busca?origem=A&destino=B` para filtrar ônibus específicos.
-- [ ] **Criar Regras de Negócio (Controllers):** Fazer a lógica em `backend/controllers/` que recebe a requisição, fala com o Banco de Dados e valida erros.
+- [x] **Configurar o Servidor Base (`server.js`):** Express rodando na porta 3000 com CORS e parser JSON.
+- [x] **Servir Arquivos do Frontend:** Middleware `express.static` configurado para abrir o site direto em `http://localhost:3000`.
+- [x] **APIs de Rotas (`rotaService` / `rotasController`):** Endpoints `/api/rotas`, `/api/rotas/:id` e `/api/rotas/buscar` integrados ao PostgreSQL via `JOIN`.
+- [x] **APIs de Horários (`horariosService` / `horariosController`):** Endpoint `/api/horarios/linha/:linhaId` trazendo horários, viações e tarifas reais.
+- [x] **Autenticação Segura (`usuariosService` / `usuariosController`):**
+  - Cadastro com senha criptografada via **Bcrypt** (Salt rounds = 10) em `POST /api/usuarios`.
+  - Login seguro com comparação de hash e emissão de **Token JWT** em `POST /api/usuarios/login`.
+- [x] **Limpeza de Código:** Remoção de arquivos legados e código morto (`localizacaoService.js`).
 
 ---
 
-## 🗄️ Equipe Banco de Dados (Dados e Modelagem)
-**Objetivo:** Decidir onde os dados ficarão salvos e preencher o sistema com as informações das linhas, paradas e horários.
+## 🎨 Equipe Frontend (Interface e Integração) — EM ANDAMENTO ⏳
+**Status:** Telas visuais criadas, faltando ajustes de integração e fluxo entre telas.
 
-- [ ] **Escolher a Tecnologia:** Decidir se usaremos MongoDB (ideal para JavaScript/Node), PostgreSQL ou SQLite. (Para o MVP, podemos até começar com um arquivo `data.json` local).
-- [ ] **Modelar o Schema (A Estrutura dos Dados):** Definir exatamente quais informações um Ônibus tem. 
-  - *Exemplo:* Nome da linha, Número, Preço, Horários de Saída, Array de Paradas.
-- [ ] **Preencher Dados de Teste (Seed):** Levantar dados reais (ou inventados) de 5 a 10 linhas de ônibus principais da cidade e inseri-las no banco. Sem isso, o sistema fica vazio.
-- [ ] **Conectar Banco ao Backend:** Ajudar a equipe Backend a escrever a conexão (`backend/database/connection.js`) garantindo que o `server.js` consiga ler e gravar informações no banco de dados com segurança.
+- [x] **Estrutura de Telas (HTML/CSS):** Telas de Início, Pesquisa, Resultados, Rota, Cadastro e Login desenhadas.
+- [x] **Consumo de Rotas na Home (`main.js`):** Autocomplete da busca consumindo e listando as cidades reais do backend.
+- [ ] **Corrigir Exibição de Resultados (`resultado.js` / `resultado.html`):**
+  - **Urgente:** Ajustar o `resultado.js` para ler a lista de rotas encontradas (`guiaBusaoRotasEncontradas`) em vez de esperar uma única rota (`guiaBusaoRotaSelecionada`), que atualmente causa a mensagem de "Viagem não encontrada".
+  - Renderizar os cartões dos ônibus encontrados dentro do container `#resultsList`.
+- [ ] **Integrar Tela de Detalhes da Linha (`rota.html`):**
+  - Conectar ao clicar em um ônibus na tela de resultados para abrir `rota.html` e exibir seus horários reais consumindo `/api/horarios/linha/:id`.
+- [ ] **Validar Fluxo de Cadastro e Login na Interface:**
+  - Testar envio dos formulários de `cadastro.html` e `login.html`, salvando o token no `localStorage` e exibindo o usuário conectado no menu.
+- [ ] **Limpeza de Arquivos Fora do Escopo:**
+  - Remover scripts não utilizados que contêm dados fictícios (`posto.js`, `pedagios.js`, `calculadora.js`).

@@ -1,520 +1,1479 @@
-/* =====================================================
+/* =========================================================
    GUIA DO BUSÃO
-   MAIN.JS
-===================================================== */
+   JAVASCRIPT PRINCIPAL
+   ========================================================= */
 
 
-/* ================= ELEMENTOS ================= */
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
 
-const routeForm = document.getElementById("routeForm");
+document.addEventListener("DOMContentLoaded", () => {
 
-const originInput = document.getElementById("origin");
-const destinationInput = document.getElementById("destination");
+    inicializarMenuMobile();
 
-const travelDate = document.getElementById("travelDate");
-const travelTime = document.getElementById("travelTime");
+    inicializarAno();
 
-const swapButton = document.getElementById("swapButton");
-const locationButton = document.getElementById("locationButton");
+    inicializarBotoesVoltar();
 
-const originSuggestions =
-    document.getElementById("originSuggestions");
+    inicializarLinksInternos();
 
-const destinationSuggestions =
-    document.getElementById("destinationSuggestions");
-
-const menuButton =
-    document.getElementById("menuButton");
-
-const mobileMenu =
-    document.getElementById("mobileMenu");
-
-const mobileClose =
-    document.getElementById("mobileClose");
-
-
-/* ================= DATA ATUAL ================= */
-
-function setMinimumDate() {
-
-    const today = new Date();
-
-    const year = today.getFullYear();
-
-    const month = String(
-        today.getMonth() + 1
-    ).padStart(2, "0");
-
-    const day = String(
-        today.getDate()
-    ).padStart(2, "0");
-
-    const formattedDate =
-        `${year}-${month}-${day}`;
-
-    travelDate.min = formattedDate;
-
-    if (!travelDate.value) {
-        travelDate.value = formattedDate;
-    }
-}
-
-setMinimumDate();
-
-
-/* ================= SWAP ================= */
-
-swapButton.addEventListener("click", () => {
-
-    const originValue = originInput.value;
-
-    originInput.value = destinationInput.value;
-
-    destinationInput.value = originValue;
+    inicializarPesquisaRota();
 
 });
 
 
-/* ================= SUGESTÕES ================= */
+/* =========================================================
+   MENU MOBILE
+   ========================================================= */
 
-const locations = [
+function inicializarMenuMobile() {
 
-    "Porto Alegre - RS",
-    "Florianópolis - SC",
-    "Curitiba - PR",
-    "São Paulo - SP",
-    "Canoas - RS",
-    "Novo Hamburgo - RS",
-    "São Leopoldo - RS",
-    "Gravataí - RS",
-    "Sarandi - Porto Alegre - RS",
-    "Centro Histórico - Porto Alegre - RS",
-    "Centro - Florianópolis - SC",
-    "Terminal Rodoviário de Porto Alegre",
-    "Terminal Rodoviário de Florianópolis",
-    "Balneário Camboriú - SC",
-];
+    const menuButton =
+        document.querySelector(".menu-mobile") ||
+        document.querySelector(".mobile-menu-button");
+
+    const navMenu =
+        document.querySelector(".nav-menu") ||
+        document.querySelector(".nav");
+
+    if (!menuButton || !navMenu) {
+        return;
+    }
+
+    menuButton.addEventListener("click", () => {
+
+        navMenu.classList.toggle("active");
+
+        menuButton.classList.toggle("active");
+
+    });
+
+}
 
 
-function showSuggestions(input, container) {
+/* =========================================================
+   ANO
+   ========================================================= */
 
-    const value =
-        input.value.trim().toLowerCase();
+function inicializarAno() {
 
-    container.innerHTML = "";
+    const elementosAno =
+        document.querySelectorAll("[data-ano]");
 
-    if (!value) {
+    const anoAtual =
+        new Date().getFullYear();
 
-        container.classList.remove("active");
+    elementosAno.forEach(elemento => {
 
+        elemento.textContent =
+            anoAtual;
+
+    });
+
+}
+
+
+/* =========================================================
+   BOTÕES VOLTAR
+   ========================================================= */
+
+function inicializarBotoesVoltar() {
+
+    const botoes =
+        document.querySelectorAll("[data-voltar]");
+
+    botoes.forEach(botao => {
+
+        botao.addEventListener("click", () => {
+
+            window.history.back();
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   LINKS INTERNOS
+   ========================================================= */
+
+function inicializarLinksInternos() {
+
+    const links =
+        document.querySelectorAll("[data-link]");
+
+    links.forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            const destino =
+                link.dataset.link;
+
+            if (!destino) {
+                return;
+            }
+
+            window.location.href =
+                destino;
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   NOTIFICAÇÃO
+   ========================================================= */
+
+function mostrarMensagem(
+    mensagem,
+    tipo = "info"
+) {
+
+    const antiga =
+        document.querySelector(
+            ".site-notification"
+        );
+
+    if (antiga) {
+        antiga.remove();
+    }
+
+    const notificacao =
+        document.createElement("div");
+
+    notificacao.className =
+        `site-notification site-notification-${tipo}`;
+
+    notificacao.textContent =
+        mensagem;
+
+    document.body.appendChild(
+        notificacao
+    );
+
+    setTimeout(() => {
+
+        notificacao.classList.add(
+            "show"
+        );
+
+    }, 10);
+
+    setTimeout(() => {
+
+        notificacao.classList.remove(
+            "show"
+        );
+
+        setTimeout(() => {
+
+            notificacao.remove();
+
+        }, 300);
+
+    }, 3000);
+
+}
+
+
+/* =========================================================
+   FORMATAÇÃO DE DATA
+   ========================================================= */
+
+function formatarData(data) {
+
+    if (!data) {
+        return "";
+    }
+
+    const dataObj =
+        new Date(
+            data + "T00:00:00"
+        );
+
+    if (
+        Number.isNaN(
+            dataObj.getTime()
+        )
+    ) {
+        return "";
+    }
+
+    return dataObj.toLocaleDateString(
+        "pt-BR",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORMATAÇÃO DE HORÁRIO
+   ========================================================= */
+
+function formatarHorario(data) {
+
+    if (!data) {
+        return "";
+    }
+
+    const dataObj =
+        new Date(data);
+
+    if (
+        Number.isNaN(
+            dataObj.getTime()
+        )
+    ) {
+        return "";
+    }
+
+    return dataObj.toLocaleTimeString(
+        "pt-BR",
+        {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOCAL STORAGE
+   ========================================================= */
+
+function salvarDados(chave, dados) {
+
+    try {
+
+        localStorage.setItem(
+            chave,
+            JSON.stringify(dados)
+        );
+
+        return true;
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao salvar dados:",
+            erro
+        );
+
+        return false;
+
+    }
+
+}
+
+
+function carregarDados(chave) {
+
+    try {
+
+        const dados =
+            localStorage.getItem(
+                chave
+            );
+
+        if (!dados) {
+            return null;
+        }
+
+        return JSON.parse(dados);
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar dados:",
+            erro
+        );
+
+        return null;
+
+    }
+
+}
+
+
+function removerDados(chave) {
+
+    localStorage.removeItem(
+        chave
+    );
+
+}
+
+
+/* =========================================================
+   USUÁRIO
+   ========================================================= */
+
+function usuarioEstaLogado() {
+
+    return Boolean(
+        localStorage.getItem(
+            "guiaBusaoUsuario"
+        )
+    );
+
+}
+
+
+function obterUsuario() {
+
+    return carregarDados(
+        "guiaBusaoUsuario"
+    );
+
+}
+
+
+function salvarUsuario(usuario) {
+
+    return salvarDados(
+        "guiaBusaoUsuario",
+        usuario
+    );
+
+}
+
+
+function sairDaConta() {
+
+    removerDados(
+        "guiaBusaoUsuario"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================================
+   PESQUISAS
+   ========================================================= */
+
+function salvarPesquisa(pesquisa) {
+
+    let pesquisas =
+        carregarDados(
+            "guiaBusaoPesquisas"
+        );
+
+    if (!Array.isArray(pesquisas)) {
+
+        pesquisas = [];
+
+    }
+
+    pesquisas.unshift(
+        pesquisa
+    );
+
+    pesquisas =
+        pesquisas.slice(0, 5);
+
+    salvarDados(
+        "guiaBusaoPesquisas",
+        pesquisas
+    );
+
+}
+
+
+function obterPesquisasRecentes() {
+
+    const pesquisas =
+        carregarDados(
+            "guiaBusaoPesquisas"
+        );
+
+    return Array.isArray(pesquisas)
+        ? pesquisas
+        : [];
+
+}
+
+
+function limparPesquisas() {
+
+    removerDados(
+        "guiaBusaoPesquisas"
+    );
+
+}
+
+
+/* =========================================================
+   PESQUISA DE ROTAS
+   ========================================================= */
+
+let todasAsRotas = [];
+
+let origemSelecionada = null;
+
+let destinoSelecionado = null;
+
+
+async function inicializarPesquisaRota() {
+
+    const formulario =
+        document.querySelector(
+            "#routeForm"
+        );
+
+    if (!formulario) {
+        return;
+    }
+
+    const origemInput =
+        document.querySelector(
+            "#origin"
+        );
+
+    const destinoInput =
+        document.querySelector(
+            "#destination"
+        );
+
+    const origemSuggestions =
+        document.querySelector(
+            "#originSuggestions"
+        );
+
+    const destinoSuggestions =
+        document.querySelector(
+            "#destinationSuggestions"
+        );
+
+
+    try {
+
+        /*
+         * Carrega as linhas reais
+         * do backend.
+         */
+
+        todasAsRotas =
+            await listarRotas();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar rotas:",
+            erro
+        );
+
+        mostrarMensagem(
+            "Não foi possível carregar as localidades.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Autocomplete da origem
+     */
+
+    if (origemInput) {
+
+        origemInput.addEventListener(
+            "input",
+            () => {
+
+                origemSelecionada =
+                    null;
+
+                mostrarSugestoes(
+                    origemInput.value,
+                    origemSuggestions,
+                    "origem"
+                );
+
+            }
+        );
+
+        origemInput.addEventListener(
+            "focus",
+            () => {
+
+                mostrarSugestoes(
+                    origemInput.value,
+                    origemSuggestions,
+                    "origem"
+                );
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Autocomplete do destino
+     */
+
+    if (destinoInput) {
+
+        destinoInput.addEventListener(
+            "input",
+            () => {
+
+                destinoSelecionado =
+                    null;
+
+                mostrarSugestoes(
+                    destinoInput.value,
+                    destinoSuggestions,
+                    "destino"
+                );
+
+            }
+        );
+
+        destinoInput.addEventListener(
+            "focus",
+            () => {
+
+                mostrarSugestoes(
+                    destinoInput.value,
+                    destinoSuggestions,
+                    "destino"
+                );
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Formulário
+     */
+
+    formulario.addEventListener(
+        "submit",
+        async evento => {
+
+            evento.preventDefault();
+
+            await executarBusca();
+
+        }
+    );
+
+
+    /*
+     * Fecha sugestões ao clicar
+     * fora delas.
+     */
+
+    document.addEventListener(
+        "click",
+        evento => {
+
+            if (
+                !evento.target.closest(
+                    ".form-group"
+                )
+            ) {
+
+                esconderSugestoes(
+                    origemSuggestions
+                );
+
+                esconderSugestoes(
+                    destinoSuggestions
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CRIAR LOCALIDADES
+   ========================================================= */
+
+function obterLocalidades() {
+
+    const localidades = [];
+
+    const cidades = new Map();
+
+    const bairros = new Map();
+
+
+    todasAsRotas.forEach(rota => {
+
+        if (
+            rota.origem &&
+            rota.origem.cidade
+        ) {
+
+            const cidade =
+                rota.origem.cidade;
+
+            cidades.set(
+                cidade.id,
+                cidade
+            );
+
+        }
+
+
+        if (
+            rota.destino &&
+            rota.destino.cidade
+        ) {
+
+            const cidade =
+                rota.destino.cidade;
+
+            cidades.set(
+                cidade.id,
+                cidade
+            );
+
+        }
+
+
+        if (
+            rota.origem &&
+            rota.origem.bairro
+        ) {
+
+            const bairro =
+                rota.origem.bairro;
+
+            bairros.set(
+                bairro.id,
+                {
+                    ...bairro,
+                    cidade:
+                        rota.origem.cidade
+                }
+            );
+
+        }
+
+
+        if (
+            rota.destino &&
+            rota.destino.bairro
+        ) {
+
+            const bairro =
+                rota.destino.bairro;
+
+            bairros.set(
+                bairro.id,
+                {
+                    ...bairro,
+                    cidade:
+                        rota.destino.cidade
+                }
+            );
+
+        }
+
+    });
+
+
+    cidades.forEach(cidade => {
+
+        localidades.push({
+
+            tipo: "cidade",
+
+            id: cidade.id,
+
+            nome: cidade.nome,
+
+            estado: cidade.estado,
+
+            cidadeId: cidade.id,
+
+            bairroId: null
+
+        });
+
+    });
+
+
+    bairros.forEach(bairro => {
+
+        localidades.push({
+
+            tipo: "bairro",
+
+            id: bairro.id,
+
+            nome: bairro.nome,
+
+            estado:
+                bairro.cidade
+                    ? bairro.cidade.estado
+                    : "",
+
+            cidade:
+                bairro.cidade
+                    ? bairro.cidade.nome
+                    : "",
+
+            cidadeId:
+                bairro.cidadeId,
+
+            bairroId:
+                bairro.id
+
+        });
+
+    });
+
+
+    return localidades;
+
+}
+
+
+/* =========================================================
+   MOSTRAR SUGESTÕES
+   ========================================================= */
+
+function mostrarSugestoes(
+    texto,
+    container,
+    tipoCampo
+) {
+
+    if (!container) {
         return;
     }
 
 
-    const filtered =
-        locations
-            .filter(location =>
-                location
-                    .toLowerCase()
-                    .includes(value)
-            )
-            .slice(0, 5);
+    const localidades =
+        obterLocalidades();
 
 
-    if (filtered.length === 0) {
+    const termo =
+        normalizarTexto(texto);
 
-        container.classList.remove("active");
 
-        return;
+    /*
+     * Se não digitou nada,
+     * mostra algumas localidades.
+     */
+
+    let resultados =
+        localidades;
+
+
+    if (termo) {
+
+        resultados =
+            localidades.filter(
+                local => {
+
+                    const nome =
+                        normalizarTexto(
+                            local.nome
+                        );
+
+                    const cidade =
+                        normalizarTexto(
+                            local.cidade || ""
+                        );
+
+                    return (
+                        nome.includes(termo) ||
+                        cidade.includes(termo)
+                    );
+
+                }
+            );
+
     }
 
 
-    filtered.forEach(location => {
+    /*
+     * Remove duplicados.
+     */
 
-        const button =
-            document.createElement("button");
+    const vistos =
+        new Set();
 
-        button.type = "button";
+    resultados =
+        resultados.filter(local => {
 
-        button.className =
-            "suggestion-item";
+            const chave =
+                `${local.tipo}-${local.id}`;
 
+            if (vistos.has(chave)) {
+                return false;
+            }
 
-        button.innerHTML = `
-            <span class="suggestion-icon">📍</span>
-            <span>${location}</span>
-        `;
+            vistos.add(chave);
 
-
-        button.addEventListener("click", () => {
-
-            input.value = location;
-
-            container.classList.remove("active");
+            return true;
 
         });
 
 
-        container.appendChild(button);
+    /*
+     * Limita a quantidade.
+     */
 
-    });
+    resultados =
+        resultados.slice(0, 8);
 
 
-    container.classList.add("active");
+    container.innerHTML = "";
+
+
+    if (
+        resultados.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="suggestion-empty">
+                Nenhuma localidade encontrada
+            </div>
+        `;
+
+        container.classList.add(
+            "active"
+        );
+
+        return;
+
+    }
+
+
+    resultados.forEach(
+        local => {
+
+            const item =
+                document.createElement(
+                    "button"
+                );
+
+            item.type = "button";
+
+            item.className =
+                "suggestion-item";
+
+
+            const localSecundario =
+                local.tipo === "cidade"
+                    ? local.estado
+                    : `${local.cidade} - ${local.estado}`;
+
+
+            item.innerHTML = `
+                <span class="suggestion-icon">
+                    📍
+                </span>
+
+                <span class="suggestion-text">
+                    <strong>
+                        ${escaparHTML(local.nome)}
+                    </strong>
+
+                    <small>
+                        ${escaparHTML(localSecundario)}
+                    </small>
+                </span>
+            `;
+
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    selecionarLocalidade(
+                        local,
+                        tipoCampo,
+                        container
+                    );
+
+                }
+            );
+
+
+            container.appendChild(
+                item
+            );
+
+        }
+    );
+
+
+    container.classList.add(
+        "active"
+    );
+
 }
 
 
-originInput.addEventListener("input", () => {
+/* =========================================================
+   SELECIONAR LOCALIDADE
+   ========================================================= */
 
-    showSuggestions(
-        originInput,
-        originSuggestions
-    );
+function selecionarLocalidade(
+    local,
+    tipoCampo,
+    container
+) {
 
-});
-
-
-destinationInput.addEventListener("input", () => {
-
-    showSuggestions(
-        destinationInput,
-        destinationSuggestions
-    );
-
-});
-
-
-/* ================= FECHAR SUGESTÕES ================= */
-
-document.addEventListener("click", (event) => {
-
-    if (
-        !originInput.contains(event.target) &&
-        !originSuggestions.contains(event.target)
-    ) {
-
-        originSuggestions.classList.remove("active");
-
-    }
+    const input =
+        tipoCampo === "origem"
+            ? document.querySelector(
+                "#origin"
+            )
+            : document.querySelector(
+                "#destination"
+            );
 
 
-    if (
-        !destinationInput.contains(event.target) &&
-        !destinationSuggestions.contains(event.target)
-    ) {
-
-        destinationSuggestions.classList.remove("active");
-
-    }
-
-});
-
-
-/* ================= LOCALIZAÇÃO ================= */
-
-locationButton.addEventListener("click", () => {
-
-    if (!navigator.geolocation) {
-
-        showNotification(
-            "Seu navegador não suporta localização.",
-            "error"
-        );
-
+    if (!input) {
         return;
     }
 
 
-    locationButton.textContent = "⌛";
+    input.value =
+        local.nome;
 
 
-    navigator.geolocation.getCurrentPosition(
+    if (tipoCampo === "origem") {
 
-        (position) => {
+        origemSelecionada =
+            local;
 
-            console.log(
-                "Latitude:",
-                position.coords.latitude
+    } else {
+
+        destinoSelecionado =
+            local;
+
+    }
+
+
+    esconderSugestoes(
+        container
+    );
+
+}
+
+
+/* =========================================================
+   ESCONDER SUGESTÕES
+   ========================================================= */
+
+function esconderSugestoes(
+    container
+) {
+
+    if (!container) {
+        return;
+    }
+
+    container.classList.remove(
+        "active"
+    );
+
+}
+
+
+/* =========================================================
+   EXECUTAR BUSCA
+   ========================================================= */
+
+async function executarBusca() {
+
+    const origemInput =
+        document.querySelector(
+            "#origin"
+        );
+
+    const destinoInput =
+        document.querySelector(
+            "#destination"
+        );
+
+    const dataInput =
+        document.querySelector(
+            "#travelDate"
+        );
+
+    const horarioInput =
+        document.querySelector(
+            "#travelTime"
+        );
+
+    const botao =
+        document.querySelector(
+            "#searchButton"
+        );
+
+
+    const origemTexto =
+        origemInput
+            ? origemInput.value.trim()
+            : "";
+
+
+    const destinoTexto =
+        destinoInput
+            ? destinoInput.value.trim()
+            : "";
+
+
+    if (
+        !origemTexto ||
+        !destinoTexto
+    ) {
+
+        mostrarMensagem(
+            "Informe a origem e o destino.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (botao) {
+
+        botao.disabled = true;
+
+        const texto =
+            botao.querySelector(
+                "span"
             );
 
-            console.log(
-                "Longitude:",
-                position.coords.longitude
-            );
+        if (texto) {
 
-
-            /*
-                FUTURO:
-
-                Aqui vamos enviar as coordenadas
-                para uma API de mapas/geolocalização.
-
-                Por enquanto apenas mostramos
-                uma mensagem.
-            */
-
-
-            showNotification(
-                "Localização encontrada! A integração com o mapa será adicionada depois.",
-                "success"
-            );
-
-
-            locationButton.textContent = "◎";
-
-        },
-
-
-        () => {
-
-            showNotification(
-                "Não foi possível obter sua localização.",
-                "error"
-            );
-
-            locationButton.textContent = "◎";
+            texto.textContent =
+                "Buscando...";
 
         }
 
-    );
-
-});
-
-
-/* ================= FORMULÁRIO ================= */
-
-routeForm.addEventListener("submit", async (event) => {
-
-    event.preventDefault();
-
-
-    const origin =
-        originInput.value.trim();
-
-    const destination =
-        destinationInput.value.trim();
-
-    const date =
-        travelDate.value;
-
-    const time =
-        travelTime.value;
-
-
-    /* ================= VALIDAÇÃO ================= */
-
-    if (!origin) {
-
-        showNotification(
-            "Informe o local de origem.",
-            "error"
-        );
-
-        originInput.focus();
-
-        return;
     }
 
 
-    if (!destination) {
+    try {
 
-        showNotification(
-            "Informe o destino.",
-            "error"
+        /*
+         * Se o usuário não clicou
+         * em uma sugestão, tenta
+         * encontrar automaticamente.
+         */
+
+        if (!origemSelecionada) {
+
+            origemSelecionada =
+                encontrarLocalidade(
+                    origemTexto
+                );
+
+        }
+
+
+        if (!destinoSelecionado) {
+
+            destinoSelecionado =
+                encontrarLocalidade(
+                    destinoTexto
+                );
+
+        }
+
+
+        if (
+            !origemSelecionada ||
+            !destinoSelecionado
+        ) {
+
+            throw new Error(
+                "Selecione uma origem e um destino da lista de sugestões."
+            );
+
+        }
+
+
+        /*
+         * Filtra as linhas reais.
+         */
+
+        const resultados =
+            filtrarRotas(
+                origemSelecionada,
+                destinoSelecionado
+            );
+
+
+        /*
+         * Pesquisa atual.
+         */
+
+        const pesquisa = {
+
+            origem:
+                origemTexto,
+
+            destino:
+                destinoTexto,
+
+            origemLocal:
+                origemSelecionada,
+
+            destinoLocal:
+                destinoSelecionado,
+
+            data:
+                dataInput
+                    ? dataInput.value
+                    : "",
+
+            horario:
+                horarioInput
+                    ? horarioInput.value
+                    : "",
+
+            dataPesquisa:
+                new Date().toISOString()
+
+        };
+
+
+        /*
+         * Salva para resultado.html
+         */
+
+        salvarDados(
+            "guiaBusaoPesquisaAtual",
+            pesquisa
         );
 
-        destinationInput.focus();
 
-        return;
-    }
-
-
-    if (!date) {
-
-        showNotification(
-            "Escolha uma data para a viagem.",
-            "error"
+        salvarDados(
+            "guiaBusaoRotasEncontradas",
+            resultados
         );
 
-        travelDate.focus();
 
-        return;
-    }
-
-
-    /* ================= BOTÃO ================= */
-
-    const button =
-        routeForm.querySelector(".search-button");
-
-    const originalContent =
-        button.innerHTML;
-
-
-    button.classList.add("loading");
-
-    button.innerHTML =
-        "<span>Buscando rotas...</span>";
-
-
-    /*
-        POR ENQUANTO:
-
-        O backend ainda não existe.
-
-        Então simulamos uma pequena espera
-        para testar a interface.
-    */
-
-
-    await delay(800);
-
-
-    const searchData = {
-
-        origin,
-        destination,
-        date,
-        time,
-
-        directOnly:
-            document.getElementById("directRoute").checked
-
-    };
-
-
-    console.log(
-        "Dados da pesquisa:",
-        searchData
-    );
-
-
-    /*
-        FUTURO BACKEND
-
-        Aqui teremos algo parecido com:
-
-        const response = await fetch(
-            "http://localhost:3000/api/rotas",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(searchData)
-            }
+        salvarDados(
+            "guiaBusaoQuantidadeRotas",
+            resultados.length
         );
 
-        const data = await response.json();
 
-        localStorage.setItem(
-            "ultimaPesquisa",
-            JSON.stringify(data)
+        salvarPesquisa(
+            pesquisa
         );
+
+
+        /*
+         * Também mantém a chave
+         * usada pelo resultado.js antigo.
+         */
+
+        salvarDados(
+            "guiaBusaoPesquisa",
+            pesquisa
+        );
+
 
         window.location.href =
             "resultado.html";
-    */
+
+    } catch (erro) {
+
+        console.error(
+            "Erro na busca:",
+            erro
+        );
+
+        mostrarMensagem(
+            erro.message ||
+            "Não foi possível realizar a busca.",
+            "error"
+        );
+
+    } finally {
+
+        if (botao) {
+
+            botao.disabled = false;
+
+            const texto =
+                botao.querySelector(
+                    "span"
+                );
+
+            if (texto) {
+
+                texto.textContent =
+                    "Buscar rota";
+
+            }
+
+        }
+
+    }
+
+}
 
 
-    localStorage.setItem(
-        "ultimaPesquisa",
-        JSON.stringify(searchData)
-    );
+/* =========================================================
+   ENCONTRAR LOCALIDADE
+   ========================================================= */
+
+function encontrarLocalidade(
+    texto
+) {
+
+    const termo =
+        normalizarTexto(texto);
 
 
-    button.classList.remove("loading");
-
-    button.innerHTML =
-        originalContent;
+    const localidades =
+        obterLocalidades();
 
 
     /*
-        Como ainda não criamos resultado.html,
-        mostramos uma mensagem temporária.
-    */
+     * Primeiro tenta igualdade
+     * exata.
+     */
 
-    showNotification(
-        "Pesquisa realizada! O sistema de rotas será conectado ao backend na próxima etapa.",
-        "success"
+    let resultado =
+        localidades.find(
+            local =>
+                normalizarTexto(
+                    local.nome
+                ) === termo
+        );
+
+
+    if (resultado) {
+        return resultado;
+    }
+
+
+    /*
+     * Depois tenta começo do nome.
+     */
+
+    resultado =
+        localidades.find(
+            local =>
+                normalizarTexto(
+                    local.nome
+                ).startsWith(termo)
+        );
+
+
+    return resultado || null;
+
+}
+
+
+/* =========================================================
+   FILTRAR ROTAS
+   ========================================================= */
+
+function filtrarRotas(
+    origem,
+    destino
+) {
+
+    return todasAsRotas.filter(
+        rota => {
+
+            const origemOK =
+                localidadeCorresponde(
+                    rota.origem,
+                    origem
+                );
+
+
+            const destinoOK =
+                localidadeCorresponde(
+                    rota.destino,
+                    destino
+                );
+
+
+            return (
+                origemOK &&
+                destinoOK
+            );
+
+        }
     );
 
-});
+}
 
 
-/* ================= MENU MOBILE ================= */
+/* =========================================================
+   COMPARAR LOCALIDADES
+   ========================================================= */
 
-menuButton.addEventListener("click", () => {
-
-    mobileMenu.classList.add("active");
-
-});
-
-
-mobileClose.addEventListener("click", () => {
-
-    mobileMenu.classList.remove("active");
-
-});
-
-
-document.addEventListener("click", (event) => {
+function localidadeCorresponde(
+    rotaLocal,
+    localSelecionado
+) {
 
     if (
-        mobileMenu.classList.contains("active") &&
-        !mobileMenu.contains(event.target) &&
-        !menuButton.contains(event.target)
+        !rotaLocal ||
+        !localSelecionado
+    ) {
+        return false;
+    }
+
+
+    /*
+     * Se foi selecionado um bairro,
+     * exige aquele bairro.
+     */
+
+    if (
+        localSelecionado.bairroId
     ) {
 
-        mobileMenu.classList.remove("active");
+        return (
+            rotaLocal.bairro &&
+            rotaLocal.bairro.id ===
+                localSelecionado.bairroId
+        );
 
     }
 
-});
 
+    /*
+     * Se foi selecionada uma cidade,
+     * aceita qualquer bairro daquela cidade.
+     */
 
-/* ================= NOTIFICAÇÃO ================= */
+    if (
+        localSelecionado.cidadeId
+    ) {
 
-function showNotification(message, type = "success") {
+        return (
+            rotaLocal.cidade &&
+            rotaLocal.cidade.id ===
+                localSelecionado.cidadeId
+        );
 
-    const existing =
-        document.querySelector(".notification");
-
-    if (existing) {
-        existing.remove();
     }
 
 
-    const notification =
-        document.createElement("div");
-
-    notification.className =
-        `notification ${type}`;
-
-    notification.textContent =
-        message;
-
-
-    document.body.appendChild(notification);
-
-
-    setTimeout(() => {
-
-        notification.remove();
-
-    }, 4000);
+    return false;
 
 }
 
 
-/* ================= DELAY ================= */
+/* =========================================================
+   NORMALIZAR TEXTO
+   ========================================================= */
 
-function delay(milliseconds) {
+function normalizarTexto(texto) {
 
-    return new Promise(resolve => {
-
-        setTimeout(resolve, milliseconds);
-
-    });
+    return String(texto || "")
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .toLowerCase()
+        .trim();
 
 }
+
+
+/* =========================================================
+   SEGURANÇA HTML
+   ========================================================= */
+
+function escaparHTML(texto) {
+
+    return String(texto || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   EXPORTAÇÃO
+   ========================================================= */
+
+window.GuiaBusao = {
+
+    mostrarMensagem,
+
+    formatarData,
+
+    formatarHorario,
+
+    salvarDados,
+
+    carregarDados,
+
+    removerDados,
+
+    usuarioEstaLogado,
+
+    obterUsuario,
+
+    salvarUsuario,
+
+    sairDaConta,
+
+    salvarPesquisa,
+
+    obterPesquisasRecentes,
+
+    limparPesquisas,
+
+    inicializarPesquisaRota
+
+};

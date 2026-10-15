@@ -1,159 +1,280 @@
-/* =====================================================
-   RESPONSIVIDADE
-===================================================== */
+/* =========================================================
+   GUIA DO BUSÃO
+   RESPONSIVIDADE GERAL
+   ========================================================= */
 
 
-/* ================= TABLET ================= */
+/* =========================================================
+   TABLET / NOTEBOOK MENOR
+   ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
-    .nav {
-        display: none;
+    .container {
+        width: min(100% - 32px, var(--container));
     }
 
-    .menu-button {
-        display: block;
+    .header-container {
+        padding: 0 16px;
     }
 
-    .quick-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-content {
-        flex-direction: column;
+    .nav-menu {
+        gap: 15px;
     }
 
 }
 
 
-/* ================= CELULAR ================= */
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    /* HEADER */
+
+    .header-container {
+        height: 68px;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .menu-mobile {
+        display: flex;
+    }
+
+
+    /* GRID */
+
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* BOTÕES */
+
+    .button-group {
+        flex-wrap: wrap;
+    }
+
+
+    /* CARDS */
+
+    .card {
+        padding: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
 
 @media (max-width: 600px) {
 
+    html {
+        font-size: 15px;
+    }
+
+
+    /* CONTAINER */
+
     .container {
-        width: min(100% - 28px, var(--container));
-    }
-
-    .header {
-        height: 70px;
-    }
-
-    .logo-icon {
-        width: 39px;
-        height: 39px;
-
-        font-size: 21px;
-    }
-
-    .logo-text strong {
-        font-size: 17px;
-    }
-
-    .logo-text small {
-        font-size: 9px;
+        width: calc(100% - 24px);
     }
 
 
-    /* HERO */
+    /* HEADER */
 
-    .hero {
-        padding: 50px 0 60px;
+    .header-container {
+        height: 62px;
+
+        padding: 0 12px;
     }
 
-    .hero-text {
-        margin-bottom: 30px;
-    }
-
-    .hero-text h1 {
-        font-size: 38px;
-
-        letter-spacing: -1.8px;
-    }
-
-    .hero-text p {
-        font-size: 14px;
+    .logo img {
+        max-width: 130px;
     }
 
 
-    /* SEARCH */
+    /* TÍTULOS */
 
-    .search-card {
-        padding: 20px 16px;
-
-        border-radius: 19px;
+    h1 {
+        font-size: 30px;
     }
 
-    .search-card-header h2 {
-        font-size: 20px;
+    h2 {
+        font-size: 23px;
     }
 
-    .fields-row {
+    h3 {
+        font-size: 18px;
+    }
+
+
+    /* GRIDS */
+
+    .grid-4,
+    .grid-3,
+    .grid-2 {
         grid-template-columns: 1fr;
-        gap: 0;
     }
 
-    .input-wrapper input {
-        height: 54px;
+
+    /* FORMULÁRIOS */
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 
-    .swap-button {
-        margin-top: -2px;
-        margin-bottom: 5px;
+    .form-group {
+        width: 100%;
     }
 
-    .search-options {
-        align-items: flex-start;
+
+    /* BOTÕES */
+
+    .button-group {
+        width: 100%;
+
         flex-direction: column;
-        gap: 12px;
     }
 
-
-    /* QUICK */
-
-    .quick-section {
-        padding: 60px 0;
-    }
-
-    .quick-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .quick-card {
-        min-height: 100px;
-    }
-
-
-    /* FEATURES */
-
-    .features-section {
-        padding: 65px 0;
-    }
-
-    .section-heading h2 {
-        font-size: 25px;
-    }
-
-    .feature-card {
-        padding: 25px 20px;
+    .button,
+    .btn {
+        width: 100%;
     }
 
 
     /* FOOTER */
 
-    .footer-content {
-        padding: 40px 0;
+    .footer-grid {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
     }
 
-    .footer-links {
-        gap: 50px;
-    }
-
-    .footer-bottom p {
+    .footer {
         text-align: center;
+    }
+
+
+    /* MODAIS */
+
+    .modal {
+        width: calc(100% - 24px);
+
+        max-height: 90vh;
+
+        overflow-y: auto;
+    }
+
+
+    /* TABELAS */
+
+    .table-container {
+        width: 100%;
+
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .container {
+        width: calc(100% - 20px);
+    }
+
+    .header-container {
+        padding: 0 10px;
+    }
+
+    .logo img {
+        max-width: 115px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    h2 {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   TOUCH / CELULAR
+   ========================================================= */
+
+@media (hover: none) {
+
+    button,
+    a,
+    input,
+    select {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    button,
+    .button,
+    .btn {
+        min-height: 44px;
+    }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS MUITO GRANDES
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+    .container {
+        max-width: 1250px;
     }
 
 }
