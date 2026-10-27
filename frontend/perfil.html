@@ -3,75 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Meu perfil - Guia do Busão"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meu perfil - Guia do Busão">
 
     <title>Meu perfil - Guia do Busão</title>
 
-    <link
-        rel="stylesheet"
-        href="./css/style.css"
-    >
+    <!-- Aplicar o tema salvo antes de carregar o CSS -->
+    <script>
+        try {
+            const temaSalvo = localStorage.getItem("guiaBusaoTema");
+
+            document.documentElement.setAttribute(
+                "data-tema",
+                temaSalvo === "escuro" ? "escuro" : "claro"
+            );
+        } catch (erro) {
+            document.documentElement.setAttribute("data-tema", "claro");
+        }
+    </script>
+
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
-
+    <!-- CABEÇALHO -->
     <header class="header">
-
         <div class="header-container">
 
-            <a
-                href="index.html"
-                class="logo-link"
-            >
-
+            <a href="index.html" class="logo-link">
                 <img
-                    src="./assets/logos/logo.png"
+                    src="./assets/images/logo.png"
                     alt="Guia do Busão"
                     class="logo"
                 >
-
             </a>
 
-
-            <nav class="nav">
-
-                <a
-                    href="index.html"
-                    class="nav-link"
-                >
-                    <span>⌂</span>
+            <nav class="nav" aria-label="Navegação principal">
+                <a href="index.html" class="nav-link">
+                    <span aria-hidden="true">⌂</span>
                     Início
                 </a>
 
-                <a
-                    href="rotas-salvas.html"
-                    class="nav-link"
-                >
-                    <span>⌖</span>
+                <a href="rotas-salvas.html" class="nav-link">
+                    <span aria-hidden="true">⌖</span>
                     Rotas Salvas
                 </a>
 
-                <a
-                    href="favoritos.html"
-                    class="nav-link"
-                >
-                    <span>☆</span>
+                <a href="favoritos.html" class="nav-link">
+                    <span aria-hidden="true">☆</span>
                     Favoritos
                 </a>
-
             </nav>
-
 
             <div class="header-actions">
 
@@ -79,480 +62,274 @@
                     type="button"
                     class="theme-button"
                     id="themeButton"
-                    aria-label="Alterar tema"
-                >
-                    ☾
-                </button>
+                    aria-label="Alternar tema"
+                    aria-pressed="false"
+                    title="Alternar tema"
+                >☾</button>
 
                 <a
                     href="perfil.html"
                     class="profile-button active"
                     aria-label="Meu perfil"
-                >
-                    👤
-                </a>
+                    aria-current="page"
+                >👤</a>
 
             </div>
 
-
+            <!-- MENU MOBILE -->
             <button
                 type="button"
                 class="mobile-menu-button"
                 id="mobileMenuButton"
                 aria-label="Abrir menu"
-            >
-                ☰
-            </button>
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+            >☰</button>
 
         </div>
-
     </header>
 
-
-    <!-- ================= CONTEÚDO ================= -->
-
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="profile-page">
-
         <div class="profile-container">
 
-
-            <!-- ================= TÍTULO ================= -->
-
+            <!-- TÍTULO -->
             <section class="profile-header">
+                <span class="hero-tag">👤 Minha conta</span>
 
-                <span class="hero-tag">
-                    👤 Minha conta
-                </span>
+                <h1>Meu perfil</h1>
 
-                <h1>
-                    Meu perfil
-                </h1>
-
-                <p>
-                    Gerencie suas informações e preferências.
-                </p>
-
+                <p>Gerencie suas informações e preferências.</p>
             </section>
 
-
-            <!-- ================= PERFIL ================= -->
-
+            <!-- RESUMO DO PERFIL -->
             <section class="profile-card">
-
-                <div class="profile-avatar">
-                    👤
-                </div>
+                <div class="profile-avatar" aria-hidden="true">👤</div>
 
                 <div class="profile-main-info">
-
-                    <h2 id="profileName">
-                        Seu nome
-                    </h2>
-
-                    <p id="profileEmail">
-                        seuemail@email.com
-                    </p>
+                    <h2 id="profileName">Seu nome</h2>
+                    <p id="profileEmail">seuemail@email.com</p>
 
                     <span class="profile-status">
                         ✓ Conta ativa
                     </span>
-
                 </div>
 
                 <button
                     type="button"
                     class="secondary-button"
                     id="editProfileButton"
-                >
-                    ✎ Editar perfil
-                </button>
-
+                >✎ Editar perfil</button>
             </section>
 
-
-            <!-- ================= DADOS ================= -->
-
+            <!-- INFORMAÇÕES PESSOAIS -->
             <section class="profile-section">
-
                 <div class="section-heading">
-
-                    <span class="hero-tag">
-                        📋 Informações pessoais
-                    </span>
-
-                    <h2>
-                        Seus dados
-                    </h2>
-
+                    <span class="hero-tag">📋 Informações pessoais</span>
+                    <h2>Seus dados</h2>
                 </div>
-
 
                 <div class="profile-data-grid">
 
-
                     <div class="profile-data-item">
-
-                        <small>
-                            Nome completo
-                        </small>
-
-                        <strong id="profileFullName">
-                            Seu nome
-                        </strong>
-
+                        <small>Nome completo</small>
+                        <strong id="profileFullName">Seu nome</strong>
                     </div>
 
-
                     <div class="profile-data-item">
-
-                        <small>
-                            E-mail
-                        </small>
-
-                        <strong id="profileUserEmail">
-                            seuemail@email.com
-                        </strong>
-
+                        <small>E-mail</small>
+                        <strong id="profileUserEmail">seuemail@email.com</strong>
                     </div>
 
-
                     <div class="profile-data-item">
-
-                        <small>
-                            Telefone
-                        </small>
-
-                        <strong id="profilePhone">
-                            Não informado
-                        </strong>
-
+                        <small>Telefone</small>
+                        <strong id="profilePhone">Não informado</strong>
                     </div>
 
-
                     <div class="profile-data-item">
-
-                        <small>
-                            Conta criada em
-                        </small>
-
-                        <strong id="profileCreatedAt">
-                            --
-                        </strong>
-
+                        <small>Conta criada em</small>
+                        <strong id="profileCreatedAt">--</strong>
                     </div>
 
                 </div>
-
             </section>
 
-
-            <!-- ================= PREFERÊNCIAS ================= -->
-
+            <!-- PREFERÊNCIAS -->
             <section class="profile-section">
-
                 <div class="section-heading">
-
-                    <span class="hero-tag">
-                        ⚙️ Preferências
-                    </span>
-
-                    <h2>
-                        Configurações
-                    </h2>
-
+                    <span class="hero-tag">⚙️ Preferências</span>
+                    <h2>Configurações</h2>
                 </div>
-
 
                 <div class="settings-list">
 
-
                     <!-- NOTIFICAÇÕES -->
-
                     <div class="setting-item">
-
-                        <div class="setting-icon">
-                            🔔
-                        </div>
+                        <div class="setting-icon" aria-hidden="true">🔔</div>
 
                         <div class="setting-content">
-
-                            <strong>
-                                Notificações
-                            </strong>
-
+                            <strong>Notificações</strong>
                             <p>
                                 Receba avisos sobre suas viagens
                                 e alterações de horários.
                             </p>
-
                         </div>
 
                         <label class="switch">
-
                             <input
                                 type="checkbox"
                                 id="notifications"
+                                aria-label="Ativar notificações"
                                 checked
                             >
-
                             <span class="slider"></span>
-
                         </label>
-
                     </div>
 
-
-                    <!-- LEMBRAR PESQUISA -->
-
+                    <!-- SALVAR PESQUISAS -->
                     <div class="setting-item">
-
-                        <div class="setting-icon">
-                            🔎
-                        </div>
+                        <div class="setting-icon" aria-hidden="true">🔎</div>
 
                         <div class="setting-content">
-
-                            <strong>
-                                Salvar pesquisas
-                            </strong>
-
+                            <strong>Salvar pesquisas</strong>
                             <p>
                                 Salve automaticamente suas
                                 pesquisas recentes.
                             </p>
-
                         </div>
 
                         <label class="switch">
-
                             <input
                                 type="checkbox"
                                 id="saveSearches"
+                                aria-label="Salvar pesquisas automaticamente"
                                 checked
                             >
-
                             <span class="slider"></span>
-
                         </label>
-
                     </div>
 
-
-                    <!-- TEMA -->
-
+                    <!-- TEMA ESCURO -->
                     <div class="setting-item">
-
-                        <div class="setting-icon">
-                            🌙
-                        </div>
+                        <div
+                            class="setting-icon"
+                            id="themeSettingIcon"
+                            aria-hidden="true"
+                        >🌙</div>
 
                         <div class="setting-content">
-
-                            <strong>
-                                Tema escuro
-                            </strong>
-
+                            <strong>Tema escuro</strong>
                             <p>
                                 Use o modo escuro para navegar
                                 com mais conforto.
                             </p>
-
                         </div>
 
                         <label class="switch">
-
                             <input
                                 type="checkbox"
                                 id="darkMode"
+                                aria-label="Ativar ou desativar tema escuro"
                             >
-
                             <span class="slider"></span>
-
                         </label>
-
                     </div>
 
                 </div>
-
             </section>
 
-
-            <!-- ================= ATALHOS ================= -->
-
+            <!-- ATALHOS -->
             <section class="profile-section">
-
                 <div class="section-heading">
-
-                    <span class="hero-tag">
-                        🚌 Guia do Busão
-                    </span>
-
-                    <h2>
-                        Acesso rápido
-                    </h2>
-
+                    <span class="hero-tag">🚌 Guia do Busão</span>
+                    <h2>Acesso rápido</h2>
                 </div>
-
 
                 <div class="profile-shortcuts">
 
-
-                    <a
-                        href="rotas-salvas.html"
-                        class="profile-shortcut"
-                    >
-
-                        <span>
-                            📌
-                        </span>
+                    <a href="rotas-salvas.html" class="profile-shortcut">
+                        <span aria-hidden="true">📌</span>
 
                         <div>
-
-                            <strong>
-                                Rotas salvas
-                            </strong>
-
-                            <small>
-                                Veja suas viagens salvas
-                            </small>
-
+                            <strong>Rotas salvas</strong>
+                            <small>Veja suas viagens salvas</small>
                         </div>
 
-                        <span>
-                            →
-                        </span>
-
+                        <span aria-hidden="true">→</span>
                     </a>
 
-
-                    <a
-                        href="favoritos.html"
-                        class="profile-shortcut"
-                    >
-
-                        <span>
-                            ☆
-                        </span>
+                    <a href="favoritos.html" class="profile-shortcut">
+                        <span aria-hidden="true">☆</span>
 
                         <div>
-
-                            <strong>
-                                Favoritos
-                            </strong>
-
-                            <small>
-                                Consulte seus favoritos
-                            </small>
-
+                            <strong>Favoritos</strong>
+                            <small>Consulte seus favoritos</small>
                         </div>
 
-                        <span>
-                            →
-                        </span>
-
+                        <span aria-hidden="true">→</span>
                     </a>
 
-
-                    <a
-                        href="pesquisa.html"
-                        class="profile-shortcut"
-                    >
-
-                        <span>
-                            🔎
-                        </span>
+                    <a href="pesquisa.html" class="profile-shortcut">
+                        <span aria-hidden="true">🔎</span>
 
                         <div>
-
-                            <strong>
-                                Nova pesquisa
-                            </strong>
-
-                            <small>
-                                Encontre uma nova viagem
-                            </small>
-
+                            <strong>Nova pesquisa</strong>
+                            <small>Encontre uma nova viagem</small>
                         </div>
 
-                        <span>
-                            →
-                        </span>
-
+                        <span aria-hidden="true">→</span>
                     </a>
 
                 </div>
-
             </section>
 
-
-            <!-- ================= SAIR ================= -->
-
+            <!-- SAIR DA CONTA -->
             <section class="profile-logout">
-
                 <button
                     type="button"
                     class="logout-button"
                     id="logoutButton"
-                >
-                    ↪ Sair da conta
-                </button>
-
+                >↪ Sair da conta</button>
             </section>
 
         </div>
-
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
-
+    <!-- RODAPÉ -->
     <footer class="footer">
-
         <div class="footer-container">
-
             <p>
                 © 2026 Guia do Busão.
                 Todos os direitos reservados.
             </p>
-
         </div>
-
     </footer>
 
-
-    <!-- ================= MENU MOBILE ================= -->
-
+    <!-- MENU MOBILE -->
     <div
         class="mobile-menu"
         id="mobileMenu"
+        aria-label="Menu de navegação"
     >
 
         <button
             type="button"
             class="mobile-menu-close"
             id="mobileMenuClose"
-        >
-            ×
-        </button>
+            aria-label="Fechar menu"
+        >×</button>
 
-        <a href="index.html">
-            Início
-        </a>
-
-        <a href="rotas-salvas.html">
-            Rotas Salvas
-        </a>
-
-        <a href="favoritos.html">
-            Favoritos
-        </a>
-
-        <a href="perfil.html">
-            Minha conta
-        </a>
+        <a href="index.html">Início</a>
+        <a href="rotas-salvas.html">Rotas Salvas</a>
+        <a href="favoritos.html">Favoritos</a>
+        <a href="perfil.html" aria-current="page">Minha conta</a>
 
     </div>
 
-</body>
+    <!-- JAVASCRIPT -->
+    <script src="./js/main.js"></script>
+    <script src="./js/perfil.js"></script>
+    <script src="./js/tema.js"></script>
 
+</body>
 </html>

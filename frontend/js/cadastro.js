@@ -665,28 +665,146 @@ function mostrarMensagem(
    ========================================================= */
 
 const googleButton =
-    document.querySelector(
-        "#googleButton"
-    );
+    document.querySelector("#googleButton");
 
+const GOOGLE_CLIENT_ID =
+    "481983737742-jsja75eddodr7upfnbo2p53as4s48gec.apps.googleusercontent.com";
 
-if (googleButton) {
+let googleInicializado = false;
+let googleCarregando = false;
 
-    googleButton.addEventListener(
-        "click",
-        () => {
+function processarLoginGoogle(credential) {
+    if (googleButton) {
+        googleButton.disabled = true;
+    }
 
-            mostrarMensagem(
+    mostrarMensagem("Verificando sua conta Google...", "sucesso");
 
-                "O login com Google ainda será configurado.",
+    fetch(`${API_BASE_URL}/api/usuarios/google`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ credential })
+    })
+        .then(async (resposta) => {
+            const dados = await resposta.json().catch(() => ({}));
 
-                "erro"
+            if (!resposta.ok) {
+                throw new Error(
+                    dados.mensagem || "Não foi possível entrar com o Google."
+                );
+            }
 
+            if (!dados.token || !dados.usuario) {
+                throw new Error("O servidor não retornou os dados da sessão.");
+            }
+
+            localStorage.setItem(
+                "guiaBusaoUsuario",
+                JSON.stringify(dados.usuario)
             );
 
-        }
-    );
+            localStorage.setItem("guiaBusaoToken", dados.token);
 
+            mostrarMensagem("Conta Google conectada com sucesso!", "sucesso");
+
+            setTimeout(() => {
+                window.location.href = "../index.html";
+            }, 700);
+        })
+        .catch((erro) => {
+            console.error("Erro no login Google:", erro);
+            mostrarMensagem(erro.message || "Erro ao autenticar com o Google.", "erro");
+        })
+        .finally(() => {
+            if (googleButton) {
+                googleButton.disabled = false;
+            }
+        });
+}
+
+function inicializarGoogleCadastro() {
+    if (!window.google?.accounts?.id) {
+        return false;
+    }
+
+    if (!googleInicializado) {
+        window.google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: (resposta) => {
+                if (resposta.credential) {
+                    processarLoginGoogle(resposta.credential);
+                } else {
+                    mostrarMensagem(
+                        "O Google não retornou uma credencial válida.",
+                        "erro"
+                    );
+                }
+            }
+        });
+
+        googleInicializado = true;
+    }
+
+    return true;
+}
+
+function carregarGoogleCadastro() {
+    if (window.google?.accounts?.id) {
+        inicializarGoogleCadastro();
+        return;
+    }
+
+    if (googleCarregando) {
+        return;
+    }
+
+    googleCarregando = true;
+
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+
+    script.onload = () => {
+        googleCarregando = false;
+
+        if (!inicializarGoogleCadastro()) {
+            mostrarMensagem("Não foi possível inicializar o Google.", "erro");
+        }
+    };
+
+    script.onerror = () => {
+        googleCarregando = false;
+        mostrarMensagem("Não foi possível carregar o Google.", "erro");
+    };
+
+    document.head.appendChild(script);
+}
+
+if (googleButton) {
+    googleButton.addEventListener("click", () => {
+        if (!inicializarGoogleCadastro()) {
+            carregarGoogleCadastro();
+
+            mostrarMensagem(
+                "Carregando o Google... Clique novamente em instantes.",
+                "sucesso"
+            );
+
+            return;
+        }
+
+        window.google.accounts.id.prompt((notificacao) => {
+            if (notificacao.isNotDisplayed()) {
+                mostrarMensagem(
+                    "O Google não abriu a seleção de conta. Verifique a configuração OAuth.",
+                    "erro"
+                );
+            }
+        });
+    });
 }
 
 

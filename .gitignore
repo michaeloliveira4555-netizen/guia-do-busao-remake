@@ -1,12 +1,26 @@
-# Pastas do Node
+# Dependências do Node.js
 node_modules/
-npm-debug.log
+npm-debug.log*
 
-# Arquivos de Senha e Ambiente (Muito Importante!)
+# Arquivos de ambiente e senhas
 .env
-.env.local
+.env.*
+!.env.example
 
-# Lixo do Sistema Operacional
+# Configurações locais de IDE
+.idea/
+.vscode/
+
+# Arquivos temporários e backups
+*.bak
+*.bak2
+*.backup
+*.backup-*
+*.suggestions-backup
+
+# Sistema operacional
 .DS_Store
 Thumbs.db
-tarefas.md 
+
+# Arquivos auxiliares
+tarefas.md

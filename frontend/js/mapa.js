@@ -1,346 +1,123 @@
-/* =========================================================
-   GUIA DO BUSÃO
-   JAVASCRIPT DO MAPA
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-    carregarRotaNoMapa();
-    inicializarControlesMapa();
-    inicializarBotaoLocalizacao();
-});
-
 
 /* =========================================================
-   CARREGAR ROTA
+   GUIA DO BUSÃO - MAPA COM LOCALIZAÇÃO AUTOMÁTICA
    ========================================================= */
 
-function carregarRotaNoMapa() {
+let mapaGuia = null;
+let marcadorUsuario = null;
+let circuloPrecisao = null;
 
-    const rota = obterRotaMapa();
+const POSICAO_INICIAL = [-30.0346, -51.2177];
 
-    if (!rota) {
+document.addEventListener("DOMContentLoaded", inicializarMapa);
+
+function inicializarMapa() {
+    const elemento = document.getElementById("map");
+
+    if (!elemento || typeof L === "undefined") {
+        console.error("Mapa ou biblioteca Leaflet não encontrados.");
         return;
     }
 
-    preencherMapaElemento(
-        "[data-mapa-origem]",
-        rota.origem
-    );
+    mapaGuia = L.map(elemento).setView(POSICAO_INICIAL, 12);
 
-    preencherMapaElemento(
-        "[data-mapa-destino]",
-        rota.destino
-    );
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mapaGuia);
 
-    preencherMapaElemento(
-        "[data-mapa-data]",
-        rota.data
-    );
+    L.marker(POSICAO_INICIAL)
+        .addTo(mapaGuia)
+        .bindPopup("Porto Alegre");
 
-    preencherMapaElemento(
-        "[data-mapa-horario]",
-        rota.horarioSaida
-    );
-}
+    const botao = document.getElementById("myLocationButton");
 
-
-/* =========================================================
-   OBTER ROTA
-   ========================================================= */
-
-function obterRotaMapa() {
-
-    const dados =
-        localStorage.getItem(
-            "guiaBusaoRotaSelecionada"
-        );
-
-    if (!dados) {
-        return criarRotaMapaExemplo();
+    if (botao) {
+        botao.addEventListener("click", obterLocalizacao);
     }
 
-    try {
+    setTimeout(() => mapaGuia.invalidateSize(), 250);
 
-        return JSON.parse(dados);
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar dados do mapa:",
-            erro
-        );
-
-        return criarRotaMapaExemplo();
-    }
+    // Tenta localizar o usuário automaticamente ao abrir a página.
+    obterLocalizacao();
 }
-
-
-/* =========================================================
-   ROTA DE EXEMPLO
-   ========================================================= */
-
-function criarRotaMapaExemplo() {
-
-    return {
-
-        origem:
-            "Porto Alegre, RS",
-
-        destino:
-            "Balneário Camboriú, SC",
-
-        data:
-            "15/08/2026",
-
-        horarioSaida:
-            "07:30"
-
-    };
-}
-
-
-/* =========================================================
-   PREENCHER ELEMENTOS
-   ========================================================= */
-
-function preencherMapaElemento(
-    seletor,
-    valor
-) {
-
-    const elementos =
-        document.querySelectorAll(seletor);
-
-    elementos.forEach((elemento) => {
-
-        elemento.textContent =
-            valor || "-";
-
-    });
-}
-
-
-/* =========================================================
-   CONTROLES DO MAPA
-   ========================================================= */
-
-function inicializarControlesMapa() {
-
-    const botoes =
-        document.querySelectorAll(
-            "[data-mapa-controle]"
-        );
-
-    botoes.forEach((botao) => {
-
-        botao.addEventListener(
-            "click",
-            () => {
-
-                const acao =
-                    botao.dataset.mapaControle;
-
-                executarControleMapa(
-                    acao
-                );
-
-            }
-        );
-
-    });
-}
-
-
-/* =========================================================
-   AÇÕES DO MAPA
-   ========================================================= */
-
-function executarControleMapa(acao) {
-
-    switch (acao) {
-
-        case "zoom-in":
-
-            mostrarMensagemMapa(
-                "Zoom aproximado."
-            );
-
-            break;
-
-
-        case "zoom-out":
-
-            mostrarMensagemMapa(
-                "Zoom afastado."
-            );
-
-            break;
-
-
-        case "rota":
-
-            mostrarMensagemMapa(
-                "A rota da viagem está sendo exibida."
-            );
-
-            break;
-
-
-        case "paradas":
-
-            mostrarMensagemMapa(
-                "Exibindo paradas da viagem."
-            );
-
-            break;
-
-
-        default:
-
-            console.log(
-                "Controle desconhecido:",
-                acao
-            );
-
-    }
-}
-
-
-/* =========================================================
-   LOCALIZAÇÃO DO USUÁRIO
-   ========================================================= */
-
-function inicializarBotaoLocalizacao() {
-
-    const botao =
-        document.querySelector(
-            "[data-minha-localizacao]"
-        );
-
-    if (!botao) {
-        return;
-    }
-
-    botao.addEventListener(
-        "click",
-        obterLocalizacao
-    );
-}
-
 
 function obterLocalizacao() {
+    const botao = document.getElementById("myLocationButton");
 
     if (!navigator.geolocation) {
-
-        mostrarMensagemMapa(
-            "Seu navegador não suporta localização."
-        );
-
+        alert("Seu navegador não oferece suporte à localização.");
         return;
     }
 
-    mostrarMensagemMapa(
-        "Obtendo sua localização..."
-    );
+    if (botao) {
+        botao.disabled = true;
+        botao.textContent = "Obtendo localização...";
+    }
 
     navigator.geolocation.getCurrentPosition(
-
         (posicao) => {
+            const latitude = posicao.coords.latitude;
+            const longitude = posicao.coords.longitude;
+            const precisao = posicao.coords.accuracy;
+            const coordenadas = [latitude, longitude];
 
-            const latitude =
-                posicao.coords.latitude;
+            if (marcadorUsuario) {
+                mapaGuia.removeLayer(marcadorUsuario);
+            }
 
-            const longitude =
-                posicao.coords.longitude;
+            if (circuloPrecisao) {
+                mapaGuia.removeLayer(circuloPrecisao);
+            }
 
-            console.log(
-                "Localização:",
-                latitude,
-                longitude
-            );
+            marcadorUsuario = L.marker(coordenadas)
+                .addTo(mapaGuia)
+                .bindPopup(
+                    `Sua localização estimada<br>` +
+                    `Precisão informada: ±${Math.round(precisao)} metros`
+                )
+                .openPopup();
 
-            mostrarMensagemMapa(
-                "Sua localização foi encontrada."
-            );
+            circuloPrecisao = L.circle(coordenadas, {
+                radius: precisao,
+                color: "#1769aa",
+                fillColor: "#1769aa",
+                fillOpacity: 0.12,
+                weight: 1
+            }).addTo(mapaGuia);
 
+            mapaGuia.setView(coordenadas, 16);
+
+            console.log("Latitude:", latitude);
+            console.log("Longitude:", longitude);
+            console.log("Precisão informada:", precisao, "metros");
+
+            if (botao) {
+                botao.disabled = false;
+                botao.textContent = "📍 Minha localização";
+            }
         },
-
         (erro) => {
+            console.warn("Erro ao obter localização:", erro.message);
 
-            console.error(
-                "Erro de localização:",
-                erro
-            );
+            if (erro.code === 1) {
+                alert("Permita o acesso à localização nas configurações do navegador.");
+            } else if (erro.code === 2) {
+                alert("Não foi possível determinar sua posição.");
+            } else if (erro.code === 3) {
+                alert("A localização demorou demais. Tente novamente pelo botão.");
+            }
 
-            mostrarMensagemMapa(
-                "Não foi possível obter sua localização."
-            );
-
+            if (botao) {
+                botao.disabled = false;
+                botao.textContent = "📍 Minha localização";
+            }
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 0
         }
-
     );
 }
-
-
-/* =========================================================
-   MENSAGEM
-   ========================================================= */
-
-function mostrarMensagemMapa(
-    mensagem
-) {
-
-    if (
-        window.GuiaBusao &&
-        typeof window.GuiaBusao.mostrarMensagem ===
-        "function"
-    ) {
-
-        window.GuiaBusao.mostrarMensagem(
-            mensagem,
-            "info"
-        );
-
-        return;
-    }
-
-    console.log(mensagem);
-}
-
-
-/* =========================================================
-   FUTURO MAPA REAL
-   ========================================================= */
-
-/*
-    Aqui futuramente vamos integrar:
-
-    - Mapa do Brasil
-    - OpenStreetMap
-    - Leaflet
-    - Origem
-    - Destino
-    - Paradas
-    - Rota do ônibus
-    - Localização do usuário
-    - Distância
-    - Tempo estimado
-
-    Exemplo futuro:
-
-    inicializarMapaReal();
-
-*/
-
-
-/* =========================================================
-   EXPORTAÇÃO
-   ========================================================= */
-
-window.MapaGuiaBusao = {
-
-    obterRotaMapa,
-
-    carregarRotaNoMapa
-
-};

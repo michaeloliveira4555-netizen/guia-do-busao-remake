@@ -955,3 +955,604 @@
     }
 
 }
+
+```css
+/* =========================================================
+   35. REFINAMENTO VISUAL — DETALHES DA ROTA
+   ========================================================= */
+
+.route-main {
+    max-width: 1180px;
+    padding-top: 34px;
+    padding-bottom: 64px;
+}
+
+/* Resumo de origem e destino */
+.route-overview {
+    gap: 28px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(24, 49, 75, 0.055);
+}
+
+.route-city {
+    min-width: 0;
+    align-items: center;
+    gap: 13px;
+}
+
+.route-city h2 {
+    overflow-wrap: anywhere;
+    font-size: clamp(17px, 2vw, 21px);
+    line-height: 1.35;
+}
+
+.route-city small {
+    margin-bottom: 5px;
+    letter-spacing: 0.7px;
+}
+
+.route-city p {
+    line-height: 1.5;
+}
+
+.route-city-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+}
+
+/* Indicador entre as cidades */
+.route-overview-line {
+    gap: 10px;
+}
+
+.route-overview-line::before,
+.route-overview-line::after {
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        var(--border),
+        var(--primary)
+    );
+    opacity: 0.65;
+}
+
+.route-overview-line-center {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+/* Cartões com informações da viagem */
+.route-details-grid {
+    gap: 16px;
+}
+
+.route-detail {
+    min-width: 0;
+    padding: 20px;
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.route-detail:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(24, 49, 75, 0.08);
+}
+
+.route-detail-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+}
+
+.route-detail small {
+    line-height: 1.5;
+    letter-spacing: 0.35px;
+}
+
+.route-detail strong {
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+/* Empresa de ônibus */
+.bus-company {
+    padding: 24px;
+    border-radius: 18px;
+    gap: 20px;
+}
+
+.bus-company-logo {
+    border: 1px solid var(--border);
+    background: #f5f9fd;
+}
+
+.bus-company-info h2 {
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+}
+
+.bus-company-info p {
+    line-height: 1.6;
+}
+
+.bus-company-tags {
+    gap: 8px;
+}
+
+.bus-company-tags span {
+    border: 1px solid var(--border);
+    line-height: 1.4;
+}
+
+/* Cabeçalhos das seções */
+.route-section {
+    margin-bottom: 38px;
+}
+
+.route-section-header {
+    margin-bottom: 22px;
+}
+
+.route-section-header h2 {
+    font-size: clamp(19px, 2.2vw, 23px);
+    line-height: 1.4;
+}
+
+.route-section-header p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Linha do tempo */
+.route-timeline {
+    padding: 8px 0;
+}
+
+.timeline-item {
+    grid-template-columns: 78px 30px minmax(0, 1fr);
+    gap: 14px;
+    min-height: 94px;
+}
+
+.timeline-time {
+    padding-top: 1px;
+}
+
+.timeline-time strong {
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+}
+
+.timeline-time span {
+    line-height: 1.5;
+}
+
+.timeline-line {
+    min-height: 100%;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    box-shadow: 0 0 0 4px var(--surface);
+}
+
+.timeline-line::after {
+    top: 18px;
+    bottom: -6px;
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        var(--primary),
+        var(--border)
+    );
+}
+
+.timeline-content {
+    min-width: 0;
+    padding-bottom: 28px;
+}
+
+.timeline-content h3 {
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.timeline-content p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.timeline-badge {
+    line-height: 1.5;
+}
+
+/* Troca de ônibus */
+.route-connection {
+    margin: 0 0 24px 92px;
+    padding: 16px;
+    border-radius: 14px;
+    line-height: 1.6;
+}
+
+.route-connection strong {
+    font-size: 13px;
+}
+
+.route-connection p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Lista de paradas */
+.route-stops {
+    border-radius: 16px;
+}
+
+.route-stop {
+    min-width: 0;
+    padding: 17px 20px;
+    gap: 14px;
+    transition: background 0.18s ease;
+}
+
+.route-stop:hover {
+    background: #f8fbfe;
+}
+
+.route-stop-info {
+    min-width: 0;
+}
+
+.route-stop-info strong {
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.route-stop-info span {
+    line-height: 1.6;
+}
+
+.route-stop-time {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Área de ações */
+.route-action-area {
+    padding: 24px;
+    border-radius: 18px;
+    gap: 24px;
+}
+
+.route-action-info {
+    min-width: 0;
+}
+
+.route-action-info strong {
+    line-height: 1.5;
+}
+
+.route-action-info span {
+    line-height: 1.6;
+}
+
+.route-action-buttons {
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Mapa ilustrativo */
+.route-map {
+    isolation: isolate;
+    border-radius: 18px;
+}
+
+.route-map-background {
+    pointer-events: none;
+}
+
+.route-map-path {
+    height: 6px;
+    transform-origin: center;
+}
+
+.route-map-marker {
+    width: 46px;
+    height: 46px;
+    border: 3px solid white;
+}
+
+/* Aviso */
+.route-alert {
+    padding: 19px;
+    border-radius: 15px;
+}
+
+.route-alert p {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   36. TABLETS
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .route-overview {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .route-overview-line {
+        width: 100%;
+        max-width: 180px;
+        margin: 0 auto;
+        transform: none;
+    }
+
+    .route-details-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bus-company {
+        flex-wrap: wrap;
+    }
+
+    .bus-company-tags {
+        width: 100%;
+    }
+
+    .route-action-area {
+        align-items: flex-start;
+    }
+}
+
+/* =========================================================
+   37. CELULARES
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .route-main {
+        width: calc(100% - 28px);
+        padding-top: 22px;
+        padding-bottom: 40px;
+    }
+
+    .route-overview {
+        padding: 20px 16px;
+        gap: 14px;
+        margin-bottom: 16px;
+        border-radius: 16px;
+    }
+
+    .route-city {
+        gap: 11px;
+    }
+
+    .route-city-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+    }
+
+    .route-city h2 {
+        font-size: 17px;
+    }
+
+    .route-city p {
+        font-size: 12px;
+    }
+
+    .route-overview-line {
+        max-width: 115px;
+    }
+
+    .route-overview-line-center {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    .route-details-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .route-detail {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .route-detail-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .route-detail small {
+        font-size: 10px;
+    }
+
+    .route-detail strong {
+        font-size: 13px;
+    }
+
+    .bus-company {
+        padding: 17px;
+        gap: 13px;
+        margin-bottom: 25px;
+        border-radius: 16px;
+    }
+
+    .bus-company-logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        font-size: 23px;
+    }
+
+    .bus-company-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .bus-company-info h2 {
+        font-size: 17px;
+    }
+
+    .bus-company-tags span {
+        padding: 6px 9px;
+        font-size: 10px;
+    }
+
+    .route-section {
+        margin-bottom: 28px;
+    }
+
+    .route-section-header {
+        margin-bottom: 17px;
+    }
+
+    .timeline-item {
+        grid-template-columns: 54px 22px minmax(0, 1fr);
+        gap: 8px;
+        min-height: 85px;
+    }
+
+    .timeline-time strong {
+        font-size: 15px;
+    }
+
+    .timeline-time span {
+        font-size: 10px;
+    }
+
+    .timeline-dot {
+        width: 14px;
+        height: 14px;
+    }
+
+    .timeline-content {
+        padding-bottom: 24px;
+    }
+
+    .timeline-content h3 {
+        font-size: 14px;
+    }
+
+    .timeline-content p {
+        font-size: 12px;
+    }
+
+    .timeline-badge {
+        font-size: 10px;
+    }
+
+    .route-connection {
+        margin: 0 0 20px 30px;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .route-connection-icon {
+        width: 31px;
+        height: 31px;
+        font-size: 15px;
+    }
+
+    .route-stop {
+        padding: 14px 12px;
+        gap: 10px;
+    }
+
+    .route-stop-number {
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+    }
+
+    .route-stop-info strong {
+        font-size: 13px;
+    }
+
+    .route-stop-info span {
+        font-size: 10px;
+    }
+
+    .route-stop-time {
+        font-size: 11px;
+    }
+
+    .route-action-area {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 18px;
+    }
+
+    .route-action-buttons {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .route-action-buttons button,
+    .route-action-buttons a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .route-map {
+        height: 270px;
+    }
+
+    .route-map-marker {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+
+    .route-alert {
+        padding: 15px;
+        gap: 10px;
+    }
+}
+
+/* Celulares muito estreitos */
+@media (max-width: 360px) {
+    .route-main {
+        width: calc(100% - 20px);
+    }
+
+    .route-details-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .route-detail {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .timeline-item {
+        grid-template-columns: 46px 18px minmax(0, 1fr);
+        gap: 7px;
+    }
+
+    .route-stop {
+        flex-wrap: wrap;
+    }
+
+    .route-stop-time {
+        margin-left: 40px;
+    }
+}

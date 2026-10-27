@@ -3,57 +3,103 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="description"
-        content="Mapa da viagem - Guia do Busão"
+        content="Mapa interativo da viagem - Guia do Busão"
     >
 
     <title>Mapa da rota - Guia do Busão</title>
 
+    <!-- Aplicar o tema salvo antes de carregar o CSS -->
+    <script>
+        try {
+            const temaSalvo = localStorage.getItem("guiaBusaoTema");
+
+            document.documentElement.setAttribute(
+                "data-tema",
+                temaSalvo === "escuro" ? "escuro" : "claro"
+            );
+        } catch (erro) {
+            document.documentElement.setAttribute("data-tema", "claro");
+        }
+    </script>
+
+    <!-- Estilos do projeto -->
     <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Estilos do Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Ajustes específicos do mapa interativo -->
+    <style>
+        .map-container #map.leaflet-container {
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+        }
+
+        #mapLoading {
+            z-index: 500;
+            max-width: 90%;
+            width: 420px;
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--card-bg, #ffffff);
+            color: var(--text, #222222);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        #mapLoading p {
+            overflow-wrap: anywhere;
+        }
+
+        .map-controls {
+            z-index: 1000;
+        }
+
+        .map-stops-list .map-stop {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
-
+    <!-- CABEÇALHO -->
     <header class="header">
-
         <div class="header-container">
 
             <a href="index.html" class="logo-link">
-
                 <img
-                    src="./assets/logos/logo.png"
+                    src="./assets/images/logo.png"
                     alt="Guia do Busão"
                     class="logo"
                 >
-
             </a>
 
-
-            <nav class="nav">
-
+            <nav class="nav" aria-label="Navegação principal">
                 <a href="index.html" class="nav-link">
-                    <span>⌂</span>
+                    <span aria-hidden="true">⌂</span>
                     Início
                 </a>
 
                 <a href="rotas-salvas.html" class="nav-link">
-                    <span>⌖</span>
+                    <span aria-hidden="true">⌖</span>
                     Rotas Salvas
                 </a>
 
                 <a href="favoritos.html" class="nav-link">
-                    <span>☆</span>
+                    <span aria-hidden="true">☆</span>
                     Favoritos
                 </a>
-
             </nav>
-
 
             <div class="header-actions">
 
@@ -61,328 +107,171 @@
                     type="button"
                     class="theme-button"
                     id="themeButton"
-                    aria-label="Alterar tema"
-                >
-                    ☾
-                </button>
+                    aria-label="Alternar tema"
+                    aria-pressed="false"
+                    title="Alternar tema"
+                >☾</button>
 
                 <a
                     href="login.html"
                     class="profile-button"
                     aria-label="Minha conta"
-                >
-                    👤
-                </a>
+                >👤</a>
 
             </div>
 
-
+            <!-- MENU MOBILE -->
             <button
                 type="button"
                 class="mobile-menu-button"
                 id="mobileMenuButton"
                 aria-label="Abrir menu"
-            >
-                ☰
-            </button>
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+            >☰</button>
 
         </div>
-
     </header>
 
-
-    <!-- ================= CONTEÚDO ================= -->
-
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="map-page">
-
         <div class="map-page-container">
 
-
             <!-- VOLTAR -->
-
-            <a
-                href="rota.html"
-                class="back-button"
-            >
+            <a href="rota.html" class="back-button">
                 ← Voltar para detalhes
             </a>
 
-
             <!-- TÍTULO -->
-
             <section class="map-header">
+                <span class="hero-tag">🗺️ Mapa da viagem</span>
 
-                <span class="hero-tag">
-                    🗺️ Mapa da viagem
-                </span>
-
-                <h1>
-                    Veja seu trajeto
-                </h1>
+                <h1>Veja seu trajeto</h1>
 
                 <p id="mapRouteDescription">
-                    Porto Alegre → Florianópolis
+                    Carregando origem e destino...
                 </p>
-
             </section>
 
-
-            <!-- ================= MAPA ================= -->
-
+            <!-- MAPA INTERATIVO -->
             <section class="map-container">
-
-                <!--
-
-                    O mapa real será carregado posteriormente.
-
-                    Podemos utilizar uma API de mapas ou
-                    OpenStreetMap.
-
-                -->
 
                 <div
                     id="map"
                     class="map"
+                    role="application"
+                    aria-label="Mapa interativo do percurso entre origem e destino"
                 >
+                    <div
+                        id="mapLoading"
+                        class="map-placeholder"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        <div class="map-placeholder-icon">🗺️</div>
 
-                    <div class="map-placeholder">
-
-                        <div class="map-placeholder-icon">
-                            🗺️
-                        </div>
-
-                        <h2>
-                            Mapa da rota
-                        </h2>
+                        <h2>Carregando mapa...</h2>
 
                         <p>
-                            O mapa será carregado aqui.
+                            Preparando o percurso entre origem e destino.
                         </p>
-
                     </div>
-
-
-                    <!-- MARCADOR DE ORIGEM -->
-
-                    <div
-                        class="map-marker origin-marker"
-                        id="originMarker"
-                    >
-                        📍
-                    </div>
-
-
-                    <!-- MARCADOR DE DESTINO -->
-
-                    <div
-                        class="map-marker destination-marker"
-                        id="destinationMarker"
-                    >
-                        📍
-                    </div>
-
                 </div>
 
-
-                <!-- CONTROLES -->
-
+                <!-- CONTROLES DO MAPA -->
                 <div class="map-controls">
-
                     <button
                         type="button"
                         id="zoomIn"
                         aria-label="Aumentar zoom"
-                    >
-                        +
-                    </button>
+                        title="Aumentar zoom"
+                    >+</button>
 
                     <button
                         type="button"
                         id="zoomOut"
                         aria-label="Diminuir zoom"
-                    >
-                        −
-                    </button>
+                        title="Diminuir zoom"
+                    >−</button>
 
                     <button
                         type="button"
                         id="centerMap"
                         aria-label="Centralizar rota"
-                    >
-                        ◎
-                    </button>
-
+                        title="Centralizar rota"
+                    >◎</button>
                 </div>
 
             </section>
 
-
-            <!-- ================= RESUMO ================= -->
-
+            <!-- RESUMO DA ROTA -->
             <section class="map-route-card">
 
                 <div class="map-route-point">
-
-                    <span class="map-route-icon origin">
-                        ●
-                    </span>
+                    <span class="map-route-icon origin" aria-hidden="true">●</span>
 
                     <div>
-
-                        <small>
-                            ORIGEM
-                        </small>
+                        <small>ORIGEM</small>
 
                         <strong id="mapOrigin">
-                            Porto Alegre - RS
+                            Aguardando origem...
                         </strong>
 
                         <span id="mapDeparture">
-                            Terminal Rodoviário
+                            Local de partida
                         </span>
-
                     </div>
-
                 </div>
 
-
                 <div class="map-route-line">
-
                     <span></span>
 
                     <strong id="mapDuration">
-                        4h 30min
+                        Calculando trajeto...
                     </strong>
 
                     <span></span>
-
                 </div>
 
-
                 <div class="map-route-point">
-
-                    <span class="map-route-icon destination">
-                        ●
-                    </span>
+                    <span class="map-route-icon destination" aria-hidden="true">●</span>
 
                     <div>
-
-                        <small>
-                            DESTINO
-                        </small>
+                        <small>DESTINO</small>
 
                         <strong id="mapDestination">
-                            Florianópolis - SC
+                            Aguardando destino...
                         </strong>
 
                         <span id="mapArrival">
-                            Terminal Rodoviário
+                            Destino da viagem
                         </span>
-
                     </div>
-
                 </div>
 
             </section>
 
-
-            <!-- ================= PARADAS ================= -->
-
+            <!-- PARADAS -->
             <section class="map-stops">
 
                 <div class="section-heading">
-
-                    <span class="hero-tag">
-                        🛑 Paradas
-                    </span>
-
-                    <h2>
-                        Pontos no trajeto
-                    </h2>
-
+                    <span class="hero-tag">🛑 Paradas</span>
+                    <h2>Pontos no trajeto</h2>
                 </div>
 
-
-                <div
-                    class="map-stops-list"
-                    id="mapStopsList"
-                >
-
-                    <div class="map-stop">
-
-                        <span class="map-stop-number">
-                            1
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Porto Alegre
-                            </strong>
-
-                            <small>
-                                Saída
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="map-stop">
-
-                        <span class="map-stop-number">
-                            2
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Osório
-                            </strong>
-
-                            <small>
-                                Parada
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="map-stop">
-
-                        <span class="map-stop-number">
-                            3
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Florianópolis
-                            </strong>
-
-                            <small>
-                                Chegada
-                            </small>
-
-                        </div>
-
-                    </div>
-
+                <div class="map-stops-list" id="mapStopsList">
+                    <p>
+                        As paradas oficiais de ônibus não estão disponíveis
+                        neste cálculo rodoviário.
+                    </p>
                 </div>
 
             </section>
 
-
-            <!-- ================= AÇÕES ================= -->
-
+            <!-- AÇÕES -->
             <section class="map-actions">
 
-                <a
-                    href="rota.html"
-                    class="secondary-button"
-                >
+                <a href="rota.html" class="secondary-button">
                     ← Detalhes da rota
                 </a>
 
@@ -390,66 +279,49 @@
                     type="button"
                     class="search-button"
                     id="saveMapRoute"
-                >
-                    ☆ Salvar rota
-                </button>
+                >☆ Salvar rota</button>
 
             </section>
 
         </div>
-
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
-
+    <!-- RODAPÉ -->
     <footer class="footer">
-
         <div class="footer-container">
-
             <p>
                 © 2026 Guia do Busão.
                 Todos os direitos reservados.
             </p>
-
         </div>
-
     </footer>
 
-
-    <!-- ================= MENU MOBILE ================= -->
-
+    <!-- MENU MOBILE -->
     <div
         class="mobile-menu"
         id="mobileMenu"
+        aria-label="Menu de navegação"
     >
 
         <button
             type="button"
             class="mobile-menu-close"
             id="mobileMenuClose"
-        >
-            ×
-        </button>
+            aria-label="Fechar menu"
+        >×</button>
 
-        <a href="index.html">
-            Início
-        </a>
-
-        <a href="rotas-salvas.html">
-            Rotas Salvas
-        </a>
-
-        <a href="favoritos.html">
-            Favoritos
-        </a>
-
-        <a href="login.html">
-            Minha conta
-        </a>
+        <a href="index.html">Início</a>
+        <a href="rotas-salvas.html">Rotas Salvas</a>
+        <a href="favoritos.html">Favoritos</a>
+        <a href="login.html">Minha conta</a>
 
     </div>
 
-</body>
+    <!-- JAVASCRIPT -->
+    <script src="./js/main.js"></script>
+    <script src="./js/tema.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./js/mapa-rota.js"></script>
 
+</body>
 </html>

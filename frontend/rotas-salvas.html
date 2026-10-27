@@ -16,40 +16,41 @@
 
     <title>Rotas salvas - Guia do Busão</title>
 
-    <link
-        rel="stylesheet"
-        href="./css/style.css"
-    >
+    <!-- Aplicar o tema salvo antes de carregar o CSS -->
+    <script>
+        try {
+            const temaSalvo = localStorage.getItem("guiaBusaoTema");
+
+            document.documentElement.setAttribute(
+                "data-tema",
+                temaSalvo === "escuro" ? "escuro" : "claro"
+            );
+        } catch (erro) {
+            document.documentElement.setAttribute("data-tema", "claro");
+        }
+    </script>
+
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
-
+    <!-- HEADER -->
     <header class="header">
 
         <div class="header-container">
 
-            <a
-                href="index.html"
-                class="logo-link"
-            >
-
+            <a href="index.html" class="logo-link">
                 <img
-                    src="./assets/logos/logo.png"
+                    src="./assets/images/logo.png"
                     alt="Guia do Busão"
                     class="logo"
                 >
-
             </a>
-
 
             <nav class="nav">
 
-                <a
-                    href="index.html"
-                    class="nav-link"
-                >
+                <a href="index.html" class="nav-link">
                     <span>⌂</span>
                     Início
                 </a>
@@ -62,16 +63,12 @@
                     Rotas Salvas
                 </a>
 
-                <a
-                    href="favoritos.html"
-                    class="nav-link"
-                >
+                <a href="favoritos.html" class="nav-link">
                     <span>☆</span>
                     Favoritos
                 </a>
 
             </nav>
-
 
             <div class="header-actions">
 
@@ -79,54 +76,46 @@
                     type="button"
                     class="theme-button"
                     id="themeButton"
-                    aria-label="Alterar tema"
-                >
-                    ☾
-                </button>
+                    aria-label="Ativar tema escuro"
+                    aria-pressed="false"
+                    title="Alternar tema"
+                >☾</button>
 
                 <a
                     href="perfil.html"
                     class="profile-button"
                     aria-label="Meu perfil"
-                >
-                    👤
-                </a>
+                    title="Meu perfil"
+                >👤</a>
 
             </div>
-
 
             <button
                 type="button"
                 class="mobile-menu-button"
                 id="mobileMenuButton"
                 aria-label="Abrir menu"
-            >
-                ☰
-            </button>
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+            >☰</button>
 
         </div>
 
     </header>
 
-
-    <!-- ================= CONTEÚDO ================= -->
-
+    <!-- CONTEÚDO -->
     <main class="saved-routes-page">
 
         <div class="saved-routes-container">
 
-
-            <!-- ================= TÍTULO ================= -->
-
+            <!-- TÍTULO -->
             <section class="saved-routes-header">
 
                 <span class="hero-tag">
                     📌 Suas rotas
                 </span>
 
-                <h1>
-                    Rotas salvas
-                </h1>
+                <h1>Rotas salvas</h1>
 
                 <p>
                     Encontre rapidamente suas rotas
@@ -135,430 +124,57 @@
 
             </section>
 
-
-            <!-- ================= AÇÕES ================= -->
-
+            <!-- AÇÕES -->
             <section class="saved-routes-toolbar">
 
                 <div>
+                    <strong id="savedRoutesCount">0 rotas salvas</strong>
 
-                    <strong id="savedRoutesCount">
-                        2 rotas salvas
-                    </strong>
-
-                    <span>
-                        na sua conta
-                    </span>
-
+                    <span>na sua conta</span>
                 </div>
 
-
-                <a
-                    href="pesquisa.html"
-                    class="search-button"
-                >
+                <a href="pesquisa.html" class="search-button">
                     + Nova pesquisa
                 </a>
 
             </section>
 
-
-            <!-- ================= LISTA ================= -->
-
+            <!-- LISTA DE ROTAS -->
             <section
                 class="saved-routes-list"
                 id="savedRoutesList"
             >
-
-
-                <!-- ================= ROTA 1 ================= -->
-
-                <article class="saved-route-card">
-
-                    <div class="saved-route-header">
-
-                        <div>
-
-                            <span class="saved-route-label">
-                                Rota salva
-                            </span>
-
-                            <h2>
-                                Porto Alegre → Florianópolis
-                            </h2>
-
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="remove-route-button"
-                            data-route-id="1"
-                            aria-label="Excluir rota salva"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-
-                    <div class="saved-route-path">
-
-                        <div class="saved-route-location">
-
-                            <span class="route-marker origin">
-                                ●
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    ORIGEM
-                                </small>
-
-                                <strong>
-                                    Porto Alegre - RS
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="saved-route-arrow">
-                            →
-                        </div>
-
-
-                        <div class="saved-route-location">
-
-                            <span class="route-marker destination">
-                                ●
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    DESTINO
-                                </small>
-
-                                <strong>
-                                    Florianópolis - SC
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="saved-route-info">
-
-                        <div>
-
-                            <span>
-                                📅
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Última pesquisa
-                                </small>
-
-                                <strong>
-                                    12/08/2026
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                🕐
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Horário preferido
-                                </small>
-
-                                <strong>
-                                    08:00
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                🚌
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Preferência
-                                </small>
-
-                                <strong>
-                                    Mais rápido
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="saved-route-actions">
-
-                        <a
-                            href="resultado.html"
-                            class="search-button"
-                        >
-                            🔎 Procurar viagens
-                        </a>
-
-                        <button
-                            type="button"
-                            class="secondary-button edit-route-button"
-                            data-route-id="1"
-                        >
-                            ✎ Editar
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- ================= ROTA 2 ================= -->
-
-                <article class="saved-route-card">
-
-                    <div class="saved-route-header">
-
-                        <div>
-
-                            <span class="saved-route-label">
-                                Rota salva
-                            </span>
-
-                            <h2>
-                                Curitiba → Balneário Camboriú
-                            </h2>
-
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="remove-route-button"
-                            data-route-id="2"
-                            aria-label="Excluir rota salva"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-
-                    <div class="saved-route-path">
-
-                        <div class="saved-route-location">
-
-                            <span class="route-marker origin">
-                                ●
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    ORIGEM
-                                </small>
-
-                                <strong>
-                                    Curitiba - PR
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="saved-route-arrow">
-                            →
-                        </div>
-
-
-                        <div class="saved-route-location">
-
-                            <span class="route-marker destination">
-                                ●
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    DESTINO
-                                </small>
-
-                                <strong>
-                                    Balneário Camboriú - SC
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="saved-route-info">
-
-                        <div>
-
-                            <span>
-                                📅
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Última pesquisa
-                                </small>
-
-                                <strong>
-                                    10/08/2026
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                🕐
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Horário preferido
-                                </small>
-
-                                <strong>
-                                    07:00
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                🚌
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Preferência
-                                </small>
-
-                                <strong>
-                                    Mais barato
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="saved-route-actions">
-
-                        <a
-                            href="resultado.html"
-                            class="search-button"
-                        >
-                            🔎 Procurar viagens
-                        </a>
-
-                        <button
-                            type="button"
-                            class="secondary-button edit-route-button"
-                            data-route-id="2"
-                        >
-                            ✎ Editar
-                        </button>
-
-                    </div>
-
-                </article>
-
             </section>
 
-
-            <!-- ================= SEM ROTAS ================= -->
-
+            <!-- ESTADO VAZIO -->
             <section
                 class="empty-state"
                 id="emptySavedRoutes"
                 hidden
             >
 
-                <div class="empty-state-icon">
-                    📌
-                </div>
+                <div class="empty-state-icon">📌</div>
 
-                <h2>
-                    Você ainda não possui rotas salvas
-                </h2>
+                <h2>Você ainda não possui rotas salvas</h2>
 
                 <p>
                     Salve uma rota durante uma pesquisa
                     para encontrá-la rapidamente depois.
                 </p>
 
-                <a
-                    href="pesquisa.html"
-                    class="search-button"
-                >
+                <a href="pesquisa.html" class="search-button">
                     🔎 Encontrar uma rota
                 </a>
 
             </section>
 
-
-            <!-- ================= INFORMAÇÃO ================= -->
-
+            <!-- INFORMAÇÃO -->
             <section class="saved-routes-tip">
 
-                <span>
-                    💡
-                </span>
+                <span>💡</span>
 
                 <div>
-
-                    <strong>
-                        Como funciona?
-                    </strong>
+                    <strong>Como funciona?</strong>
 
                     <p>
                         Faça uma pesquisa, escolha sua rota
@@ -566,7 +182,6 @@
                         novamente sem precisar preencher
                         tudo de novo.
                     </p>
-
                 </div>
 
             </section>
@@ -575,55 +190,38 @@
 
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
-
+    <!-- FOOTER -->
     <footer class="footer">
 
         <div class="footer-container">
-
             <p>
                 © 2026 Guia do Busão.
                 Todos os direitos reservados.
             </p>
-
         </div>
 
     </footer>
 
-
-    <!-- ================= MENU MOBILE ================= -->
-
-    <div
-        class="mobile-menu"
-        id="mobileMenu"
-    >
+    <!-- MENU MOBILE -->
+    <div class="mobile-menu" id="mobileMenu">
 
         <button
             type="button"
             class="mobile-menu-close"
             id="mobileMenuClose"
-        >
-            ×
-        </button>
+            aria-label="Fechar menu"
+        >×</button>
 
-        <a href="index.html">
-            Início
-        </a>
-
-        <a href="rotas-salvas.html">
-            Rotas Salvas
-        </a>
-
-        <a href="favoritos.html">
-            Favoritos
-        </a>
-
-        <a href="perfil.html">
-            Minha conta
-        </a>
+        <a href="index.html">Início</a>
+        <a href="rotas-salvas.html">Rotas Salvas</a>
+        <a href="favoritos.html">Favoritos</a>
+        <a href="perfil.html">Minha conta</a>
 
     </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="./js/tema.js"></script>
+    <script src="./js/rotas-salvas.js"></script>
 
 </body>
 

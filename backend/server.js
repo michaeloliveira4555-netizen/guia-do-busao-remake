@@ -6,6 +6,9 @@ const db = require("./database/db")
 const rotasRoutes = require("./routes/rotasRoutes")
 const horariosRoutes = require("./routes/horariosRoutes")
 const usuariosRoutes = require("./routes/usuariosRoutes")
+const anttRoutes = require("./routes/anttRoutes")
+const rotasSalvasRoutes = require("./routes/rotasSalvasRoutes");
+const favoritosRoutes = require("./routes/favoritosRoutes");
 
 const app = express()
 
@@ -28,8 +31,11 @@ app.get("/api", (req, res) => {
 
 // Rotas
 app.use("/api/rotas", rotasRoutes);
+app.use("/api/rotas-salvas", rotasSalvasRoutes);
+app.use("/api/favoritos", favoritosRoutes);
 app.use("/api/horarios", horariosRoutes);
 app.use("/api/usuarios", usuariosRoutes);
+app.use("/api/horarios/antt", anttRoutes);
 
 // Rota inexistente
 app.use((req, res) => {

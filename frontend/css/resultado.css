@@ -1163,3 +1163,569 @@
     }
 
 }
+
+```css
+/* =========================================================
+   REFINAMENTO VISUAL — RESULTADO DA PESQUISA
+   ========================================================= */
+
+.resultado-main {
+    max-width: 1240px;
+    padding-top: 32px;
+}
+
+/* Cabeçalho */
+.resultado-header {
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.resultado-header h1 {
+    letter-spacing: -0.8px;
+    font-weight: 800;
+}
+
+.resultado-header p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.resultado-date {
+    padding: 14px 18px;
+    border-radius: 14px;
+}
+
+/* Resumo da origem e destino */
+.search-summary {
+    gap: 18px;
+    padding: 22px;
+    border-radius: 18px;
+}
+
+.search-summary-location {
+    min-width: 0;
+    gap: 12px;
+}
+
+.search-summary-location strong {
+    margin-top: 4px;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+.search-summary-location small {
+    margin-bottom: 4px;
+    letter-spacing: 0.6px;
+}
+
+.search-summary-arrow {
+    font-size: 18px;
+}
+
+.edit-search-button {
+    padding: 11px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Área de filtros e resultados */
+.resultado-content {
+    grid-template-columns: 235px minmax(0, 1fr);
+    gap: 24px;
+}
+
+.resultado-filters {
+    border-radius: 17px;
+    padding: 22px;
+}
+
+.filters-header h2 {
+    font-size: 17px;
+}
+
+.clear-filters {
+    cursor: pointer;
+}
+
+.filter-option {
+    line-height: 1.5;
+}
+
+/* Cabeçalho da lista */
+.results-header {
+    margin-bottom: 18px;
+}
+
+.results-header strong {
+    font-size: 16px;
+}
+
+.sort-select {
+    max-width: 100%;
+    cursor: pointer;
+}
+
+/* Cartões de ônibus */
+.bus-results {
+    gap: 16px;
+}
+
+.bus-result-card {
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(20, 45, 70, 0.045);
+}
+
+.bus-result-card:hover {
+    box-shadow: 0 10px 28px rgba(20, 45, 70, 0.09);
+}
+
+.bus-result-main {
+    grid-template-columns:
+        minmax(75px, 0.8fr)
+        minmax(75px, 0.8fr)
+        minmax(100px, 1fr)
+        minmax(125px, 1.2fr)
+        minmax(105px, auto);
+    gap: 16px;
+}
+
+.bus-departure strong,
+.bus-arrival strong {
+    font-size: 25px;
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+}
+
+.bus-departure small,
+.bus-arrival small {
+    font-size: 11px;
+}
+
+.bus-departure span,
+.bus-arrival span {
+    line-height: 1.5;
+}
+
+/* Linha de duração */
+.bus-duration {
+    min-width: 0;
+}
+
+.bus-duration-line {
+    gap: 5px;
+}
+
+.bus-duration-line::before,
+.bus-duration-line::after {
+    background: #cbd8e4;
+}
+
+.bus-duration-line span {
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.bus-duration small {
+    font-size: 11px;
+}
+
+/* Empresa */
+.bus-company-result {
+    min-width: 0;
+    gap: 11px;
+}
+
+.bus-company-result-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+}
+
+.bus-company-result strong {
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+.bus-company-result span {
+    line-height: 1.5;
+}
+
+/* Preço e seleção */
+.bus-price {
+    white-space: nowrap;
+}
+
+.bus-price small,
+.bus-price span {
+    font-size: 10px;
+}
+
+.bus-price strong {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+}
+
+.bus-select-button {
+    min-width: 110px;
+    min-height: 44px;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+.bus-select-button:focus-visible,
+.edit-search-button:focus-visible,
+.connection-button:focus-visible {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 3px;
+}
+
+/* Detalhes adicionais */
+.bus-result-extra {
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 16px;
+}
+
+.bus-feature {
+    padding: 7px 10px;
+    line-height: 1.4;
+}
+
+.bus-availability {
+    line-height: 1.5;
+}
+
+/* Conexões */
+.bus-connection-card {
+    padding: 22px;
+    border-radius: 18px;
+}
+
+.connection-route {
+    gap: 18px;
+}
+
+.connection-button {
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Nenhum resultado */
+.no-results {
+    padding: 50px 24px;
+    border-radius: 18px;
+}
+
+.no-results h2 {
+    letter-spacing: -0.5px;
+}
+
+.no-results p {
+    line-height: 1.7;
+}
+
+/* Outras datas */
+.other-dates {
+    padding: 24px;
+    border-radius: 18px;
+}
+
+.available-date {
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* =========================================================
+   TABLETS E TELAS MENORES
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .resultado-content {
+        grid-template-columns: 200px minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .bus-result-main {
+        grid-template-columns:
+            minmax(65px, 0.8fr)
+            minmax(65px, 0.8fr)
+            minmax(90px, 1fr)
+            minmax(110px, 1fr);
+        gap: 14px;
+    }
+
+    .bus-company-result {
+        grid-column: span 2;
+    }
+
+    .bus-price {
+        text-align: left;
+    }
+
+    .bus-select-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 850px) {
+    .resultado-content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .resultado-filters {
+        position: static;
+    }
+
+    .resultado-filters .filter-group {
+        display: inline-block;
+        width: 49%;
+        vertical-align: top;
+    }
+
+    .bus-result-main {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .bus-departure,
+    .bus-arrival {
+        padding: 4px 0 10px;
+    }
+
+    .bus-duration {
+        grid-column: 1 / -1;
+        max-width: 260px;
+        width: 100%;
+        justify-self: center;
+    }
+
+    .bus-company-result {
+        grid-column: 1 / -1;
+    }
+
+    .bus-price {
+        align-self: center;
+    }
+
+    .bus-select-button {
+        align-self: center;
+    }
+}
+
+/* =========================================================
+   CELULARES
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .resultado-main {
+        width: calc(100% - 28px);
+        padding-top: 24px;
+        padding-bottom: 42px;
+    }
+
+    .resultado-header {
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .resultado-header h1 {
+        font-size: 30px;
+        line-height: 1.15;
+    }
+
+    .resultado-header p {
+        font-size: 13px;
+    }
+
+    .resultado-date {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .search-summary {
+        padding: 17px;
+        gap: 15px;
+        border-radius: 15px;
+    }
+
+    .search-summary-location {
+        flex: 1 1 calc(50% - 10px);
+        min-width: 0;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .search-summary-location strong {
+        font-size: 12px;
+    }
+
+    .search-summary-location small {
+        font-size: 9px;
+    }
+
+    .search-summary-arrow {
+        display: none;
+    }
+
+    .edit-search-button {
+        width: 100%;
+        min-height: 42px;
+    }
+
+    .resultado-filters {
+        padding: 17px;
+        border-radius: 15px;
+    }
+
+    .resultado-filters .filter-group {
+        width: 100%;
+        padding: 14px 0;
+    }
+
+    .filter-option {
+        min-height: 25px;
+    }
+
+    .results-header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .results-header > div {
+        min-width: 0;
+    }
+
+    .sort-select {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .bus-results {
+        gap: 14px;
+    }
+
+    .bus-result-card {
+        padding: 17px;
+        border-radius: 16px;
+    }
+
+    .bus-result-main {
+        gap: 14px 12px;
+    }
+
+    .bus-departure strong,
+    .bus-arrival strong {
+        font-size: 22px;
+    }
+
+    .bus-company-result-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .bus-company-result strong {
+        font-size: 13px;
+    }
+
+    .bus-price strong {
+        font-size: 21px;
+    }
+
+    .bus-select-button {
+        min-width: 0;
+        min-height: 44px;
+        padding: 0 10px;
+        font-size: 11px;
+    }
+
+    .bus-result-extra {
+        gap: 8px;
+    }
+
+    .bus-feature {
+        font-size: 10px;
+    }
+
+    .bus-availability {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .bus-connection-card {
+        padding: 17px;
+    }
+
+    .connection-route {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .connection-wait,
+    .connection-button {
+        grid-column: 1 / -1;
+    }
+
+    .connection-button {
+        width: 100%;
+        min-height: 42px;
+    }
+
+    .other-dates {
+        padding: 18px;
+    }
+
+    .no-results {
+        padding: 35px 18px;
+    }
+}
+
+/* Celulares estreitos */
+@media (max-width: 360px) {
+    .resultado-main {
+        width: calc(100% - 20px);
+    }
+
+    .search-summary-location {
+        flex-basis: 100%;
+    }
+
+    .bus-result-main {
+        gap: 12px 8px;
+    }
+
+    .bus-departure strong,
+    .bus-arrival strong {
+        font-size: 20px;
+    }
+
+    .bus-company-result {
+        align-items: flex-start;
+    }
+}
+```
+
+/* Correção de contraste dos horários e preços no tema escuro */
+html[data-tema="escuro"] .bus-departure strong,
+html[data-tema="escuro"] .bus-arrival strong {
+    color: #f8fafc !important;
+}
+
+html[data-tema="escuro"] .bus-departure small,
+html[data-tema="escuro"] .bus-arrival small,
+html[data-tema="escuro"] .bus-departure span,
+html[data-tema="escuro"] .bus-arrival span {
+    color: #cbd5e1 !important;
+}
+
+html[data-tema="escuro"] .bus-price small,
+html[data-tema="escuro"] .bus-price span {
+    color: #cbd5e1 !important;
+}
+
+html[data-tema="escuro"] .bus-price strong {
+    color: #4ade80 !important;
+}

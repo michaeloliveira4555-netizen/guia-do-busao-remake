@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function inicializarPesquisa() {
 
     const formulario =
-        document.querySelector("[data-formulario-pesquisa]");
+        document.querySelector("#searchForm, [data-formulario-pesquisa]");
 
     if (!formulario) {
         return;
@@ -40,7 +40,7 @@ function inicializarPesquisa() {
 function definirDataMinima() {
 
     const campo =
-        document.querySelector("[data-data-viagem]");
+        document.querySelector("#searchDate, [data-data-viagem]");
 
     if (!campo) {
         return;

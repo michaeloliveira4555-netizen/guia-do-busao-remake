@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
@@ -13,34 +13,47 @@
 
     <title>Guia do Busão</title>
 
+    <!-- Aplicar o tema salvo antes de carregar o CSS -->
+    <script>
+        try {
+            const temaSalvo = localStorage.getItem("guiaBusaoTema");
+
+            document.documentElement.setAttribute(
+                "data-tema",
+                temaSalvo === "escuro" ? "escuro" : "claro"
+            );
+        } catch (erro) {
+            document.documentElement.setAttribute("data-tema", "claro");
+        }
+    </script>
+
+    <!-- CSS do projeto -->
     <link rel="stylesheet" href="./css/style.css">
+
+    <!-- CSS do mapa interativo Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
-
+    <!-- HEADER -->
     <header class="header">
-
         <div class="header-container">
 
             <!-- LOGO -->
-
             <a href="index.html" class="logo-link">
-
                 <img
                     src="./assets/images/logo.png"
                     alt="Guia do Busão"
                     class="logo"
                 >
-
             </a>
 
-
             <!-- MENU -->
-
             <nav class="nav">
-
                 <a href="index.html" class="nav-link active">
                     <span>⌂</span>
                     Início
@@ -55,65 +68,43 @@
                     <span>☆</span>
                     Favoritos
                 </a>
-
             </nav>
 
-
             <!-- AÇÕES -->
-
             <div class="header-actions">
-
                 <button
                     type="button"
                     class="theme-button"
                     id="themeButton"
                     aria-label="Alterar tema"
-                >
-                    ☀
-                </button>
+                >☾</button>
 
                 <a
                     href="login.html"
+                    data-link-conta
                     class="profile-button"
                     aria-label="Minha conta"
-                >
-                    👤
-                </a>
-
+                >👤</a>
             </div>
 
-
             <!-- MENU MOBILE -->
-
             <button
                 type="button"
                 class="mobile-menu-button"
                 id="mobileMenuButton"
                 aria-label="Abrir menu"
-            >
-                ☰
-            </button>
+            >☰</button>
 
         </div>
-
     </header>
 
-
-    <!-- ================= CONTEÚDO ================= -->
-
+    <!-- CONTEÚDO -->
     <main>
-
-        <!-- HERO -->
-
         <section class="hero">
-
             <div class="hero-container">
 
-
                 <!-- TEXTO -->
-
                 <div class="hero-text">
-
                     <span class="hero-tag">
                         🚌 Transporte inteligente
                     </span>
@@ -129,35 +120,21 @@
                         para encontrar o caminho mais rápido e barato
                         até o seu destino.
                     </p>
-
                 </div>
 
-
                 <!-- ÁREA PRINCIPAL -->
-
                 <div class="travel-section">
 
-
                     <!-- FORMULÁRIO -->
-
                     <div class="route-card">
-
                         <form id="routeForm">
 
-
                             <!-- ORIGEM -->
-
                             <div class="form-group">
-
-                                <label for="origin">
-                                    Origem
-                                </label>
+                                <label for="origin">Origem</label>
 
                                 <div class="input-container">
-
-                                    <span class="input-icon">
-                                        📍
-                                    </span>
+                                    <span class="input-icon">📍</span>
 
                                     <input
                                         type="text"
@@ -167,30 +144,20 @@
                                         autocomplete="off"
                                         required
                                     >
-
                                 </div>
 
                                 <div
                                     class="suggestions"
                                     id="originSuggestions"
                                 ></div>
-
                             </div>
 
-
                             <!-- DESTINO -->
-
                             <div class="form-group">
-
-                                <label for="destination">
-                                    Destino
-                                </label>
+                                <label for="destination">Destino</label>
 
                                 <div class="input-container">
-
-                                    <span class="input-icon">
-                                        📍
-                                    </span>
+                                    <span class="input-icon">📍</span>
 
                                     <input
                                         type="text"
@@ -200,30 +167,20 @@
                                         autocomplete="off"
                                         required
                                     >
-
                                 </div>
 
                                 <div
                                     class="suggestions"
                                     id="destinationSuggestions"
                                 ></div>
-
                             </div>
 
-
                             <!-- DATA -->
-
                             <div class="form-group">
-
-                                <label for="travelDate">
-                                    Data da viagem
-                                </label>
+                                <label for="travelDate">Data da viagem</label>
 
                                 <div class="input-container">
-
-                                    <span class="input-icon">
-                                        📅
-                                    </span>
+                                    <span class="input-icon">📅</span>
 
                                     <input
                                         type="date"
@@ -231,25 +188,15 @@
                                         name="travelDate"
                                         required
                                     >
-
                                 </div>
-
                             </div>
 
-
                             <!-- HORÁRIO -->
-
                             <div class="form-group">
-
-                                <label for="travelTime">
-                                    Horário
-                                </label>
+                                <label for="travelTime">Horário</label>
 
                                 <div class="input-container">
-
-                                    <span class="input-icon">
-                                        🕐
-                                    </span>
+                                    <span class="input-icon">🕐</span>
 
                                     <input
                                         type="time"
@@ -257,337 +204,161 @@
                                         name="travelTime"
                                         value="08:00"
                                     >
-
                                 </div>
-
                             </div>
 
-
                             <!-- BOTÃO -->
-
                             <button
                                 type="submit"
                                 class="search-button"
                                 id="searchButton"
                             >
-
                                 🔎
-
-                                <span>
-                                    Buscar rota
-                                </span>
-
+                                <span>Buscar rota</span>
                             </button>
 
-
                             <!-- AVISO -->
-
                             <div class="privacy-message">
-
                                 🛡️
-
                                 <span>
                                     Seus dados são protegidos
                                     e não são compartilhados.
                                 </span>
-
                             </div>
 
                         </form>
-
                     </div>
 
-
-                    <!-- MAPA -->
-
+                    <!-- MAPA INTERATIVO -->
                     <div class="map-card">
-
                         <div class="map-header">
-
                             <div class="estimated-time">
-
-                                <span class="clock-icon">
-                                    ◷
-                                </span>
-
+                                <span class="clock-icon">◷</span>
                                 <div>
-
-                                    <small>
-                                        Tempo estimado
-                                    </small>
-
-                                    <strong id="estimatedTime">
-                                        --
-                                    </strong>
+                                   <small>Para onde vamos hoje?</small>
+                                    <strong id="estimatedTime">Encontre seu caminho pelo mapa</strong>
 
                                 </div>
-
                             </div>
-
                         </div>
 
-
-                        <div
-                            class="map"
-                            id="map"
-                        >
-
-                            <!--
-                                O mapa real será colocado
-                                posteriormente nesta área.
-                            -->
-
-                            <div class="map-placeholder">
-
-                                <span class="map-placeholder-icon">
-                                    🗺️
-                                </span>
-
-                                <strong>
-                                    Mapa da rota
-                                </strong>
-
-                                <p>
-                                    O mapa aparecerá aqui
-                                </p>
-
-                            </div>
-
-
-                            <!-- MARCADOR ORIGEM -->
-
-                            <div
-                                class="map-marker origin-marker"
-                                id="originMarker"
+                        <div class="map" id="map">
+                            <button
+                                type="button"
+                                class="location-button"
+                                id="myLocationButton"
                             >
-                                📍
-                            </div>
-
-
-                            <!-- MARCADOR DESTINO -->
-
-                            <div
-                                class="map-marker destination-marker"
-                                id="destinationMarker"
-                            >
-                                📍
-                            </div>
-
+                                📍 Minha localização
+                            </button>
                         </div>
-
                     </div>
 
                 </div>
 
-
-                <!-- ================= OPÇÕES ================= -->
-
+                <!-- OPÇÕES -->
                 <section class="route-options">
 
                     <div class="route-option">
-
-                        <div class="option-icon">
-                            🕐
-                        </div>
-
+                        <div class="option-icon">🕐</div>
                         <div>
-
-                            <h3>
-                                Mais rápido
-                            </h3>
-
-                            <p>
-                                Encontre o menor
-                                tempo de viagem
-                            </p>
-
+                            <h3>Mais rápido</h3>
+                            <p>Encontre o menor tempo de viagem</p>
                         </div>
-
                     </div>
 
-
                     <div class="route-option">
-
-                        <div class="option-icon">
-                            💰
-                        </div>
-
+                        <div class="option-icon">💰</div>
                         <div>
-
-                            <h3>
-                                Mais barato
-                            </h3>
-
-                            <p>
-                                Encontre o menor
-                                preço de viagem
-                            </p>
-
+                            <h3>Mais barato</h3>
+                            <p>Encontre o menor preço de viagem</p>
                         </div>
-
                     </div>
 
-
                     <div class="route-option">
-
-                        <div class="option-icon">
-                            🚌
-                        </div>
-
+                        <div class="option-icon">🚌</div>
                         <div>
-
-                            <h3>
-                                Mais opções
-                            </h3>
-
-                            <p>
-                                Compare diferentes
-                                rotas e conexões
-                            </p>
-
+                            <h3>Mais opções</h3>
+                            <p>Compare diferentes rotas e conexões</p>
                         </div>
-
                     </div>
 
-
                     <div class="route-option">
-
-                        <div class="option-icon">
-                            🛡️
-                        </div>
-
+                        <div class="option-icon">🛡️</div>
                         <div>
-
-                            <h3>
-                                Mais seguro
-                            </h3>
-
-                            <p>
-                                Encontre opções
-                                confiáveis
-                            </p>
-
+                            <h3>Mais seguro</h3>
+                            <p>Encontre opções confiáveis</p>
                         </div>
-
                     </div>
 
                 </section>
 
-
-                <!-- ================= BENEFÍCIOS ================= -->
-
+                <!-- BENEFÍCIOS -->
                 <section class="benefits">
-
                     <div class="benefits-title">
-
                         ☆
-
-                        <strong>
-                            Por que usar o Guia do Busão?
-                        </strong>
-
+                        <strong>Por que usar o Guia do Busão?</strong>
                     </div>
 
-
                     <div class="benefit">
-
                         <span>✓</span>
-
                         Informações em tempo real
-
                     </div>
 
-
                     <div class="benefit">
-
                         <span>✓</span>
-
                         Cobertura nacional
-
                     </div>
 
-
                     <div class="benefit">
-
                         <span>✓</span>
-
                         Integração entre empresas
-
                     </div>
-
 
                     <div class="benefit">
-
                         <span>✓</span>
-
                         Fácil, rápido e gratuito
-
                     </div>
-
                 </section>
 
             </div>
-
         </section>
-
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
-
+    <!-- FOOTER -->
     <footer class="footer">
-
         <div class="footer-container">
-
             <p>
                 © 2026 Guia do Busão.
                 Todos os direitos reservados.
             </p>
-
         </div>
-
     </footer>
 
-
-    <!-- ================= MENU MOBILE ================= -->
-
-    <div
-        class="mobile-menu"
-        id="mobileMenu"
-    >
-
+    <!-- MENU MOBILE -->
+    <div class="mobile-menu" id="mobileMenu">
         <button
             type="button"
             class="mobile-menu-close"
             id="mobileMenuClose"
-        >
-            ×
-        </button>
+            aria-label="Fechar menu"
+        >×</button>
 
-        <a href="index.html">
-            Início
-        </a>
-
-        <a href="rotas-salvas.html">
-            Rotas Salvas
-        </a>
-
-        <a href="favoritos.html">
-            Favoritos
-        </a>
-
-        <a href="login.html">
-            Minha conta
-        </a>
-
+        <a href="index.html">Início</a>
+        <a href="rotas-salvas.html">Rotas Salvas</a>
+        <a href="favoritos.html">Favoritos</a>
+        <a href="login.html" data-link-conta>Minha conta</a>
     </div>
 
-
-    <!-- ================= JAVASCRIPT ================= -->
-
+    <!-- JAVASCRIPT EXISTENTE -->
     <script src="./js/api.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/tema.js"></script>
+
+    <!-- Biblioteca do mapa -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Lógica do mapa -->
+    <script src="./js/mapa.js"></script>
 
 </body>
-
 </html>

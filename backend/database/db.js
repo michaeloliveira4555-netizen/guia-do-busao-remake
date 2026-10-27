@@ -1,32 +1,43 @@
-// Arquivo: backend/database/db.js
+
 const { Pool } = require('pg')
 const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-// O pool pega a URL configurada no .env
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+require('dotenv').config({
+    path: path.resolve(__dirname, '../.env')
 })
 
-// Testa a conexão quando o servidor iniciar
+// Detecta se a conexão é local ou online
+const databaseUrl = process.env.DATABASE_URL
+
+const isLocal = databaseUrl
+    ? /localhost|127\.0\.0\.1/i.test(new URL(databaseUrl).hostname)
+    : false
+
+// Configura a conexão com o PostgreSQL
+const pool = new Pool({
+    connectionString: databaseUrl,
+    ssl: isLocal
+        ? false
+        : { rejectUnauthorized: false }
+})
+
+// Confirma quando uma conexão é estabelecida
 pool.on('connect', () => {
     console.log('Base de Dados conectada com sucesso')
 })
 
+// Registra erros inesperados no pool
 pool.on('error', (err) => {
-    console.log('Erro inesperado no banco de Dados', err)
-    process.exit(-1)
+    console.error('Erro inesperado no banco de dados:', err)
 })
 
-// Faz uma consulta simples e falsa só para forçar o Pool a conectar e testar a senha
+// Testa a conexão com o banco
 pool.query('SELECT 1')
-    .then(() => console.log('Ping no banco Aiven: SUCESSO!'))
-    .catch(err => console.error('Erro ao conectar na Aiven:', err));
+    .then(() => console.log('Ping no banco: SUCESSO!'))
+    .catch(err => console.error('Erro ao conectar no banco:', err.message))
 
-// Exporta a função de query para o resto do sistema usar
+// Exporta a função de consulta para as rotas
 module.exports = {
-    query: (text, params) => pool.query(text, params)
+    query: (text, params) => pool.query(text, params),
+    end: () => pool.end()
 }

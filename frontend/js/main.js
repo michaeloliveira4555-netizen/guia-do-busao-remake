@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     inicializarLinksInternos();
 
+    inicializarLinksConta();
+
     inicializarPesquisaRota();
 
 });
@@ -90,6 +92,29 @@ function inicializarBotoesVoltar() {
             window.history.back();
 
         });
+
+    });
+
+}
+
+
+/* =========================================================
+   LINK DA CONTA
+   ========================================================= */
+
+function inicializarLinksConta() {
+
+    const links =
+        document.querySelectorAll("[data-link-conta]");
+
+    const logado =
+        usuarioEstaLogado();
+
+    links.forEach(link => {
+
+        link.href = logado
+            ? "perfil.html"
+            : "login.html";
 
     });
 
@@ -462,11 +487,6 @@ async function inicializarPesquisaRota() {
 
     try {
 
-        /*
-         * Carrega as linhas reais
-         * do backend.
-         */
-
         todasAsRotas =
             await listarRotas();
 
@@ -486,10 +506,6 @@ async function inicializarPesquisaRota() {
 
     }
 
-
-    /*
-     * Autocomplete da origem
-     */
 
     if (origemInput) {
 
@@ -525,10 +541,6 @@ async function inicializarPesquisaRota() {
     }
 
 
-    /*
-     * Autocomplete do destino
-     */
-
     if (destinoInput) {
 
         destinoInput.addEventListener(
@@ -563,10 +575,6 @@ async function inicializarPesquisaRota() {
     }
 
 
-    /*
-     * Formulário
-     */
-
     formulario.addEventListener(
         "submit",
         async evento => {
@@ -578,11 +586,6 @@ async function inicializarPesquisaRota() {
         }
     );
 
-
-    /*
-     * Fecha sugestões ao clicar
-     * fora delas.
-     */
 
     document.addEventListener(
         "click",
@@ -779,11 +782,6 @@ function mostrarSugestoes(
         normalizarTexto(texto);
 
 
-    /*
-     * Se não digitou nada,
-     * mostra algumas localidades.
-     */
-
     let resultados =
         localidades;
 
@@ -815,10 +813,6 @@ function mostrarSugestoes(
     }
 
 
-    /*
-     * Remove duplicados.
-     */
-
     const vistos =
         new Set();
 
@@ -838,10 +832,6 @@ function mostrarSugestoes(
 
         });
 
-
-    /*
-     * Limita a quantidade.
-     */
 
     resultados =
         resultados.slice(0, 8);
@@ -1083,12 +1073,6 @@ async function executarBusca() {
 
     try {
 
-        /*
-         * Se o usuário não clicou
-         * em uma sugestão, tenta
-         * encontrar automaticamente.
-         */
-
         if (!origemSelecionada) {
 
             origemSelecionada =
@@ -1121,20 +1105,12 @@ async function executarBusca() {
         }
 
 
-        /*
-         * Filtra as linhas reais.
-         */
-
         const resultados =
             filtrarRotas(
                 origemSelecionada,
                 destinoSelecionado
             );
 
-
-        /*
-         * Pesquisa atual.
-         */
 
         const pesquisa = {
 
@@ -1166,10 +1142,6 @@ async function executarBusca() {
         };
 
 
-        /*
-         * Salva para resultado.html
-         */
-
         salvarDados(
             "guiaBusaoPesquisaAtual",
             pesquisa
@@ -1192,11 +1164,6 @@ async function executarBusca() {
             pesquisa
         );
 
-
-        /*
-         * Também mantém a chave
-         * usada pelo resultado.js antigo.
-         */
 
         salvarDados(
             "guiaBusaoPesquisa",
@@ -1261,11 +1228,6 @@ function encontrarLocalidade(
         obterLocalidades();
 
 
-    /*
-     * Primeiro tenta igualdade
-     * exata.
-     */
-
     let resultado =
         localidades.find(
             local =>
@@ -1279,10 +1241,6 @@ function encontrarLocalidade(
         return resultado;
     }
 
-
-    /*
-     * Depois tenta começo do nome.
-     */
 
     resultado =
         localidades.find(
@@ -1352,11 +1310,6 @@ function localidadeCorresponde(
     }
 
 
-    /*
-     * Se foi selecionado um bairro,
-     * exige aquele bairro.
-     */
-
     if (
         localSelecionado.bairroId
     ) {
@@ -1369,11 +1322,6 @@ function localidadeCorresponde(
 
     }
 
-
-    /*
-     * Se foi selecionada uma cidade,
-     * aceita qualquer bairro daquela cidade.
-     */
 
     if (
         localSelecionado.cidadeId
