@@ -1,3 +1,4 @@
+
 (() => {
     "use strict";
 
@@ -20,6 +21,30 @@
 
     function texto(valor, padrao = "") {
         return String(valor ?? padrao).trim();
+    }
+
+    function primeiroValor(...valores) {
+        return valores.find(
+            (valor) => valor !== undefined &&
+                valor !== null &&
+                String(valor).trim() !== ""
+        );
+    }
+
+    function definirTexto(id, valor, padrao = "Não informado") {
+        const elemento = porId(id);
+
+        if (elemento) {
+            elemento.textContent = texto(valor, padrao);
+        }
+    }
+
+    function definirVisibilidade(id, visivel) {
+        const elemento = porId(id);
+
+        if (elemento) {
+            elemento.hidden = !visivel;
+        }
     }
 
     function mostrarAviso(mensagem, erro = false) {
@@ -47,7 +72,8 @@
     }
 
     function obterRota() {
-        return lerJSON(CHAVE_ROTA, {}) || {};
+        const rota = lerJSON(CHAVE_ROTA, {});
+        return rota && typeof rota === "object" ? rota : {};
     }
 
     function obterPesquisa() {
@@ -61,11 +87,12 @@
     function obterData(rota) {
         const pesquisa = obterPesquisa();
 
-        const valor =
-            rota.data_viagem ||
-            rota.data ||
-            pesquisa.data_viagem ||
-            pesquisa.data;
+        const valor = primeiroValor(
+            rota.data_viagem,
+            rota.data,
+            pesquisa.data_viagem,
+            pesquisa.data
+        );
 
         if (!valor) return "";
 
@@ -74,22 +101,30 @@
         return /^\d{4}-\d{2}-\d{2}$/.test(data) ? data : "";
     }
 
-    function obterHorario(rota) {
-        const pesquisa = obterPesquisa();
+    function normalizarHorario(valor) {
+        if (valor === undefined || valor === null || valor === "") {
+            return "";
+        }
 
-        const valor =
-            rota.horario ||
-            rota.saida ||
-            rota.horario_partida ||
-            pesquisa.horario;
-
-        if (!valor) return "";
-
-        const horario = String(valor).slice(0, 5);
+        const horario = String(valor).trim().slice(0, 5);
 
         return /^([01]\d|2[0-3]):[0-5]\d$/.test(horario)
             ? horario
             : "";
+    }
+
+    function obterHorario(rota) {
+        const pesquisa = obterPesquisa();
+
+        return normalizarHorario(
+            primeiroValor(
+                rota.saida,
+                rota.horario,
+                rota.hora_partida,
+                rota.horario_partida,
+                pesquisa.horario
+            )
+        );
     }
 
     function formatarMoeda(valor) {
@@ -103,12 +138,331 @@
 
         const numero = Number(valor);
 
-        if (!Number.isFinite(numero)) return String(valor);
+        if (!Number.isFinite(numero)) {
+            return String(valor);
+        }
 
         return numero.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL"
         });
+    }
+
+    function formatarDuracao(minutos) {
+        if (!Number.isFinite(minutos) || minutos < 0) {
+            return "";
+        }
+
+        const horas = Math.floor(minutos / 60);
+        const resto = minutos % 60;
+
+        if (horas && resto) return `${horas}h ${resto}min`;
+        if (horas) return `${horas}h`;
+
+        return `${resto}min`;
+    }
+
+    function calcularDuracao(saida, chegada) {
+        if (!saida || !chegada) return "";
+
+        const [horaSaida, minutoSaida] = saida.split(":").map(Number);
+        const [horaChegada, minutoChegada] = chegada.split(":").map(Number);
+
+        let inicio = horaSaida * 60 + minutoSaida;
+        let fim = horaChegada * 60 + minutoChegada;
+
+        // Se a chegada for antes da saída no relógio,
+        // considera uma viagem que termina no dia seguinte.
+        if (fim < inicio) {
+            fim += 24 * 60;
+        }
+
+        return formatarDuracao(fim - inicio);
+    }
+
+    function obterDuracao(rota, saida, chegada) {
+        const duracaoInformada = primeiroValor(
+            rota.duracao,
+            rota.duração,
+            rota.duracao_total,
+            rota.tempo_viagem
+        );
+
+        if (duracaoInformada !== undefined) {
+            if (typeof duracaoInformada === "number") {
+                return formatarDuracao(duracaoInformada);
+            }
+
+            return texto(duracaoInformada);
+        }
+
+        return calcularDuracao(saida, chegada);
+    }
+
+    function obterOrigem(rota) {
+        return texto(
+            primeiroValor(rota.origem, rota.nomeOrigem),
+            "Origem não informada"
+        );
+    }
+
+    function obterDestino(rota) {
+        return texto(
+            primeiroValor(rota.destino, rota.nomeDestino),
+            "Destino não informado"
+        );
+    }
+
+    function obterEmpresa(rota) {
+        return texto(
+            primeiroValor(rota.empresa, rota.viacao, rota.nomeEmpresa),
+            "Empresa não informada"
+        );
+    }
+
+    function obterConexoes(rota) {
+        const valor = primeiroValor(
+            rota.conexoes,
+            rota.conexões,
+            rota.quantidadeConexoes,
+            rota.quantidade_conexoes
+        );
+
+        if (Array.isArray(valor)) {
+            return {
+                quantidade: valor.length,
+                itens: valor
+            };
+        }
+
+        if (typeof valor === "number" && Number.isFinite(valor)) {
+            return {
+                quantidade: Math.max(0, valor),
+                itens: []
+            };
+        }
+
+        return {
+            quantidade: null,
+            itens: []
+        };
+    }
+
+    function obterParadas(rota) {
+        const paradas = primeiroValor(
+            rota.paradas,
+            rota.pontosParada,
+            rota.pontos_parada
+        );
+
+        return Array.isArray(paradas) ? paradas : null;
+    }
+
+    function nomeLocal(valor) {
+        if (typeof valor === "string") {
+            return valor.trim();
+        }
+
+        if (valor && typeof valor === "object") {
+            return texto(
+                primeiroValor(
+                    valor.nome,
+                    valor.local,
+                    valor.cidade,
+                    valor.endereco,
+                    valor.endereço
+                )
+            );
+        }
+
+        return "";
+    }
+
+    function atualizarParadas(rota, origem, destino) {
+        const lista = porId("stopsList");
+
+        if (!lista) return;
+
+        const paradas = obterParadas(rota);
+        lista.replaceChildren();
+
+        if (!paradas || paradas.length === 0) {
+            const aviso = document.createElement("p");
+            aviso.textContent =
+                "Informações sobre as paradas não disponíveis.";
+            lista.appendChild(aviso);
+            return;
+        }
+
+        paradas.forEach((parada, indice) => {
+            const nome = nomeLocal(parada);
+
+            if (!nome) return;
+
+            const detalhe =
+                parada && typeof parada === "object"
+                    ? texto(
+                        primeiroValor(
+                            parada.terminal,
+                            parada.local,
+                            parada.endereco,
+                            parada.endereço
+                        )
+                    )
+                    : "";
+
+            const item = document.createElement("div");
+            item.className = "stop";
+
+            const numero = document.createElement("span");
+            numero.className = "stop-number";
+            numero.textContent = String(indice + 1);
+
+            const conteudo = document.createElement("div");
+            const titulo = document.createElement("strong");
+            titulo.textContent = nome;
+            conteudo.appendChild(titulo);
+
+            if (detalhe && detalhe !== nome) {
+                const subtitulo = document.createElement("small");
+                subtitulo.textContent = detalhe;
+                conteudo.appendChild(subtitulo);
+            }
+
+            item.append(numero, conteudo);
+            lista.appendChild(item);
+        });
+
+        if (!lista.children.length) {
+            const aviso = document.createElement("p");
+            aviso.textContent =
+                "Informações sobre as paradas não disponíveis.";
+            lista.appendChild(aviso);
+        }
+    }
+
+    function atualizarConexao(rota) {
+        const bloco = porId("connectionStep");
+        const conexoes = obterConexoes(rota);
+
+        const itens = conexoes.itens;
+        const conexao = itens.length ? itens[0] : null;
+
+        // Não presume que existe conexão se os dados não informarem isso.
+        const existeConexao =
+            conexao !== null ||
+            (conexoes.quantidade !== null && conexoes.quantidade > 0);
+
+        if (bloco) {
+            bloco.hidden = !existeConexao;
+        }
+
+        if (!existeConexao) {
+            definirTexto("routeConnections", "Não informado");
+            return;
+        }
+
+        if (conexoes.quantidade !== null) {
+            const quantidade = conexoes.quantidade;
+            definirTexto(
+                "routeConnections",
+                quantidade === 1
+                    ? "1 conexão"
+                    : `${quantidade} conexões`
+            );
+        }
+
+        if (conexao && typeof conexao === "object") {
+            definirTexto(
+                "connectionTitle",
+                primeiroValor(conexao.titulo, conexao.nome),
+                "Conexão"
+            );
+
+            definirTexto(
+                "connectionDescription",
+                primeiroValor(conexao.descricao, conexao.descrição, conexao.local),
+                "Detalhes da conexão não informados"
+            );
+
+            definirTexto(
+                "connectionWaitingTime",
+                primeiroValor(
+                    conexao.tempo_espera,
+                    conexao.tempoEspera,
+                    conexao.espera
+                ),
+                ""
+            );
+        } else {
+            definirTexto("connectionTitle", "Conexão");
+            definirTexto(
+                "connectionDescription",
+                "Há conexão informada para esta viagem."
+            );
+            definirTexto("connectionWaitingTime", "");
+        }
+    }
+
+    function atualizarTrajeto(rota) {
+        const origem = obterOrigem(rota);
+        const destino = obterDestino(rota);
+        const empresa = obterEmpresa(rota);
+
+        const saida = obterHorario(rota);
+        const chegada = normalizarHorario(
+            primeiroValor(rota.chegada, rota.hora_chegada)
+        );
+
+        const duracao = obterDuracao(rota, saida, chegada);
+
+        // Resumo da viagem
+        definirTexto("routeOrigin", origem);
+        definirTexto("routeDestination", destino);
+        definirTexto(
+            "departureLocation",
+            rota.local_saida,
+            "Local de embarque não informado"
+        );
+        definirTexto(
+            "arrivalLocation",
+            rota.local_chegada,
+            "Local de chegada não informado"
+        );
+
+        definirTexto("departureTime", saida, "--:--");
+        definirTexto("arrivalTime", chegada, "--:--");
+
+        definirTexto("routeDuration", duracao, "Duração indisponível");
+        definirTexto("totalDuration", duracao, "Duração indisponível");
+        definirTexto("companyName", empresa);
+        definirTexto("busType", rota.tipo, "Tipo de ônibus não informado");
+
+        definirTexto("routePrice", formatarMoeda(rota.preco));
+
+        // Trecho de saída
+        definirTexto("stepOrigin", origem);
+        definirTexto("stepDepartureTime", saida, "--:--");
+        definirTexto(
+            "stepDepartureLocation",
+            rota.local_saida,
+            "Local de embarque não informado"
+        );
+        definirTexto("stepDepartureCompany", empresa);
+
+        // Trecho de chegada: permanece visível, mas sem inventar dados.
+        definirVisibilidade("arrivalStep", true);
+        definirTexto("stepDestination", destino);
+        definirTexto("stepArrivalTime", chegada, "--:--");
+        definirTexto(
+            "stepArrivalLocation",
+            rota.local_chegada,
+            "Local de chegada não informado"
+        );
+        definirTexto("stepArrivalCompany", empresa);
+
+        atualizarConexao(rota);
+        atualizarParadas(rota, origem, destino);
     }
 
     function atualizarDetalhes() {
@@ -122,47 +476,7 @@
             return;
         }
 
-        const origem = texto(rota.origem, rota.nomeLinha);
-        const destino = texto(rota.destino);
-
-        if (origem) {
-            if (porId("routeOrigin")) {
-                porId("routeOrigin").textContent = origem;
-            }
-
-            if (porId("departureLocation")) {
-                porId("departureLocation").textContent = texto(
-                    rota.local_saida,
-                    "Local de embarque não informado"
-                );
-            }
-        }
-
-        if (destino && porId("routeDestination")) {
-            porId("routeDestination").textContent = destino;
-        }
-
-        const saida = texto(rota.saida || rota.horario);
-        const chegada = texto(rota.chegada);
-
-        if (saida && porId("departureTime")) {
-            porId("departureTime").textContent = saida.slice(0, 5);
-        }
-
-        if (chegada && porId("arrivalTime")) {
-            porId("arrivalTime").textContent = chegada.slice(0, 5);
-        }
-
-        const empresa = texto(rota.empresa || rota.viacao);
-
-        if (empresa && porId("companyName")) {
-            porId("companyName").textContent = empresa;
-        }
-
-        if (rota.preco !== undefined && porId("routePrice")) {
-            porId("routePrice").textContent = formatarMoeda(rota.preco);
-        }
-
+        atualizarTrajeto(rota);
         atualizarBotaoFavorito();
     }
 
@@ -232,9 +546,8 @@
 
     function mesmaViagem(favorito, rota) {
         if (
-            normalizar(favorito.origem) !==
-                normalizar(texto(rota.origem, rota.nomeLinha)) ||
-            normalizar(favorito.destino) !== normalizar(rota.destino)
+            normalizar(favorito.origem) !== normalizar(obterOrigem(rota)) ||
+            normalizar(favorito.destino) !== normalizar(obterDestino(rota))
         ) {
             return false;
         }
@@ -320,9 +633,7 @@
             return;
         }
 
-        if (botao) {
-            botao.disabled = true;
-        }
+        if (botao) botao.disabled = true;
 
         try {
             await requisitarFavoritos(API_FAVORITOS, {
@@ -330,8 +641,8 @@
                 body: JSON.stringify({
                     rota_id: rota.id ?? rota.horarioId ?? null,
                     empresa: rota.empresa || rota.viacao || null,
-                    origem: texto(rota.origem, rota.nomeLinha),
-                    destino: texto(rota.destino),
+                    origem: obterOrigem(rota),
+                    destino: obterDestino(rota),
                     data_viagem: obterData(rota) || null,
                     horario: obterHorario(rota) || null,
                     preco: converterPreco(rota.preco)
@@ -343,9 +654,7 @@
         } catch (erro) {
             mostrarAviso(erro.message, true);
         } finally {
-            if (botao) {
-                botao.disabled = false;
-            }
+            if (botao) botao.disabled = false;
         }
     }
 
@@ -364,9 +673,7 @@
             return;
         }
 
-        if (botao) {
-            botao.disabled = true;
-        }
+        if (botao) botao.disabled = true;
 
         try {
             await requisitarFavoritos(
@@ -380,14 +687,12 @@
         } catch (erro) {
             mostrarAviso(erro.message, true);
 
-            if (botao) {
-                botao.disabled = false;
-            }
+            if (botao) botao.disabled = false;
         }
     }
 
     // =====================================================
-    // SALVAR ROTA — permanece independente dos favoritos
+    // SALVAR ROTA
     // =====================================================
 
     async function salvarRota() {
@@ -419,14 +724,14 @@
         }
 
         const dados = {
-            origem: texto(rota.origem, rota.nomeLinha),
-            destino: texto(rota.destino),
+            origem: obterOrigem(rota),
+            destino: obterDestino(rota),
             data_viagem: data,
             horario: obterHorario(rota) || null,
             preferencia: obterPesquisa().preferencia || "fastest"
         };
 
-        if (dados.origem.toLowerCase() === dados.destino.toLowerCase()) {
+        if (normalizar(dados.origem) === normalizar(dados.destino)) {
             mostrarAviso(
                 "A origem e o destino precisam ser diferentes.",
                 true
@@ -502,15 +807,15 @@
             CHAVE_ROTA,
             JSON.stringify({
                 ...rota,
-                origem: texto(rota.origem, rota.nomeLinha),
-                destino: texto(rota.destino)
+                origem: obterOrigem(rota),
+                destino: obterDestino(rota)
             })
         );
 
         const url = new URL("mapa.html", window.location.href);
 
-        url.searchParams.set("origem", texto(rota.origem, rota.nomeLinha));
-        url.searchParams.set("destino", texto(rota.destino));
+        url.searchParams.set("origem", obterOrigem(rota));
+        url.searchParams.set("destino", obterDestino(rota));
 
         window.location.href = url.href;
     }

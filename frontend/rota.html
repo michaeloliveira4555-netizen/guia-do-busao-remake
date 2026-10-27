@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -12,7 +13,6 @@
 
     <title>Detalhes da rota - Guia do Busão</title>
 
-    <!-- Aplicar o tema salvo antes de carregar o CSS -->
     <script>
         try {
             const temaSalvo = localStorage.getItem("guiaBusaoTema");
@@ -31,7 +31,6 @@
 
 <body>
 
-    <!-- HEADER -->
     <header class="header">
         <div class="header-container">
 
@@ -90,16 +89,13 @@
         </div>
     </header>
 
-    <!-- CONTEÚDO -->
     <main class="route-page">
         <div class="route-page-container">
 
-            <!-- VOLTAR -->
             <a href="resultado.html" class="back-button">
                 ← Voltar para resultados
             </a>
 
-            <!-- TÍTULO -->
             <section class="route-header">
                 <span class="hero-tag">🚌 Detalhes da viagem</span>
 
@@ -120,19 +116,17 @@
                     <div>
                         <small>SAÍDA</small>
 
-                        <strong id="routeOrigin">
-                            Porto Alegre - RS
-                        </strong>
+                        <strong id="routeOrigin">Origem da viagem</strong>
 
                         <span id="departureLocation">
-                            Terminal Rodoviário
+                            Terminal rodoviário
                         </span>
                     </div>
                 </div>
 
                 <div class="route-line">
                     <span></span>
-                    <small id="routeDuration">4h 30min</small>
+                    <small id="routeDuration">Duração indisponível</small>
                     <span></span>
                 </div>
 
@@ -142,12 +136,10 @@
                     <div>
                         <small>CHEGADA</small>
 
-                        <strong id="routeDestination">
-                            Florianópolis - SC
-                        </strong>
+                        <strong id="routeDestination">Destino da viagem</strong>
 
                         <span id="arrivalLocation">
-                            Terminal Rodoviário
+                            Terminal rodoviário
                         </span>
                     </div>
                 </div>
@@ -162,14 +154,14 @@
 
                     <div>
                         <small>Saída</small>
-                        <strong id="departureTime">08:30</strong>
+                        <strong id="departureTime">--:--</strong>
                     </div>
 
                     <div class="information-divider"></div>
 
                     <div>
                         <small>Chegada</small>
-                        <strong id="arrivalTime">13:00</strong>
+                        <strong id="arrivalTime">--:--</strong>
                     </div>
                 </div>
 
@@ -178,7 +170,7 @@
 
                     <div>
                         <small>Duração total</small>
-                        <strong id="totalDuration">4h 30min</strong>
+                        <strong id="totalDuration">Indisponível</strong>
                     </div>
                 </div>
 
@@ -187,7 +179,7 @@
 
                     <div>
                         <small>Valor da viagem</small>
-                        <strong id="routePrice">R$ 120,00</strong>
+                        <strong id="routePrice">Não informado</strong>
                     </div>
                 </div>
 
@@ -196,7 +188,7 @@
 
                     <div>
                         <small>Conexões</small>
-                        <strong id="routeConnections">1 conexão</strong>
+                        <strong id="routeConnections">Não informado</strong>
                     </div>
                 </div>
 
@@ -210,9 +202,9 @@
                 <div class="company-details">
                     <small>EMPRESA</small>
 
-                    <h2 id="companyName">Empresa de ônibus</h2>
+                    <h2 id="companyName">Empresa não informada</h2>
 
-                    <p id="busType">Ônibus convencional</p>
+                    <p id="busType">Tipo de ônibus não informado</p>
                 </div>
 
                 <div class="company-features">
@@ -233,11 +225,11 @@
                     </div>
                 </div>
 
-                <!-- TRECHO 1 -->
-                <article class="route-step">
+                <!-- SAÍDA -->
+                <article class="route-step" id="departureStep">
 
                     <div class="step-time">
-                        <strong>08:30</strong>
+                        <strong id="stepDepartureTime">--:--</strong>
                         <span>Saída</span>
                     </div>
 
@@ -248,38 +240,46 @@
                     </div>
 
                     <div class="step-content">
-                        <h3>Porto Alegre - RS</h3>
+                        <h3 id="stepOrigin">Origem da viagem</h3>
 
-                        <p>
-                            Terminal Rodoviário de Porto Alegre
+                        <p id="stepDepartureLocation">
+                            Terminal rodoviário
                         </p>
 
                         <div class="step-company">
                             🚌
-                            <span>Empresa de ônibus</span>
+                            <span id="stepDepartureCompany">
+                                Empresa não informada
+                            </span>
                         </div>
                     </div>
 
                 </article>
 
-                <!-- CONEXÃO -->
-                <article class="connection-step">
+                <!-- CONEXÃO: SÓ DEVE APARECER SE HOUVER DADOS -->
+                <article
+                    class="connection-step"
+                    id="connectionStep"
+                    hidden
+                >
 
                     <div class="connection-icon">🔄</div>
 
                     <div>
-                        <strong>Conexão</strong>
-                        <p>Troca de ônibus</p>
-                        <span>30 minutos de espera</span>
+                        <strong id="connectionTitle">Conexão</strong>
+                        <p id="connectionDescription">
+                            Detalhes da conexão indisponíveis
+                        </p>
+                        <span id="connectionWaitingTime"></span>
                     </div>
 
                 </article>
 
-                <!-- TRECHO 2 -->
-                <article class="route-step">
+                <!-- CHEGADA -->
+                <article class="route-step" id="arrivalStep">
 
                     <div class="step-time">
-                        <strong>13:00</strong>
+                        <strong id="stepArrivalTime">--:--</strong>
                         <span>Chegada</span>
                     </div>
 
@@ -288,15 +288,17 @@
                     </div>
 
                     <div class="step-content">
-                        <h3>Florianópolis - SC</h3>
+                        <h3 id="stepDestination">Destino da viagem</h3>
 
-                        <p>
-                            Terminal Rodoviário de Florianópolis
+                        <p id="stepArrivalLocation">
+                            Terminal rodoviário
                         </p>
 
                         <div class="step-company">
                             🚌
-                            <span>Empresa de ônibus</span>
+                            <span id="stepArrivalCompany">
+                                Empresa não informada
+                            </span>
                         </div>
                     </div>
 
@@ -315,34 +317,9 @@
                 </div>
 
                 <div class="stops-list" id="stopsList">
-
-                    <div class="stop">
-                        <span class="stop-number">1</span>
-
-                        <div>
-                            <strong>Porto Alegre</strong>
-                            <small>Terminal Rodoviário</small>
-                        </div>
-                    </div>
-
-                    <div class="stop">
-                        <span class="stop-number">2</span>
-
-                        <div>
-                            <strong>Osório</strong>
-                            <small>Parada rápida</small>
-                        </div>
-                    </div>
-
-                    <div class="stop">
-                        <span class="stop-number">3</span>
-
-                        <div>
-                            <strong>Florianópolis</strong>
-                            <small>Terminal Rodoviário</small>
-                        </div>
-                    </div>
-
+                    <p id="stopsUnavailable">
+                        Informações sobre as paradas não disponíveis.
+                    </p>
                 </div>
 
             </section>
@@ -403,7 +380,6 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
             <p>
@@ -430,7 +406,6 @@
 
     </div>
 
-    <!-- JAVASCRIPT -->
     <script src="./js/tema.js"></script>
     <script src="./js/rota-detalhes.js"></script>
 
