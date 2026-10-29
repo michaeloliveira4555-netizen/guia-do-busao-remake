@@ -13,11 +13,10 @@ services:
     # acessa a aplicação pela porta 3000 do computador
     ports:
       - "3001:3000"
-
-    # carrega variáveis de ambiente de um arquivo local, se existir.
+    # Carrega as variáveis do backend sem incluí-las na imagem.
     env_file:
-      - path: .env
-        required: false
+    - path: backend/.env
+      required: false
 
     # porta utilizada pelo server Express.
     environment:
