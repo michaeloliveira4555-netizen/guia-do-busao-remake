@@ -1,0 +1,29 @@
+
+# Serviços que compõem a aplicação
+services:
+  # Backend em Node.js que também serve o frontend
+  app:
+    # Constrói a imagem usando o Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # Nome do container
+    container_name: guia-do-busao-app
+
+    # Disponibiliza a aplicação nas portas 3000 e 3001 do computador.
+    ports:
+      - "3000:3000"
+      - "3001:3000"
+
+    # Carrega as variáveis do backend sem incluí-las na imagem.
+    env_file:
+      - path: backend/.env
+        required: true
+
+    # Porta utilizada pelo servidor Express.
+    environment:
+      PORT: 3000
+
+    # Reinicia o container se o processo falhar.
+    restart: unless-stopped
