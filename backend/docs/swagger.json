@@ -1,0 +1,279 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Guia do Busão API",
+    "version": "1.0.0",
+    "description": "Documentação oficial das APIs do projeto Guia do Busão. Projeto de Conclusão de Curso - Codifica Edu."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Servidor Local"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/api": {
+      "get": {
+        "summary": "Status da API",
+        "tags": ["Status"],
+        "responses": {
+          "200": {
+            "description": "API funcionando normalmente."
+          }
+        }
+      }
+    },
+    "/api/rotas": {
+      "get": {
+        "summary": "Listar todas as rotas",
+        "tags": ["Rotas"],
+        "responses": {
+          "200": {
+            "description": "Lista de rotas cadastradas com cidades e estados."
+          }
+        }
+      }
+    },
+    "/api/rotas/buscar": {
+      "get": {
+        "summary": "Buscar rotas por origem e destino",
+        "tags": ["Rotas"],
+        "parameters": [
+          {
+            "name": "origem",
+            "in": "query",
+            "required": true,
+            "description": "ID ou nome da localidade de origem",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "destino",
+            "in": "query",
+            "required": true,
+            "description": "ID ou nome da localidade de destino",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Rotas encontradas para o itinerário." },
+          "400": { "description": "Parâmetros obrigatórios ausentes." }
+        }
+      }
+    },
+    "/api/rotas/{id}": {
+      "get": {
+        "summary": "Buscar detalhes de uma rota por ID",
+        "tags": ["Rotas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Detalhes da rota encontrada." },
+          "404": { "description": "Rota não encontrada." }
+        }
+      }
+    },
+    "/api/horarios/linha/{linhaId}": {
+      "get": {
+        "summary": "Listar horários de uma linha",
+        "tags": ["Horários"],
+        "parameters": [
+          {
+            "name": "linhaId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de horários, viações e preços." },
+          "400": { "description": "ID da linha inválido." }
+        }
+      }
+    },
+    "/api/horarios/antt": {
+      "get": {
+        "summary": "Pesquisar horários da base ANTT",
+        "tags": ["Horários"],
+        "parameters": [
+          {
+            "name": "origem",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "destino",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de horários interestaduais da ANTT." }
+        }
+      }
+    },
+    "/api/usuarios": {
+      "post": {
+        "summary": "Cadastrar novo usuário",
+        "tags": ["Autenticação e Usuários"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["nome", "email", "telefone", "senha"],
+                "properties": {
+                  "nome": { "type": "string", "example": "João Silva" },
+                  "email": { "type": "string", "example": "joao@email.com" },
+                  "telefone": { "type": "string", "example": "(41) 99999-9999" },
+                  "senha": { "type": "string", "example": "123456" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuário criado com sucesso (senha criptografada via Bcrypt)." },
+          "400": { "description": "Dados inválidos ou campos não preenchidos." }
+        }
+      }
+    },
+    "/api/usuarios/login": {
+      "post": {
+        "summary": "Autenticar usuário (Login)",
+        "tags": ["Autenticação e Usuários"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "senha"],
+                "properties": {
+                  "email": { "type": "string", "example": "joao@email.com" },
+                  "senha": { "type": "string", "example": "123456" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login bem-sucedido com emissão de token JWT." },
+          "401": { "description": "E-mail ou senha inválidos." }
+        }
+      }
+    },
+    "/api/usuarios/perfil": {
+      "put": {
+        "summary": "Atualizar dados do perfil",
+        "tags": ["Autenticação e Usuários"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "senhaAtual": { "type": "string" },
+                  "novaSenha": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Perfil atualizado com sucesso." },
+          "401": { "description": "Não autorizado." }
+        }
+      }
+    },
+    "/api/favoritos": {
+      "get": {
+        "summary": "Listar rotas favoritas do usuário logado",
+        "tags": ["Favoritos"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de favoritos do usuário." },
+          "401": { "description": "Não autorizado." }
+        }
+      },
+      "post": {
+        "summary": "Adicionar rota aos favoritos",
+        "tags": ["Favoritos"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["rota_id"],
+                "properties": {
+                  "rota_id": { "type": "integer", "example": 1 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Favorito adicionado com sucesso." }
+        }
+      }
+    },
+    "/api/rotas-salvas": {
+      "get": {
+        "summary": "Listar rotas salvas personalizadas do usuário",
+        "tags": ["Rotas Salvas"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de rotas salvas." }
+        }
+      },
+      "post": {
+        "summary": "Salvar nova rota personalizada",
+        "tags": ["Rotas Salvas"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["titulo", "origem", "destino"],
+                "properties": {
+                  "titulo": { "type": "string", "example": "Faculdade Diária" },
+                  "origem": { "type": "string", "example": "Curitiba" },
+                  "destino": { "type": "string", "example": "São José dos Pinhais" },
+                  "observacoes": { "type": "string", "example": "Pegar o ônibus das 07:15" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Rota salva criada com sucesso." }
+        }
+      }
+    }
+  }
+}
