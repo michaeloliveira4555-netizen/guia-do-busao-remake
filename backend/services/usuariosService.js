@@ -66,7 +66,8 @@ async function loginGoogle(credential) {
         throw new Error("GOOGLE_CLIENT_ID não configurado no servidor.");
     }
 
-    const ticket = await googleClient.verifyIdToken({
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+    const ticket = await client.verifyIdToken({
         idToken: credential,
         audience: process.env.GOOGLE_CLIENT_ID
     });
@@ -103,27 +104,27 @@ async function loginGoogle(credential) {
         );
 
         if (resultadoEmail.rows.length > 0) {
-            const erro = new Error(
-                "Este e-mail já possui uma conta. Entre com seu método habitual antes de vincular o Google."
+            usuario = resultadoEmail.rows[0];
+            await database.query(
+                "UPDATE usuarios SET google_sub = $1 WHERE id = $2",
+                [googleSub, usuario.id]
             );
-            erro.status = 409;
-            throw erro;
+        } else {
+            const nome =
+                typeof payload.name === "string" && payload.name.trim()
+                    ? payload.name.trim()
+                    : email.split("@")[0];
+
+            const novoUsuario = await database.query(
+                `INSERT INTO usuarios
+                    (nome, telefone, email, senha, google_sub)
+                 VALUES ($1, NULL, $2, NULL, $3)
+                 RETURNING id, nome, email, telefone, google_sub`,
+                [nome, email, googleSub]
+            );
+
+            usuario = novoUsuario.rows[0];
         }
-
-        const nome =
-            typeof payload.name === "string" && payload.name.trim()
-                ? payload.name.trim()
-                : email.split("@")[0];
-
-        const novoUsuario = await database.query(
-            `INSERT INTO usuarios
-                (nome, telefone, email, senha, google_sub)
-             VALUES ($1, NULL, $2, NULL, $3)
-             RETURNING id, nome, email, telefone, google_sub`,
-            [nome, email, googleSub]
-        );
-
-        usuario = novoUsuario.rows[0];
     }
 
     return {

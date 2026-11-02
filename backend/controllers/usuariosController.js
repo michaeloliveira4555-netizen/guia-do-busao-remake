@@ -79,16 +79,16 @@ async function loginGoogle(req, res) {
 
         return res.status(200).json(resultado);
     } catch (erro) {
+        console.error("Erro no login Google:", erro);
+
         if (erro.status === 401 || erro.status === 409) {
             return res.status(erro.status).json({
                 mensagem: erro.message
             });
         }
 
-        console.error("Erro no login Google:", erro);
-
         return res.status(401).json({
-            mensagem: "Não foi possível autenticar com o Google."
+            mensagem: erro.message || "Não foi possível autenticar com o Google."
         });
     }
 }

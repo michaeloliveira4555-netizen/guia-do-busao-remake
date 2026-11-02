@@ -9,7 +9,9 @@
    ========================================================= */
 
 const API_BASE_URL =
-    "http://localhost:3000";
+    window.location.origin && window.location.origin.startsWith("http")
+        ? window.location.origin
+        : "http://localhost:3000";
 
 
 /* =========================================================

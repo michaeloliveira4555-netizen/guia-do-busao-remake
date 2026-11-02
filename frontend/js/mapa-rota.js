@@ -472,8 +472,12 @@ async function configurarBotaoSalvar() {
         botao.textContent = "Salvando...";
 
         try {
+            const apiBase =
+                window.location.origin && window.location.origin.startsWith("http")
+                    ? window.location.origin
+                    : "http://localhost:3000";
             const resposta = await fetch(
-                "http://localhost:3000/api/rotas-salvas",
+                `${apiBase}/api/rotas-salvas`,
                 {
                     method: "POST",
                     headers: {

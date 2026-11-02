@@ -3,7 +3,10 @@
    GUIA DO BUSÃO — PERFIL
    ========================================================= */
 
-const API_PERFIL_URL = "http://localhost:3000/api/usuarios/perfil";
+const API_PERFIL_URL =
+    (window.location.origin && window.location.origin.startsWith("http")
+        ? window.location.origin
+        : "http://localhost:3000") + "/api/usuarios/perfil";
 
 document.addEventListener("DOMContentLoaded", () => {
     carregarPerfil();

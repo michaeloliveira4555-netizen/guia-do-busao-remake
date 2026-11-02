@@ -3,8 +3,12 @@
     "use strict";
 
     const CHAVE_ROTA = "guiaBusaoRotaSelecionada";
-    const API_URL = "http://localhost:3000/api/rotas-salvas";
-    const API_FAVORITOS = "http://localhost:3000/api/favoritos";
+    const API_BASE =
+        window.location.origin && window.location.origin.startsWith("http")
+            ? window.location.origin
+            : "http://localhost:3000";
+    const API_URL = `${API_BASE}/api/rotas-salvas`;
+    const API_FAVORITOS = `${API_BASE}/api/favoritos`;
 
     const porId = (id) => document.getElementById(id);
 

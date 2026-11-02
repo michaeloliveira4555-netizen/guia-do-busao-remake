@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const googleButton = document.getElementById("googleButton");
     const forgotPassword = document.getElementById("forgotPassword");
 
-    const API_URL = "http://localhost:3000";
+    const API_URL =
+        window.location.origin && window.location.origin.startsWith("http")
+            ? window.location.origin
+            : "http://localhost:3000";
     const GOOGLE_CLIENT_ID =
         "481983737742-jsja75eddodr7upfnbo2p53as4s48gec.apps.googleusercontent.com";
 

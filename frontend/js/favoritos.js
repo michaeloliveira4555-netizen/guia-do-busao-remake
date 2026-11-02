@@ -1,7 +1,10 @@
 "use strict";
 
 (() => {
-    const API_URL = "http://localhost:3000/api/favoritos";
+    const API_URL =
+        (window.location.origin && window.location.origin.startsWith("http")
+            ? window.location.origin
+            : "http://localhost:3000") + "/api/favoritos";
     const CHAVE_TOKEN = "guiaBusaoToken";
 
     const lista = document.getElementById("favoritesList");
