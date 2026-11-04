@@ -5,6 +5,11 @@
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("guiaBusaoToken")) {
+        window.location.replace("index.html")
+        return
+    }
+
     const form = document.getElementById("loginForm");
     const email = document.getElementById("email");
     const password = document.getElementById("password");

@@ -11,14 +11,19 @@
     const contador = document.getElementById("favoritesCount");
     const estadoVazio = document.getElementById("emptyFavorites");
 
-    let favoritos = [];
+    let favoritos = []
 
     function obterToken() {
         try {
-            return localStorage.getItem(CHAVE_TOKEN);
+            return localStorage.getItem(CHAVE_TOKEN)
         } catch (erro) {
-            return null;
+            return null
         }
+    }
+
+    if (!obterToken()) {
+        window.location.replace("login.html")
+        return
     }
 
     function mostrarMensagem(mensagem) {
@@ -46,7 +51,14 @@
             }
         });
 
-        const dados = await resposta.json().catch(() => ({}));
+        const dados = await resposta.json().catch(() => ({}))
+
+        if (resposta.status === 401) {
+            localStorage.removeItem(CHAVE_TOKEN)
+            localStorage.removeItem("guiaBusaoUsuario")
+            window.location.replace("login.html")
+            throw new Error("Sua sessão expirou. Entre novamente na sua conta.")
+        }
 
         if (!resposta.ok) {
             throw new Error(

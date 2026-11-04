@@ -21,6 +21,10 @@ const API_BASE_URL =
 document.addEventListener(
     "DOMContentLoaded",
     () => {
+        if (localStorage.getItem("guiaBusaoToken")) {
+            window.location.replace("index.html")
+            return
+        }
 
         inicializarCadastro();
 

@@ -13,8 +13,17 @@ function autenticarUsuario(req, res, next) {
     const token = autorizacao.slice(7);
 
     try {
-        const segredo = process.env.JWT_SECRET || "segredo_guia_busao";
-        const payload = jwt.verify(token, segredo);
+        const segredo = process.env.JWT_SECRET
+        if (!segredo) {
+            if (process.env.NODE_ENV === "production") {
+                console.error("FATAL: JWT_SECRET não configurado em produção.")
+                return res.status(500).json({
+                    mensagem: "Erro de configuração no servidor."
+                })
+            }
+        }
+        const chaveSecreta = segredo || "segredo_guia_busao_dev"
+        const payload = jwt.verify(token, chaveSecreta)
 
         if (!payload.id) {
             return res.status(401).json({

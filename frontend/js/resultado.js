@@ -160,7 +160,7 @@ function criarCartao(rota, horario) {
     cartao.innerHTML = `
         <div class="trip-main">
             <div class="trip-time">
-                <strong>${saida}</strong>
+                <strong>${escaparHTML(saida)}</strong>
                 <span>${escaparHTML(origem)}</span>
             </div>
 
@@ -171,7 +171,7 @@ function criarCartao(rota, horario) {
             </div>
 
             <div class="trip-time">
-                <strong>${chegada}</strong>
+                <strong>${escaparHTML(chegada)}</strong>
                 <span>${escaparHTML(destino)}</span>
             </div>
         </div>
@@ -187,7 +187,7 @@ function criarCartao(rota, horario) {
 
             <div class="trip-price">
                 <small>Tarifa</small>
-                <strong>${preco}</strong>
+                <strong>${escaparHTML(preco)}</strong>
                 <button type="button" class="trip-button">
                     Ver rota
                 </button>

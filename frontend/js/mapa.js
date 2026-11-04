@@ -40,7 +40,7 @@ function inicializarMapa() {
     setTimeout(() => mapaGuia.invalidateSize(), 250);
 
     // Tenta localizar o usuário automaticamente ao abrir a página.
-    obterLocalizacao();
+    // Localização acionada sob demanda via clique no botão #myLocationButton
 }
 
 function obterLocalizacao() {

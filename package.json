@@ -5,14 +5,17 @@
   "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "node backend/server.js"
+    "dev": "node backend/server.js",
+    "migrate": "node backend/database/migrar.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.7.3",
     "google-auth-library": "^11.3.1",
+    "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.23.1",
     "swagger-ui-express": "^5.0.1"

@@ -9,11 +9,17 @@ const API_PERFIL_URL =
         : "http://localhost:3000") + "/api/usuarios/perfil";
 
 document.addEventListener("DOMContentLoaded", () => {
-    carregarPerfil();
-    inicializarFormularioPerfil();
-    inicializarBotaoEditar();
-    inicializarBotaoSair();
-});
+    const token = localStorage.getItem("guiaBusaoToken")
+    if (!token) {
+        window.location.replace("login.html")
+        return
+    }
+
+    carregarPerfil()
+    inicializarFormularioPerfil()
+    inicializarBotaoEditar()
+    inicializarBotaoSair()
+})
 
 /* =========================================================
    USUÁRIO

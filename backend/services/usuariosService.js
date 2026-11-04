@@ -7,12 +7,23 @@ require("dotenv").config();
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+function obterSegredoJWT() {
+    const segredo = process.env.JWT_SECRET
+    if (!segredo) {
+        if (process.env.NODE_ENV === "production") {
+            throw new Error("FATAL: JWT_SECRET não configurado em ambiente de produção.")
+        }
+        return "segredo_guia_busao_dev"
+    }
+    return segredo
+}
+
 function gerarToken(usuario) {
     return jwt.sign(
         { id: usuario.id },
-        process.env.JWT_SECRET || "segredo_guia_busao",
+        obterSegredoJWT(),
         { expiresIn: "1d" }
-    );
+    )
 }
 
 function formatarUsuario(usuario) {
